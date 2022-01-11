@@ -2,6 +2,6 @@
 
 class_Can Can;
 
-void class_Can::InitFunction(void){
+FUNC(void, CAN_CODE) class_Can::InitFunction(void){
 }
 

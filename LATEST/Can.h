@@ -4,7 +4,7 @@
 
 class class_Can{
    public:
-      void InitFunction(void);
+      FUNC(void, CAN_CODE) InitFunction(void);
 };
 
 extern class_Can Can;
