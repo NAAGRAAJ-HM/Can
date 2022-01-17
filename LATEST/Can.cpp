@@ -5,48 +5,48 @@ class_Can Can;
 FUNC(void, CAN_CODE) class_Can::InitFunction(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::DeInitFunction(void){
+FUNC(void, CAN_CODE) class_Can::DeInitFunction(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::GetVersionInfo(void){
+FUNC(void, CAN_CODE) class_Can::GetVersionInfo(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::SetBaudRate(void){
+FUNC(void, CAN_CODE) class_Can::SetBaudRate(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::SetControllerMode(void){
+FUNC(void, CAN_CODE) class_Can::SetControllerMode(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::DisableControllerInterrupts(void){
+FUNC(void, CAN_CODE) class_Can::DisableControllerInterrupts(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::EnableControllerInterrupts(void){
+FUNC(void, CAN_CODE) class_Can::EnableControllerInterrupts(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::CheckWakeUp(void){
+FUNC(void, CAN_CODE) class_Can::CheckWakeUp(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::GetControllerErrorState(void){
+FUNC(void, CAN_CODE) class_Can::GetControllerErrorState(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::GetControllerMode(void){
+FUNC(void, CAN_CODE) class_Can::GetControllerMode(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::Write(void){
+FUNC(void, CAN_CODE) class_Can::Write(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::MainFunction_Write(void){
+FUNC(void, CAN_CODE) class_Can::MainFunction_Write(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::MainFunction_Read(void){
+FUNC(void, CAN_CODE) class_Can::MainFunction_Read(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::MainFunction_BusOff(void){
+FUNC(void, CAN_CODE) class_Can::MainFunction_BusOff(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::MainFunction_Wakeup(void){
+FUNC(void, CAN_CODE) class_Can::MainFunction_Wakeup(void){
 }
 
-FUNC(void, CAN_CODE) class_Adc::MainFunction_Mode(void){
+FUNC(void, CAN_CODE) class_Can::MainFunction_Mode(void){
 }
 
