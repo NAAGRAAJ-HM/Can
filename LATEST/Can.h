@@ -26,8 +26,6 @@ class class_Can{
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, CAN_CODE) InitFunction                (void);
-      FUNC(void, CAN_CODE) DeInitFunction              (void);
       FUNC(void, CAN_CODE) GetVersionInfo              (void);
       FUNC(void, CAN_CODE) SetBaudRate                 (void);
       FUNC(void, CAN_CODE) SetControllerMode           (void);
