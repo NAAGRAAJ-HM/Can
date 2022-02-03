@@ -33,9 +33,9 @@
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-class_Can Can;
 class_Can_EcuM Can_EcuM;
-class_Can_EcuM *Can_EcuM_ptr = &Can_EcuM;
+class_EcuM_Client *EcuM_Client_ptr_Can = &Can_EcuM;
+class_Can Can;
 
 /*****************************************************/
 /* FUNCTIONS                                         */

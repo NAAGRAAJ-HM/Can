@@ -42,7 +42,7 @@ class class_Can_EcuM : public class_EcuM_Client{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern class_Can_EcuM *Can_EcuM_ptr;
+extern class_EcuM_Client *EcuM_Client_ptr_Can;
 
 /*****************************************************/
 /* EOF                                               */
