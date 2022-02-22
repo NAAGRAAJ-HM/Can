@@ -1,15 +1,15 @@
+#pragma once
 /*****************************************************/
-/* File   : Can.cpp                                  */
+/* File   : Can_SchM.h                               */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
 /*****************************************************/
 /* #INCLUDES                                         */
 /*****************************************************/
-#include "module.h"
-#include "Can_EcuM.h"
-#include "Can_SchM.h"
-#include "Can_Unused.h"
+#include "Compiler_Cfg_Can.h"
+
+#include "SchM_Client.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -22,14 +22,11 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class module_Can:
-      public abstract_module
-   ,  public interface_Can_EcuM
-   ,  public interface_Can_SchM
-{
+class interface_Can_SchM : public interface_SchM_Client{
    public:
-      FUNC(void, CAN_CODE) InitFunction        (void);
-      FUNC(void, CAN_CODE) DeInitFunction      (void);
+/*****************************************************/
+/* FUNCTIONS                                         */
+/*****************************************************/
       FUNC(void, CAN_CODE) MainFunction        (void);
       FUNC(void, CAN_CODE) MainFunction_Write  (void);
       FUNC(void, CAN_CODE) MainFunction_Read   (void);
@@ -49,64 +46,7 @@ class module_Can:
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-module_Can Can;
-
-interface_Can_EcuM *EcuM_Client_ptr_Can = &Can;
-interface_Can_SchM *SchM_Client_ptr_Can = &Can;
-
-/*****************************************************/
-/* FUNCTIONS                                         */
-/*****************************************************/
-FUNC(void, CAN_CODE) module_Can::InitFunction(void){
-}
-
-FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
-}
-
-FUNC(void, CAN_CODE) module_Can::MainFunction(void){
-}
-
-FUNC(void, CAN_CODE) module_Can::MainFunction_Write(void){
-}
-
-FUNC(void, CAN_CODE) module_Can::MainFunction_Read(void){
-}
-
-FUNC(void, CAN_CODE) module_Can::MainFunction_BusOff(void){
-}
-
-FUNC(void, CAN_CODE) module_Can::MainFunction_Wakeup(void){
-}
-
-FUNC(void, CAN_CODE) module_Can::MainFunction_Mode(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::GetVersionInfo(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::SetBaudRate(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::SetControllerMode(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::DisableControllerInterrupts(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::EnableControllerInterrupts(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::CheckWakeUp(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::GetControllerErrorState(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::GetControllerMode(void){
-}
-
-FUNC(void, CAN_CODE) class_Can_Unused::Write(void){
-}
+extern interface_Can_SchM *SchM_Client_ptr_Can;
 
 /*****************************************************/
 /* EOF                                               */

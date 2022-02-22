@@ -1,6 +1,6 @@
 #pragma once
 /*****************************************************/
-/* File   : Can.h                                    */
+/* File   : Can_Unused.h                             */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
@@ -21,7 +21,7 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class class_Can{
+class class_Can_Unused{
    public:
 /*****************************************************/
 /* FUNCTIONS                                         */
@@ -35,11 +35,6 @@ class class_Can{
       FUNC(void, CAN_CODE) GetControllerErrorState     (void);
       FUNC(void, CAN_CODE) GetControllerMode           (void);
       FUNC(void, CAN_CODE) Write                       (void);
-      FUNC(void, CAN_CODE) MainFunction_Write          (void);
-      FUNC(void, CAN_CODE) MainFunction_Read           (void);
-      FUNC(void, CAN_CODE) MainFunction_BusOff         (void);
-      FUNC(void, CAN_CODE) MainFunction_Wakeup         (void);
-      FUNC(void, CAN_CODE) MainFunction_Mode           (void);
 };
 
 /*****************************************************/
@@ -53,7 +48,7 @@ class class_Can{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern class_Can Can;
+//extern class_Can Can;
 
 /*****************************************************/
 /* EOF                                               */
