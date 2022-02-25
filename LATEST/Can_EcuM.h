@@ -27,8 +27,8 @@ class interface_Can_EcuM : public interface_EcuM_Client{
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, CAN_CODE) InitFunction   (void);
-      FUNC(void, CAN_CODE) DeInitFunction (void);
+      virtual FUNC(void, CAN_CODE) InitFunction   (void) = 0;
+      virtual FUNC(void, CAN_CODE) DeInitFunction (void) = 0;
 };
 
 /*****************************************************/
