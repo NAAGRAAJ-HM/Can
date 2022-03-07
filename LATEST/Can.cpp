@@ -24,8 +24,6 @@
 /*****************************************************/
 class module_Can:
       public abstract_module
-   ,  public interface_Can_EcuM
-   ,  public interface_Can_SchM
 {
    public:
       FUNC(void, CAN_CODE) InitFunction        (void);
@@ -49,10 +47,9 @@ class module_Can:
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-module_Can Can;
-
-interface_Can_EcuM *EcuM_Client_ptr_Can = &Can;
-interface_Can_SchM *SchM_Client_ptr_Can = &Can;
+module_Can     Can;
+infEcuMClient* gptrinfEcuMClient_Can = &Can;
+infSchMClient* gptrinfSchMClient_Can = &Can;
 
 /*****************************************************/
 /* FUNCTIONS                                         */

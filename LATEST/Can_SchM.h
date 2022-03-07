@@ -9,8 +9,6 @@
 /*****************************************************/
 #include "Compiler_Cfg_Can.h"
 
-#include "SchM_Client.h"
-
 /*****************************************************/
 /* #DEFINES                                          */
 /*****************************************************/
@@ -22,12 +20,11 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class interface_Can_SchM : public interface_SchM_Client{
+class interface_Can_SchM{
    public:
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, CAN_CODE) MainFunction        (void);
       FUNC(void, CAN_CODE) MainFunction_Write  (void);
       FUNC(void, CAN_CODE) MainFunction_Read   (void);
       FUNC(void, CAN_CODE) MainFunction_BusOff (void);
