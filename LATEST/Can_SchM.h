@@ -43,7 +43,7 @@ class interface_Can_SchM{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern interface_Can_SchM *SchM_Client_ptr_Can;
+extern infSchMClient *gptrinfSchMClient_Can;
 
 /*****************************************************/
 /* EOF                                               */
