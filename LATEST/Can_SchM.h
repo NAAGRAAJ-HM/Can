@@ -20,7 +20,7 @@
 /*****************************************************/
 /* TYPEDEFS                                          */
 /*****************************************************/
-class interface_Can_SchM{
+class infCan_SchM{
    public:
 /*****************************************************/
 /* FUNCTIONS                                         */
@@ -43,7 +43,8 @@ class interface_Can_SchM{
 /*****************************************************/
 /* OBJECTS                                           */
 /*****************************************************/
-extern infSchMClient *gptrinfSchMClient_Can;
+extern infSchMClient* gptrinfSchMClient_Can;
+extern infCan_SchM*   gptrinfCan_SchM;
 
 /*****************************************************/
 /* EOF                                               */
