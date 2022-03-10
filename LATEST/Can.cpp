@@ -7,8 +7,8 @@
 /* #INCLUDES                                         */
 /*****************************************************/
 #include "module.h"
-#include "Can_EcuM.h"
-#include "Can_SchM.h"
+#include "infCan_EcuM.h"
+#include "infCan_SchM.h"
 #include "Can_Unused.h"
 
 /*****************************************************/
@@ -28,6 +28,7 @@ class module_Can:
    public:
       FUNC(void, CAN_CODE) InitFunction        (void);
       FUNC(void, CAN_CODE) DeInitFunction      (void);
+      FUNC(void, CAN_CODE) GetVersionInfo      (void);
       FUNC(void, CAN_CODE) MainFunction        (void);
       FUNC(void, CAN_CODE) MainFunction_Write  (void);
       FUNC(void, CAN_CODE) MainFunction_Read   (void);
@@ -49,6 +50,7 @@ class module_Can:
 /*****************************************************/
 module_Can     Can;
 infEcuMClient* gptrinfEcuMClient_Can = &Can;
+infDcmClient*  gptrinfDcmClient_Can  = &Can;
 infSchMClient* gptrinfSchMClient_Can = &Can;
 
 /*****************************************************/
@@ -58,6 +60,9 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(void){
 }
 
 FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
+}
+
+FUNC(void, CAN_CODE) module_Can::GetVersionInfo(void){
 }
 
 FUNC(void, CAN_CODE) module_Can::MainFunction(void){
