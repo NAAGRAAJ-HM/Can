@@ -1,6 +1,6 @@
 #pragma once
 /*****************************************************/
-/* File   : Can_SchM.h                               */
+/* File   : infCan_SchM.h                            */
 /* Author : Naagraaj HM                              */
 /*****************************************************/
 
@@ -25,11 +25,11 @@ class infCan_SchM{
 /*****************************************************/
 /* FUNCTIONS                                         */
 /*****************************************************/
-      FUNC(void, CAN_CODE) MainFunction_Write  (void);
-      FUNC(void, CAN_CODE) MainFunction_Read   (void);
-      FUNC(void, CAN_CODE) MainFunction_BusOff (void);
-      FUNC(void, CAN_CODE) MainFunction_Wakeup (void);
-      FUNC(void, CAN_CODE) MainFunction_Mode   (void);
+      virtual FUNC(void, CAN_CODE) MainFunction_Write  (void);
+      virtual FUNC(void, CAN_CODE) MainFunction_Read   (void);
+      virtual FUNC(void, CAN_CODE) MainFunction_BusOff (void);
+      virtual FUNC(void, CAN_CODE) MainFunction_Wakeup (void);
+      virtual FUNC(void, CAN_CODE) MainFunction_Mode   (void);
 };
 
 /*****************************************************/

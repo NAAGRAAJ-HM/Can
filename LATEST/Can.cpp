@@ -8,8 +8,8 @@
 /*****************************************************/
 #include "module.h"
 #include "infCan_EcuM.h"
+#include "infCan_Dcm.h"
 #include "infCan_SchM.h"
-#include "Can_Unused.h"
 
 /*****************************************************/
 /* #DEFINES                                          */
@@ -83,8 +83,7 @@ FUNC(void, CAN_CODE) module_Can::MainFunction_Wakeup(void){
 FUNC(void, CAN_CODE) module_Can::MainFunction_Mode(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Unused::GetVersionInfo(void){
-}
+#include "Can_Unused.h"
 
 FUNC(void, CAN_CODE) class_Can_Unused::SetBaudRate(void){
 }
