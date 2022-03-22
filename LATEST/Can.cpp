@@ -7,7 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "module.h"
-#include "infCan_Version.h"
+#include "Can_Cfg.h"
 #include "infCan_EcuM.h"
 #include "infCan_Dcm.h"
 #include "infCan_SchM.h"
@@ -15,10 +15,19 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
+#define CAN_AR_RELEASE_MAJOR_VERSION                                           4
+#define CAN_AR_RELEASE_MINOR_VERSION                                           3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
+#if(CAN_AR_RELEASE_MAJOR_VERSION != STD_AR_RELEASE_MAJOR_VERSION)
+   #error "Incompatible CAN_AR_RELEASE_MAJOR_VERSION!"
+#endif
+
+#if(CAN_AR_RELEASE_MINOR_VERSION != STD_AR_RELEASE_MINOR_VERSION)
+   #error "Incompatible CAN_AR_RELEASE_MINOR_VERSION!"
+#endif
 
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
@@ -66,6 +75,11 @@ FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
 }
 
 FUNC(void, CAN_CODE) module_Can::GetVersionInfo(void){
+#if(STD_ON == Can_DevErrorDetect)
+//TBD: API parameter check
+   Det_ReportError(
+   );
+#endif
 }
 
 FUNC(void, CAN_CODE) module_Can::MainFunction(void){
