@@ -45,6 +45,16 @@ class module_Can:
       FUNC(void, CAN_CODE) MainFunction_BusOff (void);
       FUNC(void, CAN_CODE) MainFunction_Wakeup (void);
       FUNC(void, CAN_CODE) MainFunction_Mode   (void);
+
+   private:
+      CONST(Std_TypeVersionInfo, CAN_CONST) VersionInfo = {
+            0x0000
+         ,  0xFFFF
+         ,  0x01
+         ,  '0'
+         ,  '1'
+         ,  '0'
+      };
 };
 
 /******************************************************************************/
