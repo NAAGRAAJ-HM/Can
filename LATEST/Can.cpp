@@ -7,7 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "module.h"
-#include "Can_Cfg.h"
+#include "CfgCan.h"
 #include "infCan_EcuM.h"
 #include "infCan_Dcm.h"
 #include "infCan_SchM.h"
