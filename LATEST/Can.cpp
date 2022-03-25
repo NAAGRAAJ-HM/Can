@@ -6,11 +6,11 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "module.h"
-#include "CfgCan.h"
-#include "infCan_EcuM.h"
-#include "infCan_Dcm.h"
-#include "infCan_SchM.h"
+#include "module.hpp"
+#include "CfgCan.hpp"
+#include "infCan_EcuM.hpp"
+#include "infCan_Dcm.hpp"
+#include "infCan_SchM.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -110,7 +110,7 @@ FUNC(void, CAN_CODE) module_Can::MainFunction_Wakeup(void){
 FUNC(void, CAN_CODE) module_Can::MainFunction_Mode(void){
 }
 
-#include "Can_Unused.h"
+#include "Can_Unused.hpp"
 
 FUNC(void, CAN_CODE) class_Can_Unused::SetBaudRate(void){
 }
