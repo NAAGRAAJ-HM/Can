@@ -110,7 +110,17 @@ FUNC(void, CAN_CODE) module_Can::MainFunction_Wakeup(void){
 FUNC(void, CAN_CODE) module_Can::MainFunction_Mode(void){
 }
 
-#include "Can_Unused.hpp"
+class class_Can_Unused{
+   public:
+      FUNC(void, CAN_CODE) SetBaudRate                 (void);
+      FUNC(void, CAN_CODE) SetControllerMode           (void);
+      FUNC(void, CAN_CODE) DisableControllerInterrupts (void);
+      FUNC(void, CAN_CODE) EnableControllerInterrupts  (void);
+      FUNC(void, CAN_CODE) CheckWakeUp                 (void);
+      FUNC(void, CAN_CODE) GetControllerErrorState     (void);
+      FUNC(void, CAN_CODE) GetControllerMode           (void);
+      FUNC(void, CAN_CODE) Write                       (void);
+};
 
 FUNC(void, CAN_CODE) class_Can_Unused::SetBaudRate(void){
 }
