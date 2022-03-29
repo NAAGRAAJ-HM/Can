@@ -7,7 +7,6 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "module.hpp"
-#include "CfgCan.hpp"
 #include "infCan_EcuM.hpp"
 #include "infCan_Dcm.hpp"
 #include "infCan_SchM.hpp"
@@ -36,42 +35,46 @@ class module_Can:
       public abstract_module
 {
    public:
+      module_Can(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
+      }
       FUNC(void, CAN_CODE) InitFunction        (void);
       FUNC(void, CAN_CODE) DeInitFunction      (void);
-      FUNC(void, CAN_CODE) GetVersionInfo      (void);
       FUNC(void, CAN_CODE) MainFunction        (void);
+
       FUNC(void, CAN_CODE) MainFunction_Write  (void);
       FUNC(void, CAN_CODE) MainFunction_Read   (void);
       FUNC(void, CAN_CODE) MainFunction_BusOff (void);
       FUNC(void, CAN_CODE) MainFunction_Wakeup (void);
       FUNC(void, CAN_CODE) MainFunction_Mode   (void);
-
-   private:
-      CONST(Std_TypeVersionInfo, CAN_CONST) VersionInfo = {
-            0x0000
-         ,  0xFFFF
-         ,  0x01
-         ,  '0'
-         ,  '1'
-         ,  '0'
-      };
 };
+
+extern VAR(module_Can, CAN_VAR) Can;
 
 /******************************************************************************/
 /* CONSTS                                                                     */
 /******************************************************************************/
+CONSTP2VAR(infEcuMClient, CAN_VAR, CAN_CONST) gptrinfEcuMClient_Can = &Can;
+CONSTP2VAR(infDcmClient,  CAN_VAR, CAN_CONST) gptrinfDcmClient_Can  = &Can;
+CONSTP2VAR(infSchMClient, CAN_VAR, CAN_CONST) gptrinfSchMClient_Can = &Can;
 
 /******************************************************************************/
 /* PARAMS                                                                     */
 /******************************************************************************/
+#include "CfgCan.hpp"
 
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-VAR(module_Can, CAN_VAR) Can;
-CONSTP2VAR(infEcuMClient, CAN_VAR, CAN_CONST) gptrinfEcuMClient_Can = &Can;
-CONSTP2VAR(infDcmClient,  CAN_VAR, CAN_CONST) gptrinfDcmClient_Can  = &Can;
-CONSTP2VAR(infSchMClient, CAN_VAR, CAN_CONST) gptrinfSchMClient_Can = &Can;
+VAR(module_Can, CAN_VAR) Can(
+   {
+         0x0000
+      ,  0xFFFF
+      ,  0x01
+      ,  '0'
+      ,  '1'
+      ,  '0'
+   }
+);
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
@@ -82,14 +85,6 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(void){
 
 FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
    Can.IsInitDone = E_NOT_OK;
-}
-
-FUNC(void, CAN_CODE) module_Can::GetVersionInfo(void){
-#if(STD_ON == Can_DevErrorDetect)
-//TBD: API parameter check
-   Det_ReportError(
-   );
-#endif
 }
 
 FUNC(void, CAN_CODE) module_Can::MainFunction(void){
