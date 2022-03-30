@@ -6,7 +6,7 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "module.hpp"
+#include "Module.hpp"
 #include "infCan_EcuM.hpp"
 #include "infCan_Dcm.hpp"
 #include "infCan_SchM.hpp"
@@ -37,6 +37,9 @@ class module_Can:
    public:
       module_Can(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
       }
+      FUNC(void, _CODE) InitFunction(
+         CONSTP2CONST(CfgModule_TypeAbstract, _CONFIG_DATA, _APPL_CONST) lptrCfgModule
+      );
       FUNC(void, CAN_CODE) InitFunction        (void);
       FUNC(void, CAN_CODE) DeInitFunction      (void);
       FUNC(void, CAN_CODE) MainFunction        (void);
@@ -79,7 +82,19 @@ VAR(module_Can, CAN_VAR) Can(
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-FUNC(void, CAN_CODE) module_Can::InitFunction(void){
+FUNC(void, CAN_CODE) module_Can::InitFunction(
+   CONSTP2CONST(CfgCan_Type, CFGCAN_CONFIG_DATA, CFGCAN_APPL_CONST) lptrCfgCan
+){
+   if(NULL_PTR == lptrCfgCan){
+#if(STD_ON == Can_DevErrorDetect)
+      Det_ReportError(
+      );
+#endif
+   }
+   else{
+// check lptrCfgCan for memory faults
+// use PBcfg_Can as back-up configuration
+   }
    Can.IsInitDone = E_OK;
 }
 
