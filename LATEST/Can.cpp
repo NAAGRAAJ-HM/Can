@@ -37,10 +37,9 @@ class module_Can:
    public:
       module_Can(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
       }
-      FUNC(void, _CODE) InitFunction(
-         CONSTP2CONST(CfgModule_TypeAbstract, _CONFIG_DATA, _APPL_CONST) lptrCfgModule
+      FUNC(void, CAN_CODE) InitFunction(
+         CONSTP2CONST(CfgModule_TypeAbstract, CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
       );
-      FUNC(void, CAN_CODE) InitFunction        (void);
       FUNC(void, CAN_CODE) DeInitFunction      (void);
       FUNC(void, CAN_CODE) MainFunction        (void);
 
@@ -83,23 +82,39 @@ VAR(module_Can, CAN_VAR) Can(
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 FUNC(void, CAN_CODE) module_Can::InitFunction(
-   CONSTP2CONST(CfgCan_Type, CFGCAN_CONFIG_DATA, CFGCAN_APPL_CONST) lptrCfgCan
+   CONSTP2CONST(CfgModule_TypeAbstract, CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
 ){
-   if(NULL_PTR == lptrCfgCan){
+   if(E_OK == IsInitDone){
 #if(STD_ON == Can_DevErrorDetect)
       Det_ReportError(
       );
 #endif
    }
    else{
-// check lptrCfgCan for memory faults
+      if(NULL_PTR == lptrCfgModule){
+#if(STD_ON == Can_DevErrorDetect)
+         Det_ReportError(
+         );
+#endif
+      }
+      else{
+// check lptrCfgModule for memory faults
 // use PBcfg_Can as back-up configuration
+      }
+      IsInitDone = E_OK;
    }
-   Can.IsInitDone = E_OK;
 }
 
 FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
-   Can.IsInitDone = E_NOT_OK;
+   if(E_OK != IsInitDone){
+#if(STD_ON == Can_DevErrorDetect)
+      Det_ReportError(
+      );
+#endif
+   }
+   else{
+      IsInitDone = E_NOT_OK;
+   }
 }
 
 FUNC(void, CAN_CODE) module_Can::MainFunction(void){
