@@ -84,6 +84,7 @@ VAR(module_Can, CAN_VAR) Can(
 FUNC(void, CAN_CODE) module_Can::InitFunction(
    CONSTP2CONST(CfgModule_TypeAbstract, CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
 ){
+#if(STD_ON == Can_InitCheck)
    if(E_OK == IsInitDone){
 #if(STD_ON == Can_DevErrorDetect)
       Det_ReportError(
@@ -91,6 +92,7 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
 #endif
    }
    else{
+#endif
       if(NULL_PTR == lptrCfgModule){
 #if(STD_ON == Can_DevErrorDetect)
          Det_ReportError(
@@ -102,10 +104,13 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
 // use PBcfg_Can as back-up configuration
       }
       IsInitDone = E_OK;
+#if(STD_ON == Can_InitCheck)
    }
+#endif
 }
 
 FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
+#if(STD_ON == Can_InitCheck)
    if(E_OK != IsInitDone){
 #if(STD_ON == Can_DevErrorDetect)
       Det_ReportError(
@@ -113,11 +118,26 @@ FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
 #endif
    }
    else{
+#endif
       IsInitDone = E_NOT_OK;
+#if(STD_ON == Can_InitCheck)
    }
+#endif
 }
 
 FUNC(void, CAN_CODE) module_Can::MainFunction(void){
+#if(STD_ON == Can_InitCheck)
+   if(E_OK != IsInitDone){
+#if(STD_ON == Can_DevErrorDetect)
+      Det_ReportError(
+      );
+#endif
+   }
+   else{
+#endif
+#if(STD_ON == Can_InitCheck)
+   }
+#endif
 }
 
 FUNC(void, CAN_CODE) module_Can::MainFunction_Write(void){
