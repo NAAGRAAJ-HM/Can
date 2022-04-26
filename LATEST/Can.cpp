@@ -31,8 +31,21 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
+class class_Can_Functionality{
+   public:
+      FUNC(void, CAN_CODE) SetBaudRate                 (void);
+      FUNC(void, CAN_CODE) SetControllerMode           (void);
+      FUNC(void, CAN_CODE) DisableControllerInterrupts (void);
+      FUNC(void, CAN_CODE) EnableControllerInterrupts  (void);
+      FUNC(void, CAN_CODE) CheckWakeUp                 (void);
+      FUNC(void, CAN_CODE) GetControllerErrorState     (void);
+      FUNC(void, CAN_CODE) GetControllerMode           (void);
+      FUNC(void, CAN_CODE) Write                       (void);
+};
+
 class module_Can:
       public abstract_module
+   ,  public class_Can_Functionality
 {
    public:
       module_Can(Std_TypeVersionInfo lVersionInfo) : abstract_module(lVersionInfo){
@@ -90,6 +103,10 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
    if(E_OK == IsInitDone){
 #if(STD_ON == Can_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -98,6 +115,10 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
       if(NULL_PTR == lptrCfgModule){
 #if(STD_ON == Can_DevErrorDetect)
          Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
          );
 #endif
       }
@@ -122,6 +143,10 @@ FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
    if(E_OK != IsInitDone){
 #if(STD_ON == Can_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -138,6 +163,10 @@ FUNC(void, CAN_CODE) module_Can::MainFunction(void){
    if(E_OK != IsInitDone){
 #if(STD_ON == Can_DevErrorDetect)
       Det_ReportError(
+      0 //TBD: IdModule
+   ,  0 //TBD: IdInstance
+   ,  0 //TBD: IdApi
+   ,  0 //TBD: IdError
       );
 #endif
    }
@@ -163,40 +192,28 @@ FUNC(void, CAN_CODE) module_Can::MainFunction_Wakeup(void){
 FUNC(void, CAN_CODE) module_Can::MainFunction_Mode(void){
 }
 
-class class_Can_Unused{
-   public:
-      FUNC(void, CAN_CODE) SetBaudRate                 (void);
-      FUNC(void, CAN_CODE) SetControllerMode           (void);
-      FUNC(void, CAN_CODE) DisableControllerInterrupts (void);
-      FUNC(void, CAN_CODE) EnableControllerInterrupts  (void);
-      FUNC(void, CAN_CODE) CheckWakeUp                 (void);
-      FUNC(void, CAN_CODE) GetControllerErrorState     (void);
-      FUNC(void, CAN_CODE) GetControllerMode           (void);
-      FUNC(void, CAN_CODE) Write                       (void);
-};
-
-FUNC(void, CAN_CODE) class_Can_Unused::SetBaudRate(void){
+FUNC(void, CAN_CODE) class_Can_Functionality::SetBaudRate(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Unused::SetControllerMode(void){
+FUNC(void, CAN_CODE) class_Can_Functionality::SetControllerMode(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Unused::DisableControllerInterrupts(void){
+FUNC(void, CAN_CODE) class_Can_Functionality::DisableControllerInterrupts(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Unused::EnableControllerInterrupts(void){
+FUNC(void, CAN_CODE) class_Can_Functionality::EnableControllerInterrupts(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Unused::CheckWakeUp(void){
+FUNC(void, CAN_CODE) class_Can_Functionality::CheckWakeUp(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Unused::GetControllerErrorState(void){
+FUNC(void, CAN_CODE) class_Can_Functionality::GetControllerErrorState(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Unused::GetControllerMode(void){
+FUNC(void, CAN_CODE) class_Can_Functionality::GetControllerMode(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Unused::Write(void){
+FUNC(void, CAN_CODE) class_Can_Functionality::Write(void){
 }
 
 /******************************************************************************/
