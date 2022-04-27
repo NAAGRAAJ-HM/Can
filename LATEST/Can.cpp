@@ -31,18 +31,6 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
-class class_Can_Functionality{
-   public:
-      FUNC(void, CAN_CODE) SetBaudRate                 (void);
-      FUNC(void, CAN_CODE) SetControllerMode           (void);
-      FUNC(void, CAN_CODE) DisableControllerInterrupts (void);
-      FUNC(void, CAN_CODE) EnableControllerInterrupts  (void);
-      FUNC(void, CAN_CODE) CheckWakeUp                 (void);
-      FUNC(void, CAN_CODE) GetControllerErrorState     (void);
-      FUNC(void, CAN_CODE) GetControllerMode           (void);
-      FUNC(void, CAN_CODE) Write                       (void);
-};
-
 class module_Can:
       public abstract_module
    ,  public class_Can_Functionality
