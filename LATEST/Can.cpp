@@ -7,6 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "Module.hpp"
+#include "Can_core.hpp"
 #include "infCan_EcuM.hpp"
 #include "infCan_Dcm.hpp"
 #include "infCan_SchM.hpp"
