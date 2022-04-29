@@ -7,10 +7,9 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "Module.hpp"
+#include "CfgCan.hpp"
 #include "Can_core.hpp"
-#include "infCan_EcuM.hpp"
-#include "infCan_Dcm.hpp"
-#include "infCan_SchM.hpp"
+#include "infCan.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -44,6 +43,7 @@ class module_Can:
       );
       FUNC(void, CAN_CODE) DeInitFunction      (void);
       FUNC(void, CAN_CODE) MainFunction        (void);
+      CAN_CORE_FUNCTIONALITIES
 
       FUNC(void, CAN_CODE) MainFunction_Write  (void);
       FUNC(void, CAN_CODE) MainFunction_Read   (void);
@@ -64,7 +64,6 @@ CONSTP2VAR(infSchMClient, CAN_VAR, CAN_CONST) gptrinfSchMClient_Can = &Can;
 /******************************************************************************/
 /* PARAMS                                                                     */
 /******************************************************************************/
-#include "CfgCan.hpp"
 
 /******************************************************************************/
 /* OBJECTS                                                                    */
