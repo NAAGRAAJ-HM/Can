@@ -180,28 +180,28 @@ FUNC(void, CAN_CODE) module_Can::MainFunction_Wakeup(void){
 FUNC(void, CAN_CODE) module_Can::MainFunction_Mode(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Functionality::SetBaudRate(void){
+FUNC(void, CAN_CODE) module_Can::SetBaudRate(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Functionality::SetControllerMode(void){
+FUNC(void, CAN_CODE) module_Can::SetControllerMode(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Functionality::DisableControllerInterrupts(void){
+FUNC(void, CAN_CODE) module_Can::DisableControllerInterrupts(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Functionality::EnableControllerInterrupts(void){
+FUNC(void, CAN_CODE) module_Can::EnableControllerInterrupts(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Functionality::CheckWakeUp(void){
+FUNC(void, CAN_CODE) module_Can::CheckWakeUp(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Functionality::GetControllerErrorState(void){
+FUNC(void, CAN_CODE) module_Can::GetControllerErrorState(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Functionality::GetControllerMode(void){
+FUNC(void, CAN_CODE) module_Can::GetControllerMode(void){
 }
 
-FUNC(void, CAN_CODE) class_Can_Functionality::Write(void){
+FUNC(void, CAN_CODE) module_Can::Write(void){
 }
 
 /******************************************************************************/
