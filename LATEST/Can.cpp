@@ -95,7 +95,10 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
    CONSTP2CONST(CfgModule_TypeAbstract, CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == Can_InitCheck)
-   if(E_OK != IsInitDone){
+   if(
+         E_OK
+      != IsInitDone
+   ){
 #endif
       if(NULL_PTR != lptrCfgModule){
          if(STD_HIGH){
@@ -133,7 +136,10 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
 
 FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
 #if(STD_ON == Can_InitCheck)
-   if(E_OK == IsInitDone){
+   if(
+         E_OK
+      == IsInitDone
+   ){
 #endif
 #if(STD_ON == Can_InitCheck)
       IsInitDone = E_NOT_OK;
@@ -153,7 +159,10 @@ FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
 
 FUNC(void, CAN_CODE) module_Can::MainFunction(void){
 #if(STD_ON == Can_InitCheck)
-   if(E_OK == IsInitDone){
+   if(
+         E_OK
+      == IsInitDone
+   ){
 #endif
 #if(STD_ON == Can_InitCheck)
    }
