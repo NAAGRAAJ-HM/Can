@@ -9,7 +9,7 @@
 #include "Module.hpp"
 #include "CfgCan.hpp"
 #include "Can_core.hpp"
-#include "infCan.hpp"
+#include "infCan_Exp.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -32,6 +32,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_Can:
+   INTERFACES_EXPORTED_CAN
       public abstract_module
    ,  public class_Can_Functionality
 {
