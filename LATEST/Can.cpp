@@ -32,7 +32,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_Can:
-   INTERFACES_EXPORTED_CAN
+      INTERFACES_EXPORTED_CAN
       public abstract_module
    ,  public class_Can_Functionality
 {
