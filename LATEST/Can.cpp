@@ -78,6 +78,10 @@ CONSTP2VAR(infSchMClient, CAN_VAR, CAN_CONST) gptrinfSchMClient_Can = &Can;
 /******************************************************************************/
 VAR(module_Can, CAN_VAR) Can(
    {
+#if(STD_ON == _ReSIM)
+// char strModuleName[6];
+#else
+#endif
          CAN_AR_RELEASE_VERSION_MAJOR
       ,  CAN_AR_RELEASE_VERSION_MINOR
       ,  0x00
