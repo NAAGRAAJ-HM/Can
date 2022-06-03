@@ -10,6 +10,7 @@
 #include "CfgCan.hpp"
 #include "Can_core.hpp"
 #include "infCan_Exp.hpp"
+#include "infCan_Imp.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
