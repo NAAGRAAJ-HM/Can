@@ -136,7 +136,9 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
 #endif
 }
 
-FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
+FUNC(void, CAN_CODE) module_Can::DeInitFunction(
+   void
+){
 #if(STD_ON == Can_InitCheck)
    if(
          E_OK
@@ -159,7 +161,9 @@ FUNC(void, CAN_CODE) module_Can::DeInitFunction(void){
 #endif
 }
 
-FUNC(void, CAN_CODE) module_Can::MainFunction(void){
+FUNC(void, CAN_CODE) module_Can::MainFunction(
+   void
+){
 #if(STD_ON == Can_InitCheck)
    if(
          E_OK
@@ -181,43 +185,69 @@ FUNC(void, CAN_CODE) module_Can::MainFunction(void){
 #endif
 }
 
-FUNC(void, CAN_CODE) module_Can::MainFunction_Write(void){
+FUNC(void, CAN_CODE) module_Can::MainFunction_Write(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::MainFunction_Read(void){
+FUNC(void, CAN_CODE) module_Can::MainFunction_Read(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::MainFunction_BusOff(void){
+FUNC(void, CAN_CODE) module_Can::MainFunction_BusOff(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::MainFunction_Wakeup(void){
+FUNC(void, CAN_CODE) module_Can::MainFunction_Wakeup(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::MainFunction_Mode(void){
+FUNC(void, CAN_CODE) module_Can::MainFunction_Mode(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::SetBaudRate(void){
+FUNC(void, CAN_CODE) module_Can::SetBaudRate(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::SetControllerMode(void){
+FUNC(void, CAN_CODE) module_Can::SetControllerMode(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::DisableControllerInterrupts(void){
+FUNC(void, CAN_CODE) module_Can::DisableControllerInterrupts(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::EnableControllerInterrupts(void){
+FUNC(void, CAN_CODE) module_Can::EnableControllerInterrupts(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::CheckWakeUp(void){
+FUNC(void, CAN_CODE) module_Can::CheckWakeUp(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::GetControllerErrorState(void){
+FUNC(void, CAN_CODE) module_Can::GetControllerErrorState(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::GetControllerMode(void){
+FUNC(void, CAN_CODE) module_Can::GetControllerMode(
+   void
+){
 }
 
-FUNC(void, CAN_CODE) module_Can::Write(void){
+FUNC(void, CAN_CODE) module_Can::Write(
+   void
+){
 }
 
 /******************************************************************************/
