@@ -88,12 +88,7 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
    ){
 #endif
       if(NULL_PTR != lptrCfgModule){
-         if(STD_HIGH){
-            lptrCfg = lptrCfgModule;
-         }
-         else{
-            lptrCfg = &PBcfgCan;
-         }
+         lptrCfg = lptrCfgModule;
       }
       else{
 #if(STD_ON == Can_DevErrorDetect)
