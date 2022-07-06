@@ -7,9 +7,7 @@
 /* #INCLUDES                                                                  */
 /******************************************************************************/
 #include "Module.hpp"
-#include "CfgCan.hpp"
-#include "Can_core.hpp"
-#include "infCan_Exp.hpp"
+#include "Can.hpp"
 #include "infCan_Imp.hpp"
 
 /******************************************************************************/
@@ -32,32 +30,6 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
-class module_Can:
-      INTERFACES_EXPORTED_CAN
-      public abstract_module
-   ,  public class_Can_Functionality
-{
-   private:
-/******************************************************************************/
-/* OBJECTS                                                                    */
-/******************************************************************************/
-
-   public:
-      FUNC(void, CAN_CODE) InitFunction(
-         CONSTP2CONST(CfgModule_TypeAbstract, CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
-      );
-      FUNC(void, CAN_CODE) DeInitFunction      (void);
-      FUNC(void, CAN_CODE) MainFunction        (void);
-      CAN_CORE_FUNCTIONALITIES
-
-      FUNC(void, CAN_CODE) MainFunction_Write  (void);
-      FUNC(void, CAN_CODE) MainFunction_Read   (void);
-      FUNC(void, CAN_CODE) MainFunction_BusOff (void);
-      FUNC(void, CAN_CODE) MainFunction_Wakeup (void);
-      FUNC(void, CAN_CODE) MainFunction_Mode   (void);
-};
-
-extern VAR(module_Can, CAN_VAR) Can;
 
 /******************************************************************************/
 /* CONSTS                                                                     */
