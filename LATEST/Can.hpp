@@ -7,6 +7,7 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
+#include "ConstCan.hpp"
 #include "CfgCan.hpp"
 #include "Can_core.hpp"
 #include "infCan_Exp.hpp"
@@ -31,13 +32,15 @@ class module_Can:
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
+      const ConstCan_Type* lptrConst = (ConstCan_Type*)NULL_PTR;
 
    public:
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
       FUNC(void, CAN_CODE) InitFunction(
-         CONSTP2CONST(CfgModule_TypeAbstract, CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
+            CONSTP2CONST(ConstModule_TypeAbstract, CAN_CONST,       CAN_APPL_CONST) lptrConstModule
+         ,  CONSTP2CONST(CfgModule_TypeAbstract,   CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
       );
       FUNC(void, CAN_CODE) DeInitFunction      (void);
       FUNC(void, CAN_CODE) MainFunction        (void);

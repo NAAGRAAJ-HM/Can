@@ -48,7 +48,8 @@ VAR(module_Can, CAN_VAR) Can;
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 FUNC(void, CAN_CODE) module_Can::InitFunction(
-   CONSTP2CONST(CfgModule_TypeAbstract, CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
+      CONSTP2CONST(ConstModule_TypeAbstract, CAN_CONST,       CAN_APPL_CONST) lptrConstModule
+   ,  CONSTP2CONST(CfgModule_TypeAbstract,   CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == Can_InitCheck)
    if(
@@ -56,8 +57,12 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
       != IsInitDone
    ){
 #endif
-      if(NULL_PTR != lptrCfgModule){
-         lptrCfg = lptrCfgModule;
+      if(
+            (NULL_PTR != lptrConstModule)
+         && (NULL_PTR != lptrCfgModule)
+      ){
+         lptrConst = lptrConstModule;
+         lptrCfg   = lptrCfgModule;
       }
       else{
 #if(STD_ON == Can_DevErrorDetect)
