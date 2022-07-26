@@ -61,7 +61,7 @@ FUNC(void, CAN_CODE) module_Can::InitFunction(
             (NULL_PTR != lptrConstModule)
          && (NULL_PTR != lptrCfgModule)
       ){
-         lptrConst = lptrConstModule;
+         lptrConst = (const ConstCan_Type*)lptrConstModule;
          lptrCfg   = lptrCfgModule;
       }
       else{
