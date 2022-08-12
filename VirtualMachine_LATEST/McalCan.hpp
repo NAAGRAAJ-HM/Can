@@ -24,7 +24,7 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 class module_McalCan:
-      INTERFACES_EXPORTED_CAN
+      INTERFACES_EXPORTED_MCALCAN
       public abstract_module
    ,  public class_McalCan_Functionality
 {
@@ -38,19 +38,19 @@ class module_McalCan:
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-      FUNC(void, CAN_CODE) InitFunction(
-            CONSTP2CONST(ConstModule_TypeAbstract, CAN_CONST,       CAN_APPL_CONST) lptrConstModule
-         ,  CONSTP2CONST(CfgModule_TypeAbstract,   CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
+      FUNC(void, MCALCAN_CODE) InitFunction(
+            CONSTP2CONST(ConstModule_TypeAbstract, MCALCAN_CONST,       MCALCAN_APPL_CONST) lptrConstModule
+         ,  CONSTP2CONST(CfgModule_TypeAbstract,   MCALCAN_CONFIG_DATA, MCALCAN_APPL_CONST) lptrCfgModule
       );
-      FUNC(void, CAN_CODE) DeInitFunction      (void);
-      FUNC(void, CAN_CODE) MainFunction        (void);
-      CAN_CORE_FUNCTIONALITIES
+      FUNC(void, MCALCAN_CODE) DeInitFunction      (void);
+      FUNC(void, MCALCAN_CODE) MainFunction        (void);
+      MCALCAN_CORE_FUNCTIONALITIES
 
-      FUNC(void, CAN_CODE) MainFunction_Write  (void);
-      FUNC(void, CAN_CODE) MainFunction_Read   (void);
-      FUNC(void, CAN_CODE) MainFunction_BusOff (void);
-      FUNC(void, CAN_CODE) MainFunction_Wakeup (void);
-      FUNC(void, CAN_CODE) MainFunction_Mode   (void);
+      FUNC(void, MCALCAN_CODE) MainFunction_Write  (void);
+      FUNC(void, MCALCAN_CODE) MainFunction_Read   (void);
+      FUNC(void, MCALCAN_CODE) MainFunction_BusOff (void);
+      FUNC(void, MCALCAN_CODE) MainFunction_Wakeup (void);
+      FUNC(void, MCALCAN_CODE) MainFunction_Mode   (void);
 };
 
 /******************************************************************************/
@@ -64,7 +64,7 @@ class module_McalCan:
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-extern VAR(module_McalCan, CAN_VAR) McalCan;
+extern VAR(module_McalCan, MCALCAN_VAR) McalCan;
 
 /******************************************************************************/
 /* EOF                                                                        */

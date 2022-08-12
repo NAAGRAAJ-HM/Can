@@ -13,18 +13,18 @@
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
-#define CAN_AR_RELEASE_VERSION_MAJOR                                           4
-#define CAN_AR_RELEASE_VERSION_MINOR                                           3
+#define MCALCAN_AR_RELEASE_VERSION_MAJOR                                           4
+#define MCALCAN_AR_RELEASE_VERSION_MINOR                                           3
 
 /******************************************************************************/
 /* MACROS                                                                     */
 /******************************************************************************/
-#if(CAN_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
-   #error "Incompatible CAN_AR_RELEASE_VERSION_MAJOR!"
+#if(MCALCAN_AR_RELEASE_VERSION_MAJOR != STD_AR_RELEASE_VERSION_MAJOR)
+   #error "Incompatible MCALCAN_AR_RELEASE_VERSION_MAJOR!"
 #endif
 
-#if(CAN_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
-   #error "Incompatible CAN_AR_RELEASE_VERSION_MINOR!"
+#if(MCALCAN_AR_RELEASE_VERSION_MINOR != STD_AR_RELEASE_VERSION_MINOR)
+   #error "Incompatible MCALCAN_AR_RELEASE_VERSION_MINOR!"
 #endif
 
 /******************************************************************************/
@@ -42,14 +42,14 @@
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-VAR(module_McalCan, CAN_VAR) McalCan;
+VAR(module_McalCan, MCALCAN_VAR) McalCan;
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-FUNC(void, CAN_CODE) module_McalCan::InitFunction(
-      CONSTP2CONST(ConstModule_TypeAbstract, CAN_CONST,       CAN_APPL_CONST) lptrConstModule
-   ,  CONSTP2CONST(CfgModule_TypeAbstract,   CAN_CONFIG_DATA, CAN_APPL_CONST) lptrCfgModule
+FUNC(void, MCALCAN_CODE) module_McalCan::InitFunction(
+      CONSTP2CONST(ConstModule_TypeAbstract, MCALCAN_CONST,       MCALCAN_APPL_CONST) lptrConstModule
+   ,  CONSTP2CONST(CfgModule_TypeAbstract,   MCALCAN_CONFIG_DATA, MCALCAN_APPL_CONST) lptrCfgModule
 ){
 #if(STD_ON == McalCan_InitCheck)
    if(
@@ -83,14 +83,14 @@ FUNC(void, CAN_CODE) module_McalCan::InitFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  CAN_E_UNINIT
+         ,  MCALCAN_E_UNINIT
       );
 #endif
    }
 #endif
 }
 
-FUNC(void, CAN_CODE) module_McalCan::DeInitFunction(
+FUNC(void, MCALCAN_CODE) module_McalCan::DeInitFunction(
    void
 ){
 #if(STD_ON == McalCan_InitCheck)
@@ -108,14 +108,14 @@ FUNC(void, CAN_CODE) module_McalCan::DeInitFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  CAN_E_UNINIT
+         ,  MCALCAN_E_UNINIT
       );
 #endif
    }
 #endif
 }
 
-FUNC(void, CAN_CODE) module_McalCan::MainFunction(
+FUNC(void, MCALCAN_CODE) module_McalCan::MainFunction(
    void
 ){
 #if(STD_ON == McalCan_InitCheck)
@@ -132,74 +132,74 @@ FUNC(void, CAN_CODE) module_McalCan::MainFunction(
             0 //TBD: IdModule
          ,  0 //TBD: IdInstance
          ,  0 //TBD: IdApi
-         ,  CAN_E_UNINIT
+         ,  MCALCAN_E_UNINIT
       );
 #endif
    }
 #endif
 }
 
-FUNC(void, CAN_CODE) module_McalCan::MainFunction_Write(
+FUNC(void, MCALCAN_CODE) module_McalCan::MainFunction_Write(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::MainFunction_Read(
+FUNC(void, MCALCAN_CODE) module_McalCan::MainFunction_Read(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::MainFunction_BusOff(
+FUNC(void, MCALCAN_CODE) module_McalCan::MainFunction_BusOff(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::MainFunction_Wakeup(
+FUNC(void, MCALCAN_CODE) module_McalCan::MainFunction_Wakeup(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::MainFunction_Mode(
+FUNC(void, MCALCAN_CODE) module_McalCan::MainFunction_Mode(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::SetBaudRate(
+FUNC(void, MCALCAN_CODE) module_McalCan::SetBaudRate(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::SetControllerMode(
+FUNC(void, MCALCAN_CODE) module_McalCan::SetControllerMode(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::DisableControllerInterrupts(
+FUNC(void, MCALCAN_CODE) module_McalCan::DisableControllerInterrupts(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::EnableControllerInterrupts(
+FUNC(void, MCALCAN_CODE) module_McalCan::EnableControllerInterrupts(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::CheckWakeUp(
+FUNC(void, MCALCAN_CODE) module_McalCan::CheckWakeUp(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::GetControllerErrorState(
+FUNC(void, MCALCAN_CODE) module_McalCan::GetControllerErrorState(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::GetControllerMode(
+FUNC(void, MCALCAN_CODE) module_McalCan::GetControllerMode(
    void
 ){
 }
 
-FUNC(void, CAN_CODE) module_McalCan::Write(
+FUNC(void, MCALCAN_CODE) module_McalCan::Write(
    void
 ){
 }
