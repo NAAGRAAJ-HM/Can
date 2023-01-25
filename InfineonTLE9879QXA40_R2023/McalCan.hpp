@@ -1,13 +1,13 @@
 #pragma once
 /******************************************************************************/
-/* File   : McalCan.hpp                                                           */
+/* File   : McalCan.hpp                                                       */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
-#include "ConstMcalCan.hpp"
+#include "infMcalCan_ServiceNvM_Types.hpp"
 #include "CfgMcalCan.hpp"
 #include "McalCan_core.hpp"
 #include "infMcalCan_Exp.hpp"
