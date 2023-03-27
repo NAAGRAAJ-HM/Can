@@ -49,7 +49,7 @@ typedef enum{
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-McalCan_tuBufferElement McalCan_auBufferRx[McalCan_BufferLength];
+McalCan_tstRxFifioElement McalCan_astRxFifio[McalCan_LengthBuffer];
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
@@ -67,20 +67,10 @@ uint8 McalCan_ReadRxFifio(McalCan_teStatusReadRxFifio* ptrStatusReadRxFifio){
 }
 
 FUNC(void, MCALCAN_CODE) infMcalCanServiceSwcSchM_MainFunction(void){
-   McalCan_teStatusReadRxFifio McalCan_StatusReadRxFifio;
-
+   McalCan_teStatusReadRxFifio McalCan_StatusReadRxFifio = McalCan_eStatusReadRxFifio_BufferError;
    do{
       uint8 lu8IndexBufferRx = McalCan_ReadRxFifio(&McalCan_StatusReadRxFifio);
-
-      //TBD: Initialization code not yet implemented! - refer reference project
-      switch(McalCan_auBufferRx[lu8IndexBufferRx].McalCan_stContext.McalCan_stFrameExtended.ID){
-         case McalCan_eIdMsg_RxUds_Functional: McalCan_auBufferRx[lu8IndexBufferRx].McalCan_stContext.eHardwareObjectHandle = EcuabCanIf_eHardwareObjectHandle_RxUds_Functional; break;
-         case McalCan_eIdMsg_RxUds_Physical:   McalCan_auBufferRx[lu8IndexBufferRx].McalCan_stContext.eHardwareObjectHandle = EcuabCanIf_eHardwareObjectHandle_RxUds_Physical;   break;
-      }
-      McalCan_auBufferRx[lu8IndexBufferRx].McalCan_stContext.u8IdController = 0;
-
       infEcuabCanIfMcalCan_RxIndication(lu8IndexBufferRx);
-
    }while(McalCan_eStatusReadRxFifio_BufferEmpty != McalCan_StatusReadRxFifio);
 }
 
