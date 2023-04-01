@@ -1,6 +1,6 @@
 #pragma once
 /******************************************************************************/
-/* File   : infMcalCanServiceSwcSchM.hpp                                      */
+/* File   : infMcalCanSwcServiceSchM.hpp                                      */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
@@ -24,7 +24,7 @@
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-extern FUNC(void, MCALCAN_CODE) infMcalCanServiceSwcSchM_MainFunction(void);
+extern FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceSchM_MainFunction(void);
 
 /******************************************************************************/
 /* CONSTS                                                                     */

@@ -1,6 +1,6 @@
 #pragma once
 /******************************************************************************/
-/* File   : infMcalCanServiceSwcEcuM.hpp                                      */
+/* File   : infMcalCanSwcServiceEcuM.hpp                                      */
 /* Author : NAGARAJA HM (c) since 1982. All rights reserved.                  */
 /******************************************************************************/
 
@@ -24,8 +24,8 @@
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-extern FUNC(void, MCALCAN_CODE) infMcalCanServiceSwcEcuM_InitFunction   (void);
-extern FUNC(void, MCALCAN_CODE) infMcalCanServiceSwcEcuM_DeInitFunction (void);
+extern FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_InitFunction   (void);
+extern FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_DeInitFunction (void);
 
 /******************************************************************************/
 /* CONSTS                                                                     */

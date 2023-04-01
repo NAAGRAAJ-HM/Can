@@ -12,8 +12,8 @@
 
 #include "infEcuabCanIfMcalCan.hpp"
 #include "CanTypes.hpp"
-#include "infMcalCanServiceSwcEcuM.hpp"
-#include "infMcalCanServiceSwcSchM.hpp"
+#include "infMcalCanSwcServiceEcuM.hpp"
+#include "infMcalCanSwcServiceSchM.hpp"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
@@ -54,10 +54,10 @@ McalCan_tstRxFifioElement McalCan_astRxFifio[McalCan_LengthBuffer];
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-FUNC(void, MCALCAN_CODE) infMcalCanServiceSwcEcuM_InitFunction(void){
+FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_InitFunction(void){
 }
 
-FUNC(void, MCALCAN_CODE) infMcalCanServiceSwcEcuM_DeInitFunction (void){
+FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_DeInitFunction (void){
 }
 
 uint8 McalCan_ReadRxFifio(McalCan_teStatusReadRxFifio* ptrStatusReadRxFifio){
@@ -66,7 +66,7 @@ uint8 McalCan_ReadRxFifio(McalCan_teStatusReadRxFifio* ptrStatusReadRxFifio){
    return 0; //TBD: returns the index from McalCan_auBufferRx[McalCan_BufferLength]
 }
 
-FUNC(void, MCALCAN_CODE) infMcalCanServiceSwcSchM_MainFunction(void){
+FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceSchM_MainFunction(void){
    McalCan_teStatusReadRxFifio McalCan_StatusReadRxFifio = McalCan_eStatusReadRxFifio_BufferError;
    do{
       uint8 lu8IndexBufferRx = McalCan_ReadRxFifio(&McalCan_StatusReadRxFifio);
