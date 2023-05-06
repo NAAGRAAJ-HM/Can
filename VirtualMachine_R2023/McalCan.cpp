@@ -62,7 +62,7 @@ LibAutosarFifo_tItem      McalCan_atBuffer[CfgMcalCan_dNumMaxRequests];
 
 McalCan_tstRxFifioElement McalCan_astRxFifio[McalCan_LengthBuffer] = {
       {CfgEcuabCanIf_IdCanFrameExtendedRxUdsFunctional,  0, 0, 1, 0, 0, 8, {0x02, 0x3E, 0x00, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA}}
-   ,  {CfgEcuabCanIf_IdCanFrameExtendedRxBcmVehicleInfo, 0, 0, 0, 0, 0, 8, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}
+   ,  {CfgEcuabCanIf_IdCanFrameExtendedRxUdsFunctional,  0, 0, 0, 0, 0, 8, {0x02, 0x11, 0x02, 0xAA, 0xAA, 0xAA, 0xAA, 0xAA}}
    ,  {CfgEcuabCanIf_IdCanFrameExtendedRxBcmVehicleInfo, 0, 0, 0, 0, 0, 8, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}
    ,  {CfgEcuabCanIf_IdCanFrameExtendedRxBcmVehicleInfo, 0, 0, 0, 0, 0, 8, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}
    ,  {CfgEcuabCanIf_IdCanFrameExtendedRxBcmVehicleInfo, 0, 0, 0, 0, 0, 8, {0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00}}
@@ -83,6 +83,7 @@ FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_InitFunction(void){
       ,  CfgMcalCan_dNumMaxRequests
    );
    (void)LibAutosarFifo_Put(&McalCan_stFifoIndexBufferRx, 0); //TBD: Remove test code
+   (void)LibAutosarFifo_Put(&McalCan_stFifoIndexBufferRx, 1); //TBD: Remove test code
 }
 
 FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_DeInitFunction(void){
