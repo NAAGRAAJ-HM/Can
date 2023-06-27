@@ -42,7 +42,7 @@
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
-extern FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_InitFunction(void);
+extern FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_vInitFunction(void);
 
 /******************************************************************************/
 /* CONSTS                                                                     */

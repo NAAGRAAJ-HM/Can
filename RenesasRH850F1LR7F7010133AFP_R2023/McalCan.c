@@ -199,7 +199,7 @@ void RS_CAN_Init(void){
    RSCAN0RFCC0 |= 0x1;
 }
 
-FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_InitFunction(void){
+FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceEcuM_vInitFunction(void){
    protected_write(
          PROTCMD1
       ,  PROTS1
