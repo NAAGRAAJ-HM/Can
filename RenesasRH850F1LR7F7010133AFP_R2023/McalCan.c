@@ -272,7 +272,7 @@ FUNC(void, MCALCAN_CODE) McalCan_ForwardMessageToCanIf(
    const McalCan_FrameType* tCanFrame
 ){
    Can_HwType               tCanMailbox;
-   PduInfoType              tPduInfo;
+   Type_stInfoPdu           tPduInfo;
    CanIf_ControllerModeType tCanIfControllerMode;
 
    CanIf_GetControllerMode(
@@ -303,8 +303,8 @@ FUNC(void, MCALCAN_CODE) McalCan_ForwardMessageToCanIf(
       }
 
       tCanMailbox.ControllerId = 0;
-      tPduInfo.SduLength       = tCanFrame->DLC;
-      tPduInfo.SduDataPtr      = (uint8*)tCanFrame->DB;
+      tPduInfo.tLengthSdu       = tCanFrame->DLC;
+      tPduInfo.ptru8DataSdu     = (uint8*)tCanFrame->DB;
 
       CanIf_RxIndication(
          &tCanMailbox,
