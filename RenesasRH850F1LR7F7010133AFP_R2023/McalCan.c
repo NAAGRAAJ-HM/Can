@@ -272,7 +272,7 @@ FUNC(void, MCALCAN_CODE) McalCan_ForwardMessageToCanIf(
    const McalCan_FrameType* tCanFrame
 ){
    Can_HwType               tCanMailbox;
-   Type_stInfoPdu           tPduInfo;
+   Type_StackCom_stInfoPdu  tPduInfo;
    CanIf_ControllerModeType tCanIfControllerMode;
 
    CanIf_GetControllerMode(
