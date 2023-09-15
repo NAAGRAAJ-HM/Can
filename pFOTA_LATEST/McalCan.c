@@ -2,7 +2,7 @@
 #define CAN_SOURCE
 #define __CAN_SRC__
 #if !defined(__CAN_SRC__)
-# define __CAN_SRC__
+#define __CAN_SRC__
 #endif
 #ifdef __cplusplus
 extern "C"
@@ -14,23 +14,23 @@ extern "C"
 #include "Can_Local.hpp"
 
 #if(CAN_DEV_ERROR_REPORT == STD_ON)
-# include "SwcServiceDet.hpp"
+#include "SwcServiceDet.hpp"
 #endif
 
 #if !defined(CAN_AMD_RUNTIME_MEASUREMENT)
-# define CAN_AMD_RUNTIME_MEASUREMENT STD_OFF
+#define CAN_AMD_RUNTIME_MEASUREMENT STD_OFF
 #endif
 #if(CAN_AMD_RUNTIME_MEASUREMENT == STD_ON)
-# include "AmdRtm.hpp"
+#include "AmdRtm.hpp"
 #endif
 
 #if !defined(CAN_RUNTIME_MEASUREMENT_SUPPORT)
-# define CAN_RUNTIME_MEASUREMENT_SUPPORT STD_OFF
+#define CAN_RUNTIME_MEASUREMENT_SUPPORT STD_OFF
 #endif
 #if(CAN_RUNTIME_MEASUREMENT_SUPPORT == STD_ON)
 
-# define C_ENABLE_RUNTIME_MEASUREMENT_SUPPORT
-# include "Rtm.hpp"
+#define C_ENABLE_RUNTIME_MEASUREMENT_SUPPORT
+#include "Rtm.hpp"
 #endif
 
 #include "vstdlib.hpp"
@@ -42,9 +42,9 @@ extern "C"
 # error "Source and Header file are inconsistent!"
 #endif
 #if defined(CAN_GEN_BASE_CFG5_VERSION)
-# if(CAN_GEN_BASE_CFG5_VERSION         != 0x0103u)
-#  error "Source and Generated Header file are inconsistent!"
-# endif
+#if(CAN_GEN_BASE_CFG5_VERSION         != 0x0103u)
+#error "Source and Generated Header file are inconsistent!"
+#endif
 #else
 # error "No CAN_GEN_BASE_CFG5_VERSION is defined"
 #endif
@@ -59,48 +59,48 @@ extern "C"
 #endif
 
 #if defined(CAN_USE_NO_VECTOR_IF)
-# define CAN_USE_CRITICALSECTION_OVER_CONFIRMATION
+#define CAN_USE_CRITICALSECTION_OVER_CONFIRMATION
 #else
-# if defined(CANIF_VENDOR_ID)
-#  if(CANIF_VENDOR_ID == 0x001E)
-#   define CAN_USE_VECTOR_IF
-#   if defined(IF_ASRIFCAN_VERSION)
-#    if(IF_ASRIFCAN_VERSION < 0x0410)
-#     define CAN_USE_CRITICALSECTION_OVER_CONFIRMATION
-#    endif
-#   endif
-#  else
-#   define CAN_USE_CRITICALSECTION_OVER_CONFIRMATION
-#  endif
-# else
-#  define CAN_USE_CRITICALSECTION_OVER_CONFIRMATION
-# endif
+#if defined(CANIF_VENDOR_ID)
+#if(CANIF_VENDOR_ID == 0x001E)
+#define CAN_USE_VECTOR_IF
+#if defined(IF_ASRIFCAN_VERSION)
+#if(IF_ASRIFCAN_VERSION < 0x0410)
+#define CAN_USE_CRITICALSECTION_OVER_CONFIRMATION
+#endif
+#endif
+#else
+#define CAN_USE_CRITICALSECTION_OVER_CONFIRMATION
+#endif
+#else
+#define CAN_USE_CRITICALSECTION_OVER_CONFIRMATION
+#endif
 #endif
 
 #if(CAN_RUNTIME_MEASUREMENT_SUPPORT == STD_ON)
-# define CanHookBegin_Can_Init()                              Rtm_Start(RtmConf_RtmMeasurementPoint_Can_Init)
-# define CanHookEnd_Can_Init()                                Rtm_Stop(RtmConf_RtmMeasurementPoint_Can_Init)
-# define CanHookBegin_Can_SetControllerMode()                 Rtm_Start(RtmConf_RtmMeasurementPoint_Can_SetControllerMode)
-# define CanHookEnd_Can_SetControllerMode()                   Rtm_Stop(RtmConf_RtmMeasurementPoint_Can_SetControllerMode)
-# define CanHookBegin_Can_Write()                             Rtm_Start(RtmConf_RtmMeasurementPoint_Can_Write)
-# define CanHookEnd_Can_Write()                               Rtm_Stop(RtmConf_RtmMeasurementPoint_Can_Write)
+#define CanHookBegin_Can_Init()                              Rtm_Start(RtmConf_RtmMeasurementPoint_Can_Init)
+#define CanHookEnd_Can_Init()                                Rtm_Stop(RtmConf_RtmMeasurementPoint_Can_Init)
+#define CanHookBegin_Can_SetControllerMode()                 Rtm_Start(RtmConf_RtmMeasurementPoint_Can_SetControllerMode)
+#define CanHookEnd_Can_SetControllerMode()                   Rtm_Stop(RtmConf_RtmMeasurementPoint_Can_SetControllerMode)
+#define CanHookBegin_Can_Write()                             Rtm_Start(RtmConf_RtmMeasurementPoint_Can_Write)
+#define CanHookEnd_Can_Write()                               Rtm_Stop(RtmConf_RtmMeasurementPoint_Can_Write)
 
 #else
-# define CanHookBegin_Can_Init()
-# define CanHookEnd_Can_Init()
-# define CanHookBegin_Can_SetControllerMode() \
+#define CanHookBegin_Can_Init()
+#define CanHookEnd_Can_Init()
+#define CanHookBegin_Can_SetControllerMode() \
 
-# define CanHookEnd_Can_SetControllerMode() \
+#define CanHookEnd_Can_SetControllerMode() \
 
-# define CanHookBegin_Can_Write() \
+#define CanHookBegin_Can_Write() \
 
-# define CanHookEnd_Can_Write() \
+#define CanHookEnd_Can_Write() \
 
 #endif
 
-# define CanHookBegin_CanHL_ReInit() \
+#define CanHookBegin_CanHL_ReInit() \
 
-# define CanHookEnd_CanHL_ReInit() \
+#define CanHookEnd_CanHL_ReInit() \
 
 #define CanHookBegin_CanHL_TxConfirmation() \
 
@@ -126,9 +126,9 @@ extern "C"
 #define kCanCrIntMaskCancel            0x00010000u
 #define kCanCrListenOnlyMode           0x03000000u
 #if defined(C_ENABLE_IMMEDIATE_BUSOFF_RECOVERY)
-# define kCanCrHaltAtBusoff            0x00200000u
+#define kCanCrHaltAtBusoff            0x00200000u
 #else
-# define kCanCrHaltAtBusoff            0x00400000u
+#define kCanCrHaltAtBusoff            0x00400000u
 #endif
 #define kCanSrMaskBusoff               0x00000010u
 #define kCanSrMaskPassive              0x00000008u
@@ -138,38 +138,38 @@ extern "C"
 #define kCanEfMaskBusoffClear          0x7FF7u
 
 #if defined(C_ENABLE_ALTERNATIVE_CLOCK_SOURCE)
-# define kCanGlobCfg                   0x00000010u
+#define kCanGlobCfg                   0x00000010u
 #else
-# define kCanGlobCfg                   0x00000000u
+#define kCanGlobCfg                   0x00000000u
 #endif
 #define kCanIntMaskMessageLost         0x00000200u
 #define kCanSrMaskRamIst               0x00000008u
 #if defined (C_ENABLE_ECC_TX_ERROR)
-# if(kCanMaxPhysChannels == 1u)
-#  define kCanEfMaskEccError           0x00010000u
-#  define kCanEfMaskEccErrorClear      0xFFFEFFFFu
+#if(kCanMaxPhysChannels == 1u)
+#define kCanEfMaskEccError           0x00010000u
+#define kCanEfMaskEccErrorClear      0xFFFEFFFFu
 # elif(kCanMaxPhysChannels == 2u)
-#  define kCanEfMaskEccError           0x00030000u
-#  define kCanEfMaskEccErrorClear      0xFFFCFFFFu
+#define kCanEfMaskEccError           0x00030000u
+#define kCanEfMaskEccErrorClear      0xFFFCFFFFu
 # elif(kCanMaxPhysChannels == 3u)
-#  define kCanEfMaskEccError           0x00070000u
-#  define kCanEfMaskEccErrorClear      0xFFF8FFFFu
+#define kCanEfMaskEccError           0x00070000u
+#define kCanEfMaskEccErrorClear      0xFFF8FFFFu
 # elif(kCanMaxPhysChannels == 4u)
-#  define kCanEfMaskEccError           0x000F0000u
-#  define kCanEfMaskEccErrorClear      0xFFF0FFFFu
+#define kCanEfMaskEccError           0x000F0000u
+#define kCanEfMaskEccErrorClear      0xFFF0FFFFu
 # elif(kCanMaxPhysChannels == 5u)
-#  define kCanEfMaskEccError           0x001F0000u
-#  define kCanEfMaskEccErrorClear      0xFFE0FFFFu
+#define kCanEfMaskEccError           0x001F0000u
+#define kCanEfMaskEccErrorClear      0xFFE0FFFFu
 # elif(kCanMaxPhysChannels == 6u)
-#  define kCanEfMaskEccError           0x003F0000u
-#  define kCanEfMaskEccErrorClear      0xFFC0FFFFu
+#define kCanEfMaskEccError           0x003F0000u
+#define kCanEfMaskEccErrorClear      0xFFC0FFFFu
 # elif(kCanMaxPhysChannels == 7u)
-#  define kCanEfMaskEccError           0x007F0000u
-#  define kCanEfMaskEccErrorClear      0xFF80FFFFu
+#define kCanEfMaskEccError           0x007F0000u
+#define kCanEfMaskEccErrorClear      0xFF80FFFFu
 # elif(kCanMaxPhysChannels == 8u)
-#  define kCanEfMaskEccError           0x00FF0000u
-#  define kCanEfMaskEccErrorClear      0xFF00FFFFu
-# endif
+#define kCanEfMaskEccError           0x00FF0000u
+#define kCanEfMaskEccErrorClear      0xFF00FFFFu
+#endif
 #endif
 #define kCanHwRamTestEnable            0x00000004u
 #define kCanHwRamTestDisable           0x00000000u
@@ -233,132 +233,132 @@ extern "C"
 #define CanLL_WriteRegGlobalRegSize    CanLL_WriteRegGlobal32
 #define CanMemCheckValuesRegSize       CanMemCheckValues32bit
 
-# if defined(C_ENABLE_IF_RSCAN)
-#  define kCanRamCheckMaskCGCFG        0xFFFFFF1Fu
-# else
-#  if defined(C_ENABLE_RSCAN_FD_LAYOUT)
-#   define kCanRamCheckMaskCGCFG       0xFFFFFF3Fu
-#  else
-#   define kCanRamCheckMaskCGCFG       0xFFFFFFDFu
-#  endif
-# endif
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
-#  define kCanRamCheckMaskCGCR         0x00000F00u
-# else
-#  define kCanRamCheckMaskCGCR         0x00000700u
-# endif
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
-#  define kCanRamCheckMaskCRECR        0x0000013Fu
-# else
-#  define kCanRamCheckMaskCRECR        0x0000011Fu
-# endif
-# if(kCanMaxPhysChannels == 1u)
-#  define kCanRamCheckMaskCRNCFG0      0xFF000000u
+#if defined(C_ENABLE_IF_RSCAN)
+#define kCanRamCheckMaskCGCFG        0xFFFFFF1Fu
+#else
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#define kCanRamCheckMaskCGCFG       0xFFFFFF3Fu
+#else
+#define kCanRamCheckMaskCGCFG       0xFFFFFFDFu
+#endif
+#endif
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#define kCanRamCheckMaskCGCR         0x00000F00u
+#else
+#define kCanRamCheckMaskCGCR         0x00000700u
+#endif
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#define kCanRamCheckMaskCRECR        0x0000013Fu
+#else
+#define kCanRamCheckMaskCRECR        0x0000011Fu
+#endif
+#if(kCanMaxPhysChannels == 1u)
+#define kCanRamCheckMaskCRNCFG0      0xFF000000u
 # elif(kCanMaxPhysChannels == 2u)
-#  define kCanRamCheckMaskCRNCFG0      0xFFFF0000u
+#define kCanRamCheckMaskCRNCFG0      0xFFFF0000u
 # elif(kCanMaxPhysChannels == 3u)
-#  define kCanRamCheckMaskCRNCFG0      0xFFFFFF00u
+#define kCanRamCheckMaskCRNCFG0      0xFFFFFF00u
 # elif(kCanMaxPhysChannels >= 4u)
-#  define kCanRamCheckMaskCRNCFG0      0xFFFFFFFFu
-# endif
-# if(kCanMaxPhysChannels == 5u)
-#  define kCanRamCheckMaskCRNCFG1      0xFF000000u
+#define kCanRamCheckMaskCRNCFG0      0xFFFFFFFFu
+#endif
+#if(kCanMaxPhysChannels == 5u)
+#define kCanRamCheckMaskCRNCFG1      0xFF000000u
 # elif(kCanMaxPhysChannels == 6u)
-#  define kCanRamCheckMaskCRNCFG1      0xFFFF0000u
+#define kCanRamCheckMaskCRNCFG1      0xFFFF0000u
 # elif(kCanMaxPhysChannels == 7u)
-#  define kCanRamCheckMaskCRNCFG1      0xFFFFFF00u
+#define kCanRamCheckMaskCRNCFG1      0xFFFFFF00u
 # elif(kCanMaxPhysChannels == 8u)
-#  define kCanRamCheckMaskCRNCFG1      0xFFFFFFFFu
-# endif
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
-#  define kCanRamCheckMaskCRBNUM       0x000007FFu
-# else
-#  if defined(C_ENABLE_CAN_FD_USED)
-#   define kCanRamCheckMaskCRBNUM      0x000003FFu
-#  else
-#   define kCanRamCheckMaskCRBNUM      0x000000FFu
-#  endif
-# endif
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
-#  define kCanRamCheckMaskCRFCR        0x0000F772u
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
-#  define kCanRamCheckMaskTRFCR        0xFFFFFF76u
-# else
-#  define kCanRamCheckMaskTRFCR        0xFFFFF776u
-# endif
-# else
-#  define kCanRamCheckMaskCRFCR        0x0000F702u
-#  define kCanRamCheckMaskTRFCR        0xFFFFF706u
-# endif
-# if defined(C_ENABLE_IF_RSCAN_FD)
-#  define kCanRamCheckMaskCGRMCFG      0x00000001u
-# endif
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
-#  define kCanRamCheckMaskCGFDCFG      0x00000301u
-#  define kCanRamCheckMaskCGCRCCFG     0x00000001u
-# endif
-# define kCanRamCheckMaskRuleCode      0xFFFFFFFFu
-# define kCanRamCheckMaskRuleMask      0xDFFFFFFFu
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
-#  define kCanRamCheckMaskRuleBuf      0xFFFFFF0Fu
-# else
-#  define kCanRamCheckMaskRuleBuf      0xFFFFFF00u
-# endif
-# if(kCanMaxPhysChannels == 1u)
-#  define kCanRamCheckMaskRuleFifo     0x000007FFu
+#define kCanRamCheckMaskCRNCFG1      0xFFFFFFFFu
+#endif
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#define kCanRamCheckMaskCRBNUM       0x000007FFu
+#else
+#if defined(C_ENABLE_CAN_FD_USED)
+#define kCanRamCheckMaskCRBNUM      0x000003FFu
+#else
+#define kCanRamCheckMaskCRBNUM      0x000000FFu
+#endif
+#endif
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#define kCanRamCheckMaskCRFCR        0x0000F772u
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#define kCanRamCheckMaskTRFCR        0xFFFFFF76u
+#else
+#define kCanRamCheckMaskTRFCR        0xFFFFF776u
+#endif
+#else
+#define kCanRamCheckMaskCRFCR        0x0000F702u
+#define kCanRamCheckMaskTRFCR        0xFFFFF706u
+#endif
+#if defined(C_ENABLE_IF_RSCAN_FD)
+#define kCanRamCheckMaskCGRMCFG      0x00000001u
+#endif
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#define kCanRamCheckMaskCGFDCFG      0x00000301u
+#define kCanRamCheckMaskCGCRCCFG     0x00000001u
+#endif
+#define kCanRamCheckMaskRuleCode      0xFFFFFFFFu
+#define kCanRamCheckMaskRuleMask      0xDFFFFFFFu
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#define kCanRamCheckMaskRuleBuf      0xFFFFFF0Fu
+#else
+#define kCanRamCheckMaskRuleBuf      0xFFFFFF00u
+#endif
+#if(kCanMaxPhysChannels == 1u)
+#define kCanRamCheckMaskRuleFifo     0x000007FFu
 # elif(kCanMaxPhysChannels == 2u)
-#  define kCanRamCheckMaskRuleFifo     0x00003FFFu
+#define kCanRamCheckMaskRuleFifo     0x00003FFFu
 # elif(kCanMaxPhysChannels == 3u)
-#  define kCanRamCheckMaskRuleFifo     0x0001FFFFu
+#define kCanRamCheckMaskRuleFifo     0x0001FFFFu
 # elif(kCanMaxPhysChannels == 4u)
-#  define kCanRamCheckMaskRuleFifo     0x000FFFFFu
+#define kCanRamCheckMaskRuleFifo     0x000FFFFFu
 # elif(kCanMaxPhysChannels == 5u)
-#  define kCanRamCheckMaskRuleFifo     0x007FFFFFu
+#define kCanRamCheckMaskRuleFifo     0x007FFFFFu
 # elif(kCanMaxPhysChannels == 6u)
-#  define kCanRamCheckMaskRuleFifo     0x03FFFFFFu
+#define kCanRamCheckMaskRuleFifo     0x03FFFFFFu
 # elif(kCanMaxPhysChannels == 7u)
-#  define kCanRamCheckMaskRuleFifo     0x1FFFFFFFu
+#define kCanRamCheckMaskRuleFifo     0x1FFFFFFFu
 # elif(kCanMaxPhysChannels == 8u)
-#  define kCanRamCheckMaskRuleFifo     0xFFFFFFFFu
-# endif
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
-#  define kCanRamCheckMaskBCFG         0x1F7FFBFFu
-#  define kCanRamCheckMaskFDBCFG       0x077F00FFu
-#  if defined(C_ENABLE_IF_RSCAN_FD_V3)
-#   define kCanRamCheckMaskFDCFG       0x777F0707u
-#  else
-#   define kCanRamCheckMaskFDCFG       0x3F7F0707u
-#  endif
-#  define kCanRamCheckMaskCR           0x00EFFF00u
-# else
-#  define kCanRamCheckMaskBCFG         0x037F03FFu
-#  define kCanRamCheckMaskCR           0x00E1FF00u
-# endif
+#define kCanRamCheckMaskRuleFifo     0xFFFFFFFFu
+#endif
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#define kCanRamCheckMaskBCFG         0x1F7FFBFFu
+#define kCanRamCheckMaskFDBCFG       0x077F00FFu
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#define kCanRamCheckMaskFDCFG       0x777F0707u
+#else
+#define kCanRamCheckMaskFDCFG       0x3F7F0707u
+#endif
+#define kCanRamCheckMaskCR           0x00EFFF00u
+#else
+#define kCanRamCheckMaskBCFG         0x037F03FFu
+#define kCanRamCheckMaskCR           0x00E1FF00u
+#endif
 
 #define tCanIntCnt                     vuint8
 #define tCanLoopRet                    Can_ReturnType
 
 #if(CAN_SAFE_BSW == STD_ON)
-# if !(CAN_SLEEP_SUPPORT == STD_ON)                                                         || \
+#if !(CAN_SLEEP_SUPPORT == STD_ON)                                                         || \
      !defined(CAN_HL_HW_LAYOUT_TXBASIC_FIRST)                                               || \
      ((CAN_GET_STATUS == STD_ON) && !defined(C_ENABLE_EXTENDED_STATUS))                     || \
      !defined(C_HL_ENABLE_OVERRUN_IN_STATUS)                                                || \
      (defined(C_ENABLE_RX_FULLCAN_OBJECTS) && !defined(C_ENABLE_RX_FULLCAN_POLLING))        || \
      (defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL))
-#  error "SafeBSW: An unsupported feature is active!"
-# endif
+#error "SafeBSW: An unsupported feature is active!"
+#endif
 #endif
 
 #define CAN_HL_HW_TX_NORMAL_INDEX(hwch)     (Can_GetTxBasicHwStart(hwch))
 #if defined(CAN_HL_HW_LAYOUT_TXBASIC_FIRST)
-# define CAN_HL_HW_TX_STARTINDEX(hwch)      (Can_GetTxBasicHwStart(hwch))
+#define CAN_HL_HW_TX_STARTINDEX(hwch)      (Can_GetTxBasicHwStart(hwch))
 #endif
 #define CAN_HL_HW_TX_FULL_STARTINDEX(hwch)  (Can_GetTxFullHwStart(hwch))
 #define CAN_HL_HW_UNUSED_STARTINDEX(hwch)   (Can_GetUnusedHwStart(hwch))
 #define CAN_HL_HW_RX_FULL_STARTINDEX(hwch)  (Can_GetRxFullHwStart(hwch))
 #define CAN_HL_HW_RX_BASIC_STARTINDEX(hwch) (Can_GetRxBasicHwStart(hwch))
 #if defined(CAN_HL_HW_LAYOUT_TXBASIC_FIRST)
-# define CAN_HL_HW_TX_STOPINDEX(hwch)       (Can_GetTxFullHwStop(hwch))
+#define CAN_HL_HW_TX_STOPINDEX(hwch)       (Can_GetTxFullHwStop(hwch))
 #endif
 #define CAN_HL_HW_TX_FULL_STOPINDEX(hwch)   (Can_GetTxFullHwStop(hwch))
 #define CAN_HL_HW_UNUSED_STOPINDEX(hwch)    (Can_GetUnusedHwStop(hwch))
@@ -375,35 +375,35 @@ extern "C"
 #define CAN_HL_MB_TX_BASIC_STOPINDEX(hwch)  (Can_GetTxBasicHandleStop(hwch))
 
 #if defined(C_ENABLE_CAN_RAM_CHECK)
-# if !defined(CAN_RAM_CHECK_MAILBOX_RESULT)
-#  if defined( C_SINGLE_RECEIVE_CHANNEL )
-#   define CAN_RAM_CHECK_MAILBOX_RESULT(ch, initParaPtr) CanLL_InitIsMailboxCorrupt((initParaPtr))
-#  else
-#   define CAN_RAM_CHECK_MAILBOX_RESULT(ch, initParaPtr) CanLL_InitIsMailboxCorrupt((ch), (initParaPtr))
-#  endif
-# endif
-# if !defined(CAN_RAM_CHECK_FINISHED_CTP)
-#  define CAN_RAM_CHECK_FINISHED_CTP(ch)
-# endif
+#if !defined(CAN_RAM_CHECK_MAILBOX_RESULT)
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
+#define CAN_RAM_CHECK_MAILBOX_RESULT(ch, initParaPtr) CanLL_InitIsMailboxCorrupt((initParaPtr))
+#else
+#define CAN_RAM_CHECK_MAILBOX_RESULT(ch, initParaPtr) CanLL_InitIsMailboxCorrupt((ch), (initParaPtr))
+#endif
+#endif
+#if !defined(CAN_RAM_CHECK_FINISHED_CTP)
+#define CAN_RAM_CHECK_FINISHED_CTP(ch)
+#endif
 #endif
 #if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
-# if !defined(CAN_RAM_CHECK_BEGIN_REG_RESULT)
-#  if defined( C_SINGLE_RECEIVE_CHANNEL )
-#   define CAN_RAM_CHECK_BEGIN_REG_RESULT(ch, initParaPtr) CanLL_InitBeginIsRegisterCorrupt((initParaPtr))
-#  else
-#   define CAN_RAM_CHECK_BEGIN_REG_RESULT(ch, initParaPtr) CanLL_InitBeginIsRegisterCorrupt((ch), (initParaPtr))
-#  endif
-# endif
-# if !defined(CAN_RAM_CHECK_END_REG_RESULT)
-#  if defined( C_SINGLE_RECEIVE_CHANNEL )
-#   define CAN_RAM_CHECK_END_REG_RESULT(ch, initParaPtr) CanLL_InitEndIsRegisterCorrupt((initParaPtr))
-#  else
-#   define CAN_RAM_CHECK_END_REG_RESULT(ch, initParaPtr) CanLL_InitEndIsRegisterCorrupt((ch), (initParaPtr))
-#  endif
-# endif
-# if !defined(CAN_RAM_CHECK_READ_BACK_RESULT)
-#  define CAN_RAM_CHECK_READ_BACK_RESULT(ch)
-# endif
+#if !defined(CAN_RAM_CHECK_BEGIN_REG_RESULT)
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
+#define CAN_RAM_CHECK_BEGIN_REG_RESULT(ch, initParaPtr) CanLL_InitBeginIsRegisterCorrupt((initParaPtr))
+#else
+#define CAN_RAM_CHECK_BEGIN_REG_RESULT(ch, initParaPtr) CanLL_InitBeginIsRegisterCorrupt((ch), (initParaPtr))
+#endif
+#endif
+#if !defined(CAN_RAM_CHECK_END_REG_RESULT)
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
+#define CAN_RAM_CHECK_END_REG_RESULT(ch, initParaPtr) CanLL_InitEndIsRegisterCorrupt((initParaPtr))
+#else
+#define CAN_RAM_CHECK_END_REG_RESULT(ch, initParaPtr) CanLL_InitEndIsRegisterCorrupt((ch), (initParaPtr))
+#endif
+#endif
+#if !defined(CAN_RAM_CHECK_READ_BACK_RESULT)
+#define CAN_RAM_CHECK_READ_BACK_RESULT(ch)
+#endif
 #endif
 
 #define CanHL_IsStart(ch) ((Can_GetLogStatus(ch) & CAN_STATUS_START) == CAN_STATUS_START)
@@ -413,22 +413,22 @@ extern "C"
 #define CanHL_IsControllerInit(ch) ((Can_GetLogStatus(ch) & CAN_STATUS_INIT) == CAN_STATUS_INIT)
 
 #if defined(C_ENABLE_CAN_FD_USED)
-# define CAN_DLC2LEN(dlc) (Can_DlcToFrameLenght[((uint8)(dlc)) & ((uint8)0xFu)])
-# define CAN_LEN2DLC(length) ((uint8)Can_MessageLengthToDlc[(length)])
+#define CAN_DLC2LEN(dlc) (Can_DlcToFrameLenght[((uint8)(dlc)) & ((uint8)0xFu)])
+#define CAN_LEN2DLC(length) ((uint8)Can_MessageLengthToDlc[(length)])
 #else
-# define CAN_DLC2LEN(dlc) (dlc)
-# define CAN_LEN2DLC(length) (length)
+#define CAN_DLC2LEN(dlc) (dlc)
+#define CAN_LEN2DLC(length) (length)
 #endif
 #if defined(C_ENABLE_CAN_FD_FULL)
-# define CAN_MAX_DATALEN_OBJ(Index) Can_GetMailboxDataLen(Index)
+#define CAN_MAX_DATALEN_OBJ(Index) Can_GetMailboxDataLen(Index)
 #else
-# define CAN_MAX_DATALEN_OBJ(Index) 8u
+#define CAN_MAX_DATALEN_OBJ(Index) 8u
 #endif
 #define CanHL_IsFdMessage(id) (((id) & (Can_IdType)CAN_ID_FD_MASK) == (Can_IdType)CAN_ID_FD_MASK)
 #define CanHL_IsFdTxBrs(ch)   (Can_GetInitObjectFdBrsConfig(Can_GetLastInitObject(ch)) == CAN_FD_RXTX)
 
 #if defined(C_SINGLE_PHYS_CHANNEL)
-# define canPhysChannel                      kCanLogToPhys
+#define canPhysChannel                      kCanLogToPhys
 #endif
 
 #define CanLL_SL32(num) \
@@ -456,42 +456,42 @@ extern "C"
   (((pch)>>2)&0x01u)
 
 #if defined(C_ENABLE_IF_RSCAN_FD_V3)
-# define CanLL_TxMaskWord(pch) \
+#define CanLL_TxMaskWord(pch) \
   ((kCanRegSize)kCanOne32)
 #else
-# define CanLL_TxMaskWord(pch) \
+#define CanLL_TxMaskWord(pch) \
   ((kCanRegSize)(((kCanRegSize)0x0000FFFFu)<<(((pch)&0x01u)<<4)))
 #endif
 
 #if defined(C_ENABLE_IF_RSCAN_FD_V3)
-# define CanLL_TxSharedRegToWord(pch, val) \
+#define CanLL_TxSharedRegToWord(pch, val) \
   ((kCanTxSize)(val))
 #else
-# define CanLL_TxSharedRegToWord(pch, val) \
+#define CanLL_TxSharedRegToWord(pch, val) \
   ((kCanTxSize)(((kCanRegSize)(val))>>(((pch)&0x01u)<<4)))
 #endif
 
 #if defined(C_ENABLE_IF_RSCAN_FD_V3)
-# define CanLL_TxWordToSharedReg(pch, val) \
+#define CanLL_TxWordToSharedReg(pch, val) \
   ((kCanRegSize)(val))
 #else
-# define CanLL_TxWordToSharedReg(pch, val) \
+#define CanLL_TxWordToSharedReg(pch, val) \
   ((kCanRegSize)(((kCanRegSize)(val))<<(((pch)&0x01u)<<4)))
 #endif
 
 #if defined(C_ENABLE_IF_RSCAN_FD_V3)
-# define CanLL_TxWordIndex(pch) \
+#define CanLL_TxWordIndex(pch) \
   ((pch)&0x07u)
 #else
-# define CanLL_TxWordIndex(pch) \
+#define CanLL_TxWordIndex(pch) \
   (((pch)>>1)&0x03u)
 #endif
 
 #if defined(C_ENABLE_IF_RSCAN_FD_V3)
-# define CanLL_SLTS(num) \
+#define CanLL_SLTS(num) \
   CanLL_SL32(num)
 #else
-# define CanLL_SLTS(num) \
+#define CanLL_SLTS(num) \
   CanLL_SL16(num)
 #endif
 
@@ -526,92 +526,92 @@ extern "C"
   (Can->CGSR == (mode))
 
 #if defined(C_ENABLE_LL_CAN_INTCTRL) || defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL)
-# if defined(C_ENABLE_INTC_ACCESS_BY_APPL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL)
 
-#  define CanLL_IntcIntEnable(id, reg) \
+#define CanLL_IntcIntEnable(id, reg) \
   ApplCanWriteIcr8((vuint32)(&(reg)), (vuint8)(ApplCanReadIcr8((vuint32)(&(reg))) & kCanIntcEIMKNeg))
 
-#  define CanLL_IntcIntEnableLoc(reg) \
+#define CanLL_IntcIntEnableLoc(reg) \
   ((reg) &= kCanIntcEIMKNeg)
 
-#  define CanLL_IntcIntDisable(id, reg) \
+#define CanLL_IntcIntDisable(id, reg) \
   ApplCanWriteIcr8((vuint32)(&(reg)), (vuint8)(ApplCanReadIcr8((vuint32)(&(reg))) | kCanIntcEIMK))
 
-#  define CanLL_IntcIntDisableLoc(reg) \
+#define CanLL_IntcIntDisableLoc(reg) \
   ((reg) |= kCanIntcEIMK)
 
-#  define CanLL_IntcIntFlag(id, reg) \
+#define CanLL_IntcIntFlag(id, reg) \
   ((ApplCanReadIcr8((vuint32)(&(reg))) & kCanIntcEIRF) == kCanIntcEIRF)
 
-#  define CanLL_IntcIntClear(id, reg) \
+#define CanLL_IntcIntClear(id, reg) \
   ApplCanWriteIcr8((vuint32)(&(reg)), (vuint8)(ApplCanReadIcr8((vuint32)(&(reg))) & kCanIntcEIRFNeg))
 
-#  define CanLL_IntcIntSave(id, dst, src) \
+#define CanLL_IntcIntSave(id, dst, src) \
   ((dst) = ApplCanReadIcr8((vuint32)(&(src))))
 
-#  define CanLL_IntcIntRestore(id, dst, src) \
+#define CanLL_IntcIntRestore(id, dst, src) \
   ApplCanWriteIcr8((vuint32)(&(dst)), (vuint8)(src))
 
 # elif defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
 
-#  define CanLL_IntcIntEnable(id, reg) \
+#define CanLL_IntcIntEnable(id, reg) \
   (void)osEnableInterruptSource((id), TRUE)
 
-#  define CanLL_IntcIntEnableLoc(reg) \
+#define CanLL_IntcIntEnableLoc(reg) \
   ((reg) = TRUE)
 
-#  define CanLL_IntcIntDisable(id, reg) \
+#define CanLL_IntcIntDisable(id, reg) \
   (void)osDisableInterruptSource(id)
 
-#  define CanLL_IntcIntDisableLoc(reg) \
+#define CanLL_IntcIntDisableLoc(reg) \
   ((reg) = FALSE)
 
-#  define CanLL_IntcIntFlag(id, reg) \
+#define CanLL_IntcIntFlag(id, reg) \
   (CanLL_OsIsInterruptPending(id) == TRUE)
 
-#  define CanLL_IntcIntClear(id, reg) \
+#define CanLL_IntcIntClear(id, reg) \
   (void)osClearPendingInterrupt(id)
 
-#  define CanLL_IntcIntSave(id, dst, src) \
+#define CanLL_IntcIntSave(id, dst, src) \
   ((dst) = (vuint8)CanLL_OsIsInterruptSourceEnabled(id))
 
-#  define CanLL_IntcIntRestore(id, dst, src) \
+#define CanLL_IntcIntRestore(id, dst, src) \
   CanLL_OsRestoreInterruptSource((id), (boolean)(src))
 
-# else
+#else
 
-#  define CanLL_IntcIntEnable(id, reg) \
+#define CanLL_IntcIntEnable(id, reg) \
   ((reg) &= kCanIntcEIMKNeg)
 
-#  define CanLL_IntcIntEnableLoc(reg) \
+#define CanLL_IntcIntEnableLoc(reg) \
   ((reg) &= kCanIntcEIMKNeg)
 
-#  define CanLL_IntcIntDisable(id, reg) \
+#define CanLL_IntcIntDisable(id, reg) \
   ((reg) |= kCanIntcEIMK)
 
-#  define CanLL_IntcIntDisableLoc(reg) \
+#define CanLL_IntcIntDisableLoc(reg) \
   ((reg) |= kCanIntcEIMK)
 
-#  define CanLL_IntcIntFlag(id, reg) \
+#define CanLL_IntcIntFlag(id, reg) \
   (((reg) & kCanIntcEIRF) == kCanIntcEIRF)
 
-#  define CanLL_IntcIntClear(id, reg) \
+#define CanLL_IntcIntClear(id, reg) \
   ((reg) &= kCanIntcEIRFNeg)
 
-#  define CanLL_IntcIntSave(id, dst, src) \
+#define CanLL_IntcIntSave(id, dst, src) \
   ((dst) = (src))
 
-#  define CanLL_IntcIntRestore(id, dst, src) \
+#define CanLL_IntcIntRestore(id, dst, src) \
   ((dst) = (src))
 
-# endif
+#endif
 #endif
 
 #if defined(C_ENABLE_SLEEP_WAKEUP)
-# define CanLL_HwIsSleep(hwCh) \
+#define CanLL_HwIsSleep(hwCh) \
   (CanLL_ModeCheck_Log((hwCh), kCanStopMode))
 #else
-# define CanLL_HwIsSleep(hwCh) \
+#define CanLL_HwIsSleep(hwCh) \
   (kCanFalse != kCanFalse)
 #endif
 
@@ -626,46 +626,46 @@ extern "C"
 
 #if defined(C_ENABLE_EXTENDED_STATUS)
 
-# define CanLL_HwIsPassive(hwCh) \
+#define CanLL_HwIsPassive(hwCh) \
   ((Can->ChCtrl[mCanLogToPhys(hwCh)].SR & kCanSrMaskPassive) == kCanSrMaskPassive)
 
-# if defined(C_MULTIPLE_RECEIVE_CHANNEL)
-#  define CanLL_HwIsWarning(hwCh) \
+#if defined(C_MULTIPLE_RECEIVE_CHANNEL)
+#define CanLL_HwIsWarning(hwCh) \
   (((CanRxActualErrorCounter(hwCh) >= (96u)) && (CanRxActualErrorCounter(hwCh) < (128u))) || \
    ((CanTxActualErrorCounter(hwCh) >= (96u)) && (CanTxActualErrorCounter(hwCh) < (128u))))
-# else
-#  define CanLL_HwIsWarning(hwCh) \
+#else
+#define CanLL_HwIsWarning(hwCh) \
   (((CanRxActualErrorCounter() >= (96u)) && (CanRxActualErrorCounter() < (128u))) || \
    ((CanTxActualErrorCounter() >= (96u)) && (CanTxActualErrorCounter() < (128u))))
-# endif
+#endif
 #endif
 
 #if defined(C_MULTIPLE_RECEIVE_CHANNEL)
-# define CanLL_ApplCanTimerStart(loop)   ApplCanTimerStart(channel, loop)
-# define CanLL_ApplCanTimerEnd(loop)     ApplCanTimerEnd(channel, loop)
-# define CanLL_ApplCanTimerLoop(loop)    ApplCanTimerLoop(channel, loop)
+#define CanLL_ApplCanTimerStart(loop)   ApplCanTimerStart(channel, loop)
+#define CanLL_ApplCanTimerEnd(loop)     ApplCanTimerEnd(channel, loop)
+#define CanLL_ApplCanTimerLoop(loop)    ApplCanTimerLoop(channel, loop)
 #else
-# define CanLL_ApplCanTimerStart(loop)   ApplCanTimerStart(loop)
-# define CanLL_ApplCanTimerEnd(loop)     ApplCanTimerEnd(loop)
-# define CanLL_ApplCanTimerLoop(loop)    ApplCanTimerLoop(loop)
+#define CanLL_ApplCanTimerStart(loop)   ApplCanTimerStart(loop)
+#define CanLL_ApplCanTimerEnd(loop)     ApplCanTimerEnd(loop)
+#define CanLL_ApplCanTimerLoop(loop)    ApplCanTimerLoop(loop)
 #endif
 
 #if defined(C_ENABLE_HW_LOOP_TIMER)
-# define CanLL_CanTimerStart(loop)       CanLL_ApplCanTimerStart(loop)
-# define CanLL_CanTimerEnd(loop)         CanLL_ApplCanTimerEnd(loop)
-# define CanLL_CanTimerLoop(loop)        CanLL_ApplCanTimerLoop(loop)
+#define CanLL_CanTimerStart(loop)       CanLL_ApplCanTimerStart(loop)
+#define CanLL_CanTimerEnd(loop)         CanLL_ApplCanTimerEnd(loop)
+#define CanLL_CanTimerLoop(loop)        CanLL_ApplCanTimerLoop(loop)
 #else
-# define CanLL_CanTimerStart(loop)
-# define CanLL_CanTimerEnd(loop)
-# define CanLL_CanTimerLoop(loop)        CAN_OK
+#define CanLL_CanTimerStart(loop)
+#define CanLL_CanTimerEnd(loop)
+#define CanLL_CanTimerLoop(loop)        CAN_OK
 #endif
 
 #if(CAN_RUNTIME_MEASUREMENT_SUPPORT == STD_ON)
-# define CanLL_RtmStart(point)           Rtm_Start(RtmConf_RtmMeasurementPoint_##point)
-# define CanLL_RtmStop(point)            Rtm_Stop(RtmConf_RtmMeasurementPoint_##point)
+#define CanLL_RtmStart(point)           Rtm_Start(RtmConf_RtmMeasurementPoint_##point)
+#define CanLL_RtmStop(point)            Rtm_Stop(RtmConf_RtmMeasurementPoint_##point)
 #else
-# define CanLL_RtmStart(point)
-# define CanLL_RtmStop(point)
+#define CanLL_RtmStart(point)
+#define CanLL_RtmStop(point)
 #endif
 
 #define CAN_START_SEC_CONST_UNSPECIFIED
@@ -709,11 +709,11 @@ V_DEF_VAR(CAN_STATIC, uint8, VAR_NOINIT) canIsRxTaskLocked;
 V_DEF_VAR(CAN_STATIC, uint16, VAR_NOINIT) canRxQueueMaxDataSize;
 #endif
 
-# if defined(C_ENABLE_LL_CAN_INTCTRL)
+#if defined(C_ENABLE_LL_CAN_INTCTRL)
 
 V_DEF_VAR(CAN_STATIC, tCanLLCanGlobalIntOld, VAR_NOINIT) canInterruptOldFlag;
 
-# endif
+#endif
 #if defined(C_ENABLE_GLOBAL_INIT_POST_PROCESS)
 
 V_DEF_VAR(CAN_STATIC, vuint8, VAR_NOINIT) CanAddFilterRulesStartPage;
@@ -735,73 +735,73 @@ V_DEF_VAR(CAN_STATIC, tCanDummyBuf, VAR_NOINIT) CanLL_DummyBuf;
 #define CAN_STOP_SEC_VAR_NOINIT_UNSPECIFIED
 #include "MemMap.hpp"
 
-# define CAN_START_SEC_VAR_INIT_UNSPECIFIED
-# include "MemMap.hpp"
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "MemMap.hpp"
 
 V_DEF_VAR(CAN_STATIC, uint8, VAR_INIT) canConfigInitFlag = CAN_STATUS_UNINIT;
-# define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
-# include "MemMap.hpp"
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "MemMap.hpp"
 
 #if defined(CAN_ENABLE_USE_INIT_ROOT_POINTER)
-# define CAN_START_SEC_VAR_INIT_UNSPECIFIED
-# include "MemMap.hpp"
+#define CAN_START_SEC_VAR_INIT_UNSPECIFIED
+#include "MemMap.hpp"
 
 V_DEF_P2CONST (V_NONE, Can_ConfigType, VAR_INIT, CONST_PBCFG) Can_ConfigDataPtr = NULL_PTR;
-# define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
-# include "MemMap.hpp"
+#define CAN_STOP_SEC_VAR_INIT_UNSPECIFIED
+#include "MemMap.hpp"
 #else
-# define CAN_START_SEC_CONST_UNSPECIFIED
-# include "MemMap.hpp"
+#define CAN_START_SEC_CONST_UNSPECIFIED
+#include "MemMap.hpp"
 
 V_DEF_CONSTP2CONST(V_NONE, Can_ConfigType, CONST, CONST_PBCFG) Can_ConfigDataPtr = (Can_ConfigType*) NULL_PTR;
-# define CAN_STOP_SEC_CONST_UNSPECIFIED
-# include "MemMap.hpp"
+#define CAN_STOP_SEC_CONST_UNSPECIFIED
+#include "MemMap.hpp"
 #endif
 
 #if !defined(CAN_SAFE_BSW)
-# define CAN_SAFE_BSW   STD_OFF
+#define CAN_SAFE_BSW   STD_OFF
 #else
-# if(CAN_SAFE_BSW == STD_ON)
-#  if(CAN_DEV_ERROR_DETECT == STD_OFF) || (CAN_AMD_RUNTIME_MEASUREMENT == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_OFF) || (CAN_AMD_RUNTIME_MEASUREMENT == STD_ON)
 #   error "Unsupported Feature activated for SafeBSW"
-#  endif
-# endif
+#endif
+#endif
 #endif
 
 #if(CAN_TRANSMIT_BUFFER == STD_OFF) && defined(C_ENABLE_CANCEL_IN_HW)
 # error "C_ENABLE_CANCEL_IN_HW need CAN_TRANSMIT_BUFFER == STD_ON (no FIFO buffering but PRIO_BY_CANID in CanIf) -> check Generated data"
 #endif
 #if !defined(C_ENABLE_SLEEP_WAKEUP)
-# if(CAN_SLEEP_SUPPORT == STD_ON) && (CAN_WAKEUP_SUPPORT == STD_ON)
-#  error "C_ENABLE_SLEEP_WAKEUP organified but generated like supported"
-# endif
+#if(CAN_SLEEP_SUPPORT == STD_ON) && (CAN_WAKEUP_SUPPORT == STD_ON)
+#error "C_ENABLE_SLEEP_WAKEUP organified but generated like supported"
+#endif
 #endif
 #if(CAN_WAKEUP_SUPPORT == STD_ON) && (CAN_SLEEP_SUPPORT == STD_OFF)
 # error "activated CAN_WAKEUP_SUPPORT need activated CAN_SLEEP_SUPPORT"
 #endif
 #if defined(C_ENABLE_HW_LOOP_TIMER)
-# if(CAN_LOOP_MAX == 0)
-#  error "CAN_LOOP_MAX should not be generated as 0"
-# endif
+#if(CAN_LOOP_MAX == 0)
+#error "CAN_LOOP_MAX should not be generated as 0"
+#endif
 #else
-# if(CAN_HARDWARE_CANCELLATION == STD_ON)
-#  error "C_ENABLE_HW_LOOP_TIMER organified but generated like supported"
-# endif
+#if(CAN_HARDWARE_CANCELLATION == STD_ON)
+#error "C_ENABLE_HW_LOOP_TIMER organified but generated like supported"
+#endif
 #endif
 #if defined(C_ENABLE_CANCEL_IN_HW)
 #else
-# if(CAN_HW_TRANSMIT_CANCELLATION == STD_ON)
-#  error "C_ENABLE_CANCEL_IN_HW organified but generated like supported"
-# endif
+#if(CAN_HW_TRANSMIT_CANCELLATION == STD_ON)
+#error "C_ENABLE_CANCEL_IN_HW organified but generated like supported"
+#endif
 #endif
 #if(CAN_MIRROR_MODE == STD_ON) && (!defined(CAN_ENABLE_GENERIC_CONFIRMATION_API2) || (CAN_GENERIC_PRECOPY == STD_OFF))
 # error "CAN_MIRROR_MODE need CAN_GENERIC_CONFIRMATION with CAN_API2 and CAN_GENERIC_PRECOPY as STD_ON"
 #endif
 #if(CAN_MULTIPLE_BASICCAN_TX == STD_ON)
-# if(CAN_HW_TRANSMIT_CANCELLATION == STD_ON)
+#if(CAN_HW_TRANSMIT_CANCELLATION == STD_ON)
 
 # error "CAN_MULTIPLE_BASICCAN_TX and CAN_HW_TRANSMIT_CANCELLATION are STD_ON but this combination is not supported"
-# endif
+#endif
 #endif
 
 #if((kCanMaxPhysChannels > kCanMaxPhysChannelsCell)           ||  \
@@ -823,81 +823,81 @@ V_DEF_CONSTP2CONST(V_NONE, Can_ConfigType, CONST, CONST_PBCFG) Can_ConfigDataPtr
 # error "General configuration error!"
 #endif
 
-# if defined(C_ENABLE_LL_CAN_INTCTRL)
-#  if((kCanIntcRxFifoBaseAdr == 0u)                           || \
+#if defined(C_ENABLE_LL_CAN_INTCTRL)
+#if((kCanIntcRxFifoBaseAdr == 0u)                           || \
        (kCanIntcGErrorBaseAdr == 0u))
 #   error "Interrupt control register address configuration error!"
-#  endif
-# endif
+#endif
+#endif
 
 #if !defined(C_ENABLE_IF_RSCAN) && !defined(C_ENABLE_IF_RSCAN_FD) && !defined(C_ENABLE_IF_RSCAN_FD_V3)
 # error "CAN interface is not defined!"
 #endif
-# if defined(C_ENABLE_IF_RSCAN) && defined(C_ENABLE_IF_RSCAN_FD)
-#  error "Configuration of CAN interface is ambiguous!"
-# endif
-# if defined(C_ENABLE_IF_RSCAN) && defined(C_ENABLE_IF_RSCAN_FD_V3)
-#  error "Configuration of CAN interface is ambiguous!"
-# endif
-# if defined(C_ENABLE_IF_RSCAN_FD) && defined(C_ENABLE_IF_RSCAN_FD_V3)
-#  error "Configuration of CAN interface is ambiguous!"
-# endif
-# if defined(C_ENABLE_CAN_FD_USED)
-#  if defined(C_ENABLE_IF_RSCAN)
+#if defined(C_ENABLE_IF_RSCAN) && defined(C_ENABLE_IF_RSCAN_FD)
+#error "Configuration of CAN interface is ambiguous!"
+#endif
+#if defined(C_ENABLE_IF_RSCAN) && defined(C_ENABLE_IF_RSCAN_FD_V3)
+#error "Configuration of CAN interface is ambiguous!"
+#endif
+#if defined(C_ENABLE_IF_RSCAN_FD) && defined(C_ENABLE_IF_RSCAN_FD_V3)
+#error "Configuration of CAN interface is ambiguous!"
+#endif
+#if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_IF_RSCAN)
 #   error "Usage of CAN-FD requires a RSCAN-FD hardware interface, check the configuration or used derivative!"
-#  endif
-# endif
+#endif
+#endif
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
-# if !defined(C_ENABLE_RX_FULLCAN_POLLING)
-#  error "Rx FullCANs cannot be processed in interrupt context!"
-# endif
+#if !defined(C_ENABLE_RX_FULLCAN_POLLING)
+#error "Rx FullCANs cannot be processed in interrupt context!"
+#endif
 #endif
 
 #if defined(C_ENABLE_NESTED_INTERRUPTS)
-# if defined(C_ENABLE_OSEK_OS) && defined(C_ENABLE_OSEK_OS_INTCAT2)
-#  error "Nesting of category 2 CAN interrupts must not be enabled by the driver!"
-# endif
-# if defined(C_ENABLE_ISRVOID)
-#  error "Nesting of void-void CAN interrupts must not be enabled by the driver!"
-# endif
+#if defined(C_ENABLE_OSEK_OS) && defined(C_ENABLE_OSEK_OS_INTCAT2)
+#error "Nesting of category 2 CAN interrupts must not be enabled by the driver!"
+#endif
+#if defined(C_ENABLE_ISRVOID)
+#error "Nesting of void-void CAN interrupts must not be enabled by the driver!"
+#endif
 #endif
 
-# if defined(C_ENABLE_SLEEP_WAKEUP)
-#  if !defined(C_ENABLE_BUSWAKEUP_SUPPORT)
+#if defined(C_ENABLE_SLEEP_WAKEUP)
+#if !defined(C_ENABLE_BUSWAKEUP_SUPPORT)
 #   error "Sleep/Wakeup functionality is not supported for this derivative!"
-#  endif
-# endif
+#endif
+#endif
 
 #if defined(C_ENABLE_TX_HW_FIFO)
-# if defined(C_ENABLE_CANCEL_IN_HW)
-#  error "'Hardware (Transmit) Cancellation' is not supported if Tx Fifos are enabled!"
-# endif
+#if defined(C_ENABLE_CANCEL_IN_HW)
+#error "'Hardware (Transmit) Cancellation' is not supported if Tx Fifos are enabled!"
+#endif
 #endif
 
 #define CAN_START_SEC_STATIC_CODE
 #include "MemMap.hpp"
 
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
-#  define CanHL_ApplCanTimerStart( timerIdx )  ApplCanTimerStart( timerIdx );
-#  define CanHL_ApplCanTimerEnd( timerIdx )    ApplCanTimerEnd( timerIdx );
-# else
-#  define CanHL_ApplCanTimerStart( timerIdx )  ApplCanTimerStart( channel, (timerIdx) );
-#  define CanHL_ApplCanTimerEnd( timerIdx )    ApplCanTimerEnd( channel, (timerIdx) );
-# endif
-# define CanHL_ApplCanTimerLoop( timerIdx )   if(ApplCanTimerLoop(CAN_CHANNEL_CANPARA_FIRST (timerIdx)) != CAN_OK) \
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
+#define CanHL_ApplCanTimerStart( timerIdx )  ApplCanTimerStart( timerIdx );
+#define CanHL_ApplCanTimerEnd( timerIdx )    ApplCanTimerEnd( timerIdx );
+#else
+#define CanHL_ApplCanTimerStart( timerIdx )  ApplCanTimerStart( channel, (timerIdx) );
+#define CanHL_ApplCanTimerEnd( timerIdx )    ApplCanTimerEnd( channel, (timerIdx) );
+#endif
+#define CanHL_ApplCanTimerLoop( timerIdx )   if(ApplCanTimerLoop(CAN_CHANNEL_CANPARA_FIRST (timerIdx)) != CAN_OK) \
                                               { \
                                                 break; \
                                               }
 
-# if(CAN_HW_LOOP_SUPPORT_API == STD_OFF)
+#if(CAN_HW_LOOP_SUPPORT_API == STD_OFF)
 
-#  if defined( C_SINGLE_RECEIVE_CHANNEL )
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
 
-#    define ApplCanTimerStart(source)     ((void)GetCounterValue( CAN_OS_COUNTER_ID, &Can_GetCanLoopTimeout(0, (source))))
-#  else
-#    define ApplCanTimerStart(ch, source) ((void)GetCounterValue( CAN_OS_COUNTER_ID, &Can_GetCanLoopTimeout((ch), (source))))
-#  endif
+#define ApplCanTimerStart(source)     ((void)GetCounterValue( CAN_OS_COUNTER_ID, &Can_GetCanLoopTimeout(0, (source))))
+#else
+#define ApplCanTimerStart(ch, source) ((void)GetCounterValue( CAN_OS_COUNTER_ID, &Can_GetCanLoopTimeout((ch), (source))))
+#endif
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) ApplCanTimerLoop( CAN_CHANNEL_CANTYPE_FIRST uint8 source ){
 
@@ -908,19 +908,19 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) ApplCanTimerLoop( CAN_
   apiId = CAN_HW_ACCESS_ID;
   retval = CAN_NOT_OK;
 
-#  if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if(source > CAN_LOOP_MAX){
     errorId = CAN_E_PARAM_HANDLE;
   }
   else
-#   if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#   endif
-#  endif
+#endif
+#endif
   {
 
     TickType elapsedTime;
@@ -937,7 +937,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) ApplCanTimerLoop( CAN_
       {
         retval = CAN_OK;
       }
-#  if defined(C_ENABLE_HW_LOOP_TIMER)
+#if defined(C_ENABLE_HW_LOOP_TIMER)
       else
       {
 
@@ -946,24 +946,24 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) ApplCanTimerLoop( CAN_
           errorId = CAN_E_TIMEOUT_DET;
         }
       }
-#  endif
+#endif
     }
     CAN_DUMMY_STATEMENT(startTime);
   }
 
-#  if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(apiId, errorId);
   }
-#  else
+#else
   CAN_DUMMY_STATEMENT(apiId);
   CAN_DUMMY_STATEMENT(errorId);
-#  endif
+#endif
   return retval;
 }
 
-#  define ApplCanTimerEnd ApplCanTimerStart
-# endif
+#define ApplCanTimerEnd ApplCanTimerStart
+#endif
 
 V_DEF_FUNC(CAN_STATIC, uint8, STATIC_CODE) CanHL_ReInit( CAN_HW_CHANNEL_CANTYPE_FIRST uint8 doRamCheck ){
 
@@ -979,18 +979,18 @@ V_DEF_FUNC(CAN_STATIC, uint8, STATIC_CODE) CanHL_ReInit( CAN_HW_CHANNEL_CANTYPE_
     errorId = CAN_E_UNINIT;
   }
   else
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-# endif
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-# endif
+#endif
 #endif
   {
 
@@ -1034,14 +1034,14 @@ V_DEF_FUNC(CAN_STATIC, uint8, STATIC_CODE) CanHL_ReInit( CAN_HW_CHANNEL_CANTYPE_
 #if defined(C_ENABLE_CAN_RAM_CHECK)
       if(doRamCheck == kCanExecuteRamCheck)
       {
-# if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
+#if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
 
         if(initPara.isChRamCheckFail == kCanTrue)
         {
           CanIf_RamCheckCorruptController((uint8)Can_GetCanToCanIfChannelMapping(channel));
           Can_SetLogStatus(channel, Can_GetLogStatus(channel) | CAN_DEACTIVATE_CONTROLLER);
         }
-# else
+#else
         if( (Can_GetLogStatus(channel) & CAN_DEACTIVATE_CONTROLLER) == CAN_DEACTIVATE_CONTROLLER )
         {
           if(Appl_CanRamCheckFailed((uint8)channel) != CAN_DEACTIVATE_CONTROLLER)
@@ -1049,7 +1049,7 @@ V_DEF_FUNC(CAN_STATIC, uint8, STATIC_CODE) CanHL_ReInit( CAN_HW_CHANNEL_CANTYPE_
             Can_SetLogStatus(channel, Can_GetLogStatus(channel) & (uint8)(~(CAN_DEACTIVATE_CONTROLLER)));
           }
         }
-# endif
+#endif
         CAN_RAM_CHECK_FINISHED_CTP(channel)
       }
 #endif
@@ -1094,7 +1094,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_ModeTransition( CAN_CHANN
     {
       transitionState = CanLL_ModeTransition(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST transitionRequest, busOffRecovery, doRamCheck);
       CanHL_ApplCanTimerLoop((uint8)CAN_LOOP_MAX);
-    } while ( transitionState != kCanOk );
+    } while( transitionState != kCanOk );
     CanHL_ApplCanTimerEnd ((uint8)CAN_LOOP_MAX);
   }
   if( transitionState == kCanRequested ){
@@ -1128,7 +1128,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) CanHL_IsHigherCanIdPri
   tmpCanId1 = CanId1;
   tmpCanId2 = CanId2;
 
-# if defined(C_ENABLE_MIXED_ID)
+#if defined(C_ENABLE_MIXED_ID)
 
   if(((tmpCanId1) & CAN_ID_IDE_MASK) == CAN_ID_IDE_MASK){
     tmpCanId1 = tmpCanId1 & (Can_IdType)(CAN_ID_MASK);
@@ -1140,11 +1140,11 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) CanHL_IsHigherCanIdPri
   } else {
     tmpCanId2 = (Can_IdType)(((tmpCanId2) & CAN_ID_MASK_STD) << 18);
   }
-# else
+#else
 
   tmpCanId1 = tmpCanId1 & (Can_IdType)CAN_ID_MASK;
   tmpCanId2 = tmpCanId2 & (Can_IdType)CAN_ID_MASK;
-# endif
+#endif
 
   if(tmpCanId1 < tmpCanId2){
     retval = CAN_OK;
@@ -1165,21 +1165,21 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WritePrepare( CAN_CHANNEL_
     CanObjectHandle mailboxElement_max;
     mailboxElement_max = Can_GetMailboxSize(txPara->mailboxHandle);
 
-# if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
     if(Can_GetMailboxType(txPara->mailboxHandle) == CAN_TX_BASICCAN_FIFO_TYPE){
        txPara->mailboxElement = (CanObjectHandle)Can_GetTxHwFifoWriteIndex(Can_GetMailboxTxHwFifo(txPara->mailboxHandle));
        txPara->activeSendObject += txPara->mailboxElement;
     }
     else
-# endif
+#endif
     {
       CanObjectHandle mailboxElementFound;
       CanObjectHandle activeSendObjectFound;
       mailboxElementFound = mailboxElement_max;
       activeSendObjectFound = mailboxElement_max;
-      for (txPara->mailboxElement = 0u; txPara->mailboxElement < mailboxElement_max; txPara->mailboxElement++)
+      for(txPara->mailboxElement = 0u; txPara->mailboxElement < mailboxElement_max; txPara->mailboxElement++)
       {
-# if(CAN_IDENTICAL_ID_CANCELLATION == STD_ON) && defined(C_ENABLE_CANCEL_IN_HW)
+#if(CAN_IDENTICAL_ID_CANCELLATION == STD_ON) && defined(C_ENABLE_CANCEL_IN_HW)
         if( ((txPara->pdu.id) == Can_GetActiveSendId(txPara->activeSendObject) ) && (Can_GetActiveSendState(txPara->activeSendObject) != kCanBufferFree) )
         {
           mailboxElementFound = txPara->mailboxElement;
@@ -1191,22 +1191,22 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WritePrepare( CAN_CHANNEL_
           mailboxElementFound = txPara->mailboxElement;
           activeSendObjectFound = txPara->activeSendObject;
         }
-# else
+#else
         if(Can_GetActiveSendState(txPara->activeSendObject) == kCanBufferFree)
         {
           mailboxElementFound = txPara->mailboxElement;
           activeSendObjectFound = txPara->activeSendObject;
           break;
         }
-# endif
+#endif
         txPara->activeSendObject++;
       }
-# if defined(C_ENABLE_CANCEL_IN_HW)
+#if defined(C_ENABLE_CANCEL_IN_HW)
       if(mailboxElementFound == mailboxElement_max)
       {
         Can_IdType lowestPrioId = txPara->pdu.id;
         txPara->activeSendObject = CanHL_GetActiveSendObject(txPara->mailboxHandle, 0u);
-        for (txPara->mailboxElement = 0u; txPara->mailboxElement < mailboxElement_max; txPara->mailboxElement++)
+        for(txPara->mailboxElement = 0u; txPara->mailboxElement < mailboxElement_max; txPara->mailboxElement++)
         {
           if(Can_GetActiveSendState(txPara->activeSendObject) == kCanBufferSend)
           {
@@ -1220,7 +1220,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WritePrepare( CAN_CHANNEL_
           txPara->activeSendObject++;
         }
       }
-# endif
+#endif
       if(mailboxElementFound == mailboxElement_max)
       {
         txPara->mailboxElement = 0u;
@@ -1230,9 +1230,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WritePrepare( CAN_CHANNEL_
       {
         txPara->mailboxElement = mailboxElementFound;
         txPara->activeSendObject = activeSendObjectFound;
-# if defined(C_ENABLE_CANCEL_IN_HW)
+#if defined(C_ENABLE_CANCEL_IN_HW)
         CanHL_WritePrepareCancelTx(CAN_CHANNEL_CANPARA_FIRST txPara);
-# endif
+#endif
       }
     }
 #endif
@@ -1250,9 +1250,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WriteSavePduInfo( CanTxTra
     activeSendData = CanHL_GetActiveSendData(txPara->mailboxHandle, txPara->mailboxElement);
 
     if(txPara->pdu.sdu != NULL_PTR){
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
       if(Can_GetSizeOfActiveSendData() >= (activeSendData + txPara->pdu.length))
-# endif
+#endif
       {
 
         VStdMemCpy((void*)&Can_GetActiveSendData(activeSendData), (void*)txPara->pdu.sdu, txPara->pdu.length);
@@ -1308,18 +1308,18 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) CanHL_WriteStart( CAN_
 #if defined(C_ENABLE_TX_HW_FIFO)
     if(Can_GetMailboxType(txPara->mailboxHandle) == CAN_TX_BASICCAN_FIFO_TYPE){
       uint16 txHwFifo;
-# if defined(CAN_ENABLE_GENERIC_CONFIRMATION_API2)
+#if defined(CAN_ENABLE_GENERIC_CONFIRMATION_API2)
       CanHL_WriteSavePduInfo(txPara);
-# endif
+#endif
 
       SchM_Enter_Can_CAN_EXCLUSIVE_AREA_7();
       txHwFifo = Can_GetMailboxTxHwFifo(txPara->mailboxHandle);
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
       if(txHwFifo >= (uint16)Can_GetSizeOfTxHwFifo())
       {
         txHwFifo = 0u;
       }
-# endif
+#endif
       Can_IncTxHwFifoFillCount(txHwFifo);
       if(Can_GetTxHwFifoWriteIndex(txHwFifo) < ((uint16)Can_GetMailboxSize(txPara->mailboxHandle) - (uint16)1u) )
       {
@@ -1337,12 +1337,12 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) CanHL_WriteStart( CAN_
 
     txPara->dlcRaw = MK_TX_DLC(CAN_LEN2DLC(txPara->pdu.length));
 #if defined(C_ENABLE_EXTENDED_ID)
-# if defined(C_ENABLE_MIXED_ID)
+#if defined(C_ENABLE_MIXED_ID)
     if( ((txPara->pdu.id) & CAN_ID_IDE_MASK) != CAN_ID_IDE_MASK){
       SET_PARASTRUCT_IDRAW_TX_STD(txPara, txPara->pdu.id);
     }
     else
-# endif
+#endif
     {
       SET_PARASTRUCT_IDRAW_TX_EXT(txPara, txPara->pdu.id);
     }
@@ -1381,9 +1381,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, CanObjectHandle, STATIC_CODE) CanHL_GetActiveSendOb
 #if(CAN_SAFE_BSW == STD_ON)
   if(activeSendObject >= (Can_HwHandleType)Can_GetSizeOfActiveSendObject()){
     activeSendObject = ((Can_HwHandleType)Can_GetSizeOfActiveSendObject() - (Can_HwHandleType)1u);
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
     Can_CallDetReportError(CAN_WRITE_ID, CAN_E_PARAM_HANDLE);
-# endif
+#endif
   }
 #endif
   return activeSendObject;
@@ -1400,9 +1400,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint16, STATIC_CODE) CanHL_GetActiveSendData( Can_H
 #if(CAN_SAFE_BSW == STD_ON)
   if((activeSendData + Can_GetMailboxDataLen(mailboxHandle)) > Can_GetSizeOfActiveSendData()){
     activeSendData = 0u;
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
     Can_CallDetReportError(CAN_WRITE_ID, CAN_E_PARAM_HANDLE);
-# endif
+#endif
   }
 #endif
   return activeSendData;
@@ -1417,13 +1417,13 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RamCheckMailboxNotificatio
 
   Can_SetLogStatus(channel, Can_GetLogStatus(channel) | CAN_DEACTIVATE_CONTROLLER);
 
-# if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
+#if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
   CanIf_RamCheckCorruptMailbox((uint8)Can_GetCanToCanIfChannelMapping(channel), initPara->mailboxHandle);
-# else
-#  if defined(C_ENABLE_NOTIFY_CORRUPT_MAILBOX)
+#else
+#if defined(C_ENABLE_NOTIFY_CORRUPT_MAILBOX)
   Appl_CanCorruptMailbox((uint8)channel, (initPara->hwObjHandle));
-#  endif
-# endif
+#endif
+#endif
 }
 #endif
 
@@ -1452,27 +1452,27 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitTxFullCAN( CAN_CHANNE
   uint8 initOk;
   uint8 mailboxState;
   CanObjectHandle activeSendObject;
-# if defined(C_ENABLE_CAN_RAM_CHECK)
+#if defined(C_ENABLE_CAN_RAM_CHECK)
   uint8 isMbRamCheckFail;
-# endif
+#endif
 
   initOk = kCanOk;
 
-  for (initPara->mailboxHandle = Can_GetTxFullHandleStart(canHwChannel); initPara->mailboxHandle < Can_GetTxFullHandleStop(canHwChannel); initPara->mailboxHandle++){
+  for(initPara->mailboxHandle = Can_GetTxFullHandleStart(canHwChannel); initPara->mailboxHandle < Can_GetTxFullHandleStop(canHwChannel); initPara->mailboxHandle++){
     initPara->hwObjHandle = Can_GetMailboxHwHandle(initPara->mailboxHandle);
     activeSendObject = CanHL_GetActiveSendObject(initPara->mailboxHandle, 0u);
     Can_SetActiveSendState(activeSendObject, kCanBufferFree);
-# if defined(C_ENABLE_CAN_RAM_CHECK)
+#if defined(C_ENABLE_CAN_RAM_CHECK)
 
     isMbRamCheckFail = kCanFalse;
     if(initPara->doRamCheck == kCanExecuteRamCheck){
       isMbRamCheckFail = CAN_RAM_CHECK_MAILBOX_RESULT(channel, initPara);
     }
-# endif
+#endif
 
     mailboxState = CanLL_InitMailboxTx(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST initPara);
     initOk &= mailboxState;
-# if defined(C_ENABLE_CAN_RAM_CHECK)
+#if defined(C_ENABLE_CAN_RAM_CHECK)
     if( (Can_GetLogStatus(channel) & CAN_STATUS_INIT) != CAN_STATUS_INIT ){
       Can_SetMailboxState(initPara->mailboxHandle, mailboxState);
     }
@@ -1483,7 +1483,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitTxFullCAN( CAN_CHANNE
         CanHL_RamCheckMailboxNotification(CAN_CHANNEL_CANPARA_FIRST initPara);
       }
     }
-# endif
+#endif
   }
   return initOk;
 }
@@ -1501,7 +1501,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitTxBasicCAN( CAN_CHANN
   initOk = kCanOk;
   initPara->mailboxHandle = Can_GetTxBasicHandleStart(canHwChannel);
 #if defined(C_ENABLE_MULTIPLE_BASICCAN_TX)
-  for (; initPara->mailboxHandle < Can_GetTxBasicHandleStop(canHwChannel); initPara->mailboxHandle++)
+  for(; initPara->mailboxHandle < Can_GetTxBasicHandleStop(canHwChannel); initPara->mailboxHandle++)
 #endif
   {
 #if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION) || defined(C_ENABLE_TX_HW_FIFO)
@@ -1511,27 +1511,27 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitTxBasicCAN( CAN_CHANN
     activeSendObject = CanHL_GetActiveSendObject(initPara->mailboxHandle, 0u);
 #if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION) || defined(C_ENABLE_TX_HW_FIFO)
     activeSendObjectStop = activeSendObject + Can_GetMailboxSize(initPara->mailboxHandle);
-    for (; activeSendObject < activeSendObjectStop; activeSendObject++)
+    for(; activeSendObject < activeSendObjectStop; activeSendObject++)
 #endif
     {
       Can_SetActiveSendState(activeSendObject, kCanBufferFree);
     }
-# if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
     if(Can_GetMailboxType(initPara->mailboxHandle) == CAN_TX_BASICCAN_FIFO_TYPE){
       uint16 txHwFifo;
       txHwFifo = Can_GetMailboxTxHwFifo(initPara->mailboxHandle);
-#  if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
       if(txHwFifo >= (uint16)Can_GetSizeOfTxHwFifo())
       {
         txHwFifo = 0u;
         initOk = kCanFailed;
       }
-#  endif
+#endif
       Can_SetTxHwFifoWriteIndex(txHwFifo, 0u);
       Can_SetTxHwFifoReadIndex(txHwFifo, 0u);
       Can_SetTxHwFifoFillCount(txHwFifo, 0u);
     }
-# endif
+#endif
 #if defined(C_ENABLE_CAN_RAM_CHECK)
 
     isMbRamCheckFail = kCanFalse;
@@ -1566,25 +1566,25 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitRxFullCAN( CAN_CHANNE
   uint8 mailboxState;
 
   initOk = kCanOk;
-  for (initPara->mailboxHandle = Can_GetRxFullHandleStart(canHwChannel); initPara->mailboxHandle < Can_GetRxFullHandleStop(canHwChannel); initPara->mailboxHandle++){
+  for(initPara->mailboxHandle = Can_GetRxFullHandleStart(canHwChannel); initPara->mailboxHandle < Can_GetRxFullHandleStop(canHwChannel); initPara->mailboxHandle++){
     initPara->hwObjHandle=Can_GetMailboxHwHandle(initPara->mailboxHandle);
 
-# if defined(C_ENABLE_EXTENDED_ID)
-#  if defined(C_ENABLE_MIXED_ID)
+#if defined(C_ENABLE_EXTENDED_ID)
+#if defined(C_ENABLE_MIXED_ID)
     if( (Can_GetMailboxIDValue(initPara->mailboxHandle) & CAN_ID_IDE_MASK) != CAN_ID_IDE_MASK){
       initPara->idType = kCanIdTypeStd;
       SET_PARASTRUCT_IDRAW_RX_STD(initPara, Can_GetMailboxIDValue(initPara->mailboxHandle));
     }
     else
-#  endif
+#endif
     {
       initPara->idType = kCanIdTypeExt;
       SET_PARASTRUCT_IDRAW_RX_EXT(initPara, Can_GetMailboxIDValue(initPara->mailboxHandle));
     }
-# else
+#else
     initPara->idType = kCanIdTypeStd;
     SET_PARASTRUCT_IDRAW_RX_STD(initPara, Can_GetMailboxIDValue(initPara->mailboxHandle));
-# endif
+#endif
 
     mailboxState = CanLL_InitMailboxRxFullCan(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST initPara);
     initOk &= mailboxState;
@@ -1602,7 +1602,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitRxBasicCAN( CAN_CHANN
   uint8 mailboxState;
 
   initOk = kCanOk;
-  for (initPara->mailboxHandle = Can_GetRxBasicHandleStart(canHwChannel); initPara->mailboxHandle < Can_GetRxBasicHandleStop(canHwChannel); initPara->mailboxHandle++){
+  for(initPara->mailboxHandle = Can_GetRxBasicHandleStart(canHwChannel); initPara->mailboxHandle < Can_GetRxBasicHandleStop(canHwChannel); initPara->mailboxHandle++){
     initPara->hwObjHandle = Can_GetMailboxHwHandle(initPara->mailboxHandle);
 
     mailboxState = CanLL_InitMailboxRxBasicCan(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST initPara);
@@ -1624,7 +1624,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitEnd_InitMode( CAN_CHA
 }
 
 #if defined(C_ENABLE_RX_BASICCAN_OBJECTS)
-# if defined(C_ENABLE_RX_BASICCAN_POLLING)
+#if defined(C_ENABLE_RX_BASICCAN_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxBasicCanPolling( CAN_HW_CHANNEL_CANTYPE_ONLY ){
 
@@ -1632,12 +1632,12 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxBasicCanPolling( CAN_HW_
 
   if(CanLL_RxBasicIsGlobalIndPending(CAN_HW_CHANNEL_CANPARA_ONLY) == kCanTrue){
 
-    for (taskPara.mailboxHandle = Can_GetRxBasicHandleStart(canHwChannel); taskPara.mailboxHandle < Can_GetRxBasicHandleStop(canHwChannel); taskPara.mailboxHandle++){
+    for(taskPara.mailboxHandle = Can_GetRxBasicHandleStart(canHwChannel); taskPara.mailboxHandle < Can_GetRxBasicHandleStop(canHwChannel); taskPara.mailboxHandle++){
       taskPara.hwObjHandle = Can_GetMailboxHwHandle(taskPara.mailboxHandle);
-#  if defined(C_ENABLE_INDIVIDUAL_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING)
 
       if( Can_IsMailboxIndivPolling(taskPara.mailboxHandle))
-#  endif
+#endif
       {
 
         CanLL_RxBasicProcessPendings(CAN_HW_CHANNEL_CANPARA_FIRST &taskPara);
@@ -1645,11 +1645,11 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxBasicCanPolling( CAN_HW_
     }
   }
 }
-# endif
+#endif
 #endif
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
-# if defined(C_ENABLE_RX_FULLCAN_POLLING)
+#if defined(C_ENABLE_RX_FULLCAN_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxFullCanPolling( CAN_HW_CHANNEL_CANTYPE_ONLY ){
 
@@ -1657,12 +1657,12 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxFullCanPolling( CAN_HW_C
 
   if(CanLL_RxFullIsGlobalIndPending(CAN_HW_CHANNEL_CANPARA_ONLY) == kCanTrue){
 
-    for (taskPara.mailboxHandle = Can_GetRxFullHandleStart(canHwChannel); taskPara.mailboxHandle < Can_GetRxFullHandleStop(canHwChannel); taskPara.mailboxHandle++ ){
+    for(taskPara.mailboxHandle = Can_GetRxFullHandleStart(canHwChannel); taskPara.mailboxHandle < Can_GetRxFullHandleStop(canHwChannel); taskPara.mailboxHandle++ ){
       taskPara.hwObjHandle = Can_GetMailboxHwHandle(taskPara.mailboxHandle);
-#  if defined(C_ENABLE_INDIVIDUAL_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING)
 
       if( Can_IsMailboxIndivPolling(taskPara.mailboxHandle))
-#  endif
+#endif
       {
 
         CanLL_RxFullProcessPendings(CAN_HW_CHANNEL_CANPARA_FIRST &taskPara);
@@ -1670,20 +1670,20 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxFullCanPolling( CAN_HW_C
     }
   }
 }
-# endif
+#endif
 #endif
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_RxMsgReceivedNotification( CAN_CHANNEL_CANTYPE_FIRST CanRxInfoStructPtr rxStructPtr ){
 
-# if !defined(C_ENABLE_RX_QUEUE) && (CAN_GENERIC_PRECOPY == STD_ON)
+#if !defined(C_ENABLE_RX_QUEUE) && (CAN_GENERIC_PRECOPY == STD_ON)
   Can_ReturnType generic_retval;
-# endif
+#endif
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if defined(C_ENABLE_RX_QUEUE)
+#if defined(C_ENABLE_RX_QUEUE)
 
   SchM_Enter_Can_CAN_EXCLUSIVE_AREA_4();
   if(Can_GetRxQueueInfo().Count < Can_GetSizeOfRxQueueBuffer()){
@@ -1692,12 +1692,12 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_RxMsgReceivedNotification
     Can_GetRxQueueBuffer(Can_GetRxQueueInfo().WriteIndex).id  = rxStructPtr->localId;
     Can_GetRxQueueBuffer(Can_GetRxQueueInfo().WriteIndex).dlc = rxStructPtr->localDlc;
 
-#  if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
     if(canRxQueueMaxDataSize < rxStructPtr->localDlc){
       errorId = CAN_E_PARAM_DLC;
     }
     else
-#  endif
+#endif
     {
 
       VStdMemCpy((void*)Can_GetRxQueueBuffer(Can_GetRxQueueInfo().WriteIndex).data, (void*)rxStructPtr->pChipData, rxStructPtr->localDlc);
@@ -1711,30 +1711,30 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_RxMsgReceivedNotification
       Can_GetRxQueueInfo().WriteIndex = 0u;
     }
   }
-#  if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   else{
     errorId = CAN_E_RXQUEUE;
   }
-#  endif
+#endif
   SchM_Exit_Can_CAN_EXCLUSIVE_AREA_4();
-# else
+#else
 
-#  if(CAN_GENERIC_PRECOPY == STD_ON)
-#   if defined(C_ENABLE_MIRROR_MODE)
+#if(CAN_GENERIC_PRECOPY == STD_ON)
+#if defined(C_ENABLE_MIRROR_MODE)
   if(Can_GetMirrorModeState(channel) == CDDMIRROR_INACTIVE){
     generic_retval = CAN_OK;
   }
   else
-#   endif
+#endif
   {
     generic_retval = Appl_GenericPrecopy((uint8)channel, (rxStructPtr->localId & CAN_ID_MASK_IN_GENERIC_CALLOUT), rxStructPtr->localDlc, (Can_DataPtrType)rxStructPtr->pChipData);
   }
   if(generic_retval == CAN_OK)
-#  endif
+#endif
   {
     EcuabCanIf_RxIndication(rxStructPtr->localMailboxHandle, rxStructPtr->localId, rxStructPtr->localDlc, (Can_DataPtrType)rxStructPtr->pChipData);
   }
-# endif
+#endif
   CAN_CHANNEL_DUMMY_STATEMENT;
   CAN_DUMMY_STATEMENT(errorId);
   return errorId;
@@ -1743,31 +1743,31 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_RxMsgReceivedNotification
 
 #if defined(C_ENABLE_RX_QUEUE)
 
-V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxQueueExecution( void ){
+V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxQueueExecution(void){
 
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-  while ( Can_GetRxQueueInfo().Count != (uint16)0 ){
-# if(CAN_GENERIC_PRECOPY == STD_ON)
+  while( Can_GetRxQueueInfo().Count != (uint16)0 ){
+#if(CAN_GENERIC_PRECOPY == STD_ON)
     Can_ReturnType generic_retval;
     CAN_CHANNEL_CANTYPE_LOCAL
     generic_retval = CAN_NOT_OK;
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
     channel = Can_GetMailboxController(Can_GetRxQueueBuffer(Can_GetRxQueueInfo().ReadIndex).Hrh);
-#   if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
     if(channel >= kCanNumberOfChannels){
       errorId = CAN_E_PARAM_CONTROLLER;
     }
     else
-#   endif
-#  endif
-#  if defined(C_ENABLE_MIRROR_MODE)
+#endif
+#endif
+#if defined(C_ENABLE_MIRROR_MODE)
     if(Can_GetMirrorModeState(channel) == CDDMIRROR_INACTIVE){
       generic_retval = CAN_OK;
     }
     else
-#  endif
+#endif
     {
       generic_retval = Appl_GenericPrecopy( (uint8)channel,
                 (Can_GetRxQueueBuffer(Can_GetRxQueueInfo().ReadIndex).id & CAN_ID_MASK_IN_GENERIC_CALLOUT),
@@ -1775,7 +1775,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxQueueExecution( void ){
                 (Can_DataPtrType)Can_GetRxQueueBuffer(Can_GetRxQueueInfo().ReadIndex).data );
     }
     if(generic_retval == CAN_OK)
-# endif
+#endif
     {
       EcuabCanIf_RxIndication( Can_GetRxQueueBuffer(Can_GetRxQueueInfo().ReadIndex).Hrh,
               Can_GetRxQueueBuffer(Can_GetRxQueueInfo().ReadIndex).id,
@@ -1810,16 +1810,16 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxQueueExecution( void ){
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitBegin( CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanInitParaStructPtr initPara ){
 
 #if defined(C_ENABLE_LL_WAKEUP_SUPPORT)
-# if !defined(C_ENABLE_WAKEUP_POLLING)
-#  if defined(C_ENABLE_LL_CAN_INTCTRL)
+#if !defined(C_ENABLE_WAKEUP_POLLING)
+#if defined(C_ENABLE_LL_CAN_INTCTRL)
 
   CanLL_CanWakeupInterruptDisable(CAN_HW_CHANNEL_CANPARA_FIRST &Can_GetCanInterruptOldStatus(canHwChannel));
-#  endif
-#  if defined(C_ENABLE_LL_CAN_INTCB)
+#endif
+#if defined(C_ENABLE_LL_CAN_INTCB)
 
   ApplCanWakeupInterruptDisable(canHwChannel);
-#  endif
-# endif
+#endif
+#endif
 #endif
 
   CAN_CHANNEL_AND_HW_CHANNEL_DUMMY_STATEMENT;
@@ -1833,21 +1833,21 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitBeginIsRegisterCorru
 
   vuint8 canRegCheckFailed;
   vuint8 idx;
-  # if defined(C_MULTIPLE_PHYS_CHANNEL)
+#if defined(C_MULTIPLE_PHYS_CHANNEL)
   CanChannelHandle canPhysChannel = mCanLogToPhys(canHwChannel);
-  # endif
+#endif
 
   canRegCheckFailed = kCanFalse;
 
-  for (idx=0u; idx<3u; idx++){
+  for(idx=0u; idx<3u; idx++){
 
     Can->ChCtrl[canPhysChannel].BCFG = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskBCFG);
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
 
     Can->ChCtrlFd[canPhysChannel].BCFG = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskFDBCFG);
 
     Can->ChCtrlFd[canPhysChannel].FDCFG = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskFDCFG);
-# endif
+#endif
 
     Can->ChCtrl[canPhysChannel].CR = ((CanMemCheckValues32bit[idx] & kCanRamCheckMaskCR) | kCanResetMode);
 
@@ -1855,10 +1855,10 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitBeginIsRegisterCorru
       ((Can->CTBIER[CanLL_TxWordIndex(canPhysChannel)] & CanLL_TxMaskWordClear(canPhysChannel)) | (CanMemCheckValuesRegSize[idx] & CanLL_TxMaskWord(canPhysChannel)));
 
     if(   ((Can->ChCtrl[canPhysChannel].BCFG & kCanRamCheckMaskBCFG) != (CanMemCheckValues32bit[idx] & kCanRamCheckMaskBCFG))
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
         || ((Can->ChCtrlFd[canPhysChannel].BCFG & kCanRamCheckMaskFDBCFG) != (CanMemCheckValues32bit[idx] & kCanRamCheckMaskFDBCFG))
         || ((Can->ChCtrlFd[canPhysChannel].FDCFG & kCanRamCheckMaskFDCFG) != (CanMemCheckValues32bit[idx] & kCanRamCheckMaskFDCFG))
-# endif
+#endif
         || ((Can->ChCtrl[canPhysChannel].CR & kCanRamCheckMaskCR) != (CanMemCheckValues32bit[idx] & kCanRamCheckMaskCR))
         || ((Can->CTBIER[CanLL_TxWordIndex(canPhysChannel)] & CanLL_TxMaskWord(canPhysChannel)) != (CanMemCheckValuesRegSize[idx] & CanLL_TxMaskWord(canPhysChannel)))
        ){
@@ -1901,9 +1901,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitBeginSetRegisters( C
 #endif
 #if defined(C_ENABLE_TX_POLLING) && !defined(C_ENABLE_INDIVIDUAL_POLLING)
 #else
-# if defined(C_ENABLE_CANCEL_IN_HW)
+#if defined(C_ENABLE_CANCEL_IN_HW)
   canTmpReg32 |= kCanCrIntMaskCancel;
-# endif
+#endif
 #endif
   CanLL_WriteReg32(CAN_CHANNEL_CANPARA_FIRST &Can->ChCtrl[canPhysChannel].CR, canTmpReg32, initPara);
 
@@ -1914,15 +1914,15 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitBeginSetRegisters( C
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
 
   Can->CRBRCF[0] = ((kCanRegSizeCast) ~Can_GetRxFcMask0OfChannelData(canHwChannel));
-# if(kCanNumberOfSharedReg16 > 1u)
+#if(kCanNumberOfSharedReg16 > 1u)
   Can->CRBRCF[1] = ((kCanRegSizeCast) ~Can_GetRxFcMask1OfChannelData(canHwChannel));
-# endif
-# if(kCanNumberOfSharedReg16 > 2u)
+#endif
+#if(kCanNumberOfSharedReg16 > 2u)
   Can->CRBRCF[2] = ((kCanRegSizeCast) ~Can_GetRxFcMask2OfChannelData(canHwChannel));
-# endif
-# if(kCanNumberOfSharedReg16 > 3u)
+#endif
+#if(kCanNumberOfSharedReg16 > 3u)
   Can->CRBRCF[3] = ((kCanRegSizeCast) ~Can_GetRxFcMask3OfChannelData(canHwChannel));
-# endif
+#endif
 #endif
 
   return (kCanOk);
@@ -1935,7 +1935,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitMailboxTx( CAN_CHANN
   return (kCanOk);
 }
 
-# if(defined( C_ENABLE_CAN_RAM_CHECK ))
+#if(defined( C_ENABLE_CAN_RAM_CHECK ))
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitMailboxTxDeactivate( CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanInitParaStructPtr initPara ){
 
@@ -1943,7 +1943,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitMailboxTxDeactivate( C
   CAN_DUMMY_STATEMENT(initPara);
 }
 
-# endif
+#endif
 
 #if defined( C_ENABLE_RX_FULLCAN_OBJECTS )
 
@@ -1962,9 +1962,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitMailboxRxBasicCan( C
 
   vuint8 retVal = kCanFailed;
 
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
   if(initPara->hwObjHandle < kCanMaxRxFifos)
-# endif
+#endif
   {
 
     Can->CRFCR[initPara->hwObjHandle] &= ((kCanRegSize) ~kCanCrFifoEnable);
@@ -2006,65 +2006,65 @@ V_DEF_FUNC(CAN_STATIC, vuint8, STATIC_CODE) CanLL_InitIsMailboxCorrupt( CAN_CHAN
 
   vuint8 canMailboxCheckFailed = kCanFalse;
 
-# if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
 
   if(!Can_IsTxFifo(initPara->mailboxHandle))
-# endif
+#endif
   {
-# if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
+#if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
 
-    for (; mailboxElement < Can_GetMailboxSize(initPara->mailboxHandle); mailboxElement++)
-# endif
+    for(; mailboxElement < Can_GetMailboxSize(initPara->mailboxHandle); mailboxElement++)
+#endif
     {
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
       if((initPara->hwObjHandle + mailboxElement) >= kCanMaxTxBuf)
       {
         canMailboxCheckFailed = kCanTrue;
       }
       else
-# endif
+#endif
       {
         Buf = pBufTm(mCanLogToPhys(canHwChannel), (initPara->hwObjHandle + mailboxElement));
 
-        for (idx=0u; idx<3u; idx++)
+        for(idx=0u; idx<3u; idx++)
         {
 
           Buf->Id         =  CanMemCheckValues32bit[idx];
           Buf->Dlc        = (CanMemCheckValues32bit[idx] & kCanDlcMask);
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
           Buf->Fd         = (CanMemCheckValues32bit[idx] & kCanFdCfgMask);
-# endif
+#endif
           Buf->u.iData[0] =  CanMemCheckValues32bit[idx];
           Buf->u.iData[1] =  CanMemCheckValues32bit[idx];
-# if defined(C_ENABLE_CAN_FD_FULL)
+#if defined(C_ENABLE_CAN_FD_FULL)
           Buf->u.iData[2] =  CanMemCheckValues32bit[idx];
           Buf->u.iData[3] =  CanMemCheckValues32bit[idx];
           Buf->u.iData[4] =  CanMemCheckValues32bit[idx];
-# endif
+#endif
 
           if(   (Buf->Id         !=  CanMemCheckValues32bit[idx]                 )
               || (Buf->Dlc        != (CanMemCheckValues32bit[idx] & kCanDlcMask)  )
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
               || (Buf->Fd         != (CanMemCheckValues32bit[idx] & kCanFdCfgMask))
-# endif
+#endif
               || (Buf->u.iData[0] !=  CanMemCheckValues32bit[idx]                 )
               || (Buf->u.iData[1] !=  CanMemCheckValues32bit[idx]                 )
-# if defined(C_ENABLE_CAN_FD_FULL)
+#if defined(C_ENABLE_CAN_FD_FULL)
               || (Buf->u.iData[2] !=  CanMemCheckValues32bit[idx]                 )
               || (Buf->u.iData[3] !=  CanMemCheckValues32bit[idx]                 )
               || (Buf->u.iData[4] !=  CanMemCheckValues32bit[idx]                 )
-# endif
+#endif
              )
           {
             canMailboxCheckFailed = kCanTrue;
           }
 
-# if defined(C_ENABLE_CAN_FD_FULL)
-#  if defined(C_ENABLE_IF_RSCAN_FD)
+#if defined(C_ENABLE_CAN_FD_FULL)
+#if defined(C_ENABLE_IF_RSCAN_FD)
           if(   ((initPara->hwObjHandle + mailboxElement) == 0u)
               || ((initPara->hwObjHandle + mailboxElement) == 3u)
              )
-#  endif
+#endif
           {
 
             Buf->u.iData[5] =  CanMemCheckValues32bit[idx];
@@ -2095,7 +2095,7 @@ V_DEF_FUNC(CAN_STATIC, vuint8, STATIC_CODE) CanLL_InitIsMailboxCorrupt( CAN_CHAN
               canMailboxCheckFailed = kCanTrue;
             }
           }
-# endif
+#endif
         }
       }
     }
@@ -2112,9 +2112,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitPowerOn(void){
   CAN_CHANNEL_CANTYPE_LOCAL
   vuint8 retVal = kCanOk;
 #if defined(C_ENABLE_IF_RSCAN_FD)
-# if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
+#if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
   vuint8 idx;
-# endif
+#endif
 #endif
 
 #if defined(C_MULTIPLE_RECEIVE_CHANNEL)
@@ -2132,10 +2132,10 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitPowerOn(void){
   {
 #if defined(C_ENABLE_IF_RSCAN_FD)
 
-# if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
+#if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
     canIsCellCorrupt = kCanFalse;
 
-    for (idx=0u; idx<3u; idx++){
+    for(idx=0u; idx<3u; idx++){
 
       Can->CGRMCFG = (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCGRMCFG);
       if((Can->CGRMCFG & kCanRamCheckMaskCGRMCFG) != (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCGRMCFG))
@@ -2143,43 +2143,43 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitPowerOn(void){
         canIsCellCorrupt = kCanTrue;
       }
     }
-# endif
+#endif
 
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
 
     CanLL_WriteRegGlobal32(&Can->CGRMCFG, kCanOne);
-# else
+#else
 
     CanLL_WriteRegGlobal32(&Can->CGRMCFG, kCanZero);
-# endif
+#endif
 #endif
 
 #if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
 
-# if defined(C_ENABLE_IF_RSCAN_FD)
+#if defined(C_ENABLE_IF_RSCAN_FD)
     if(canIsCellCorrupt == kCanFalse)
-# endif
+#endif
     {
       canIsCellCorrupt = CanLL_IsGlobalRegisterCorrupt();
     }
 #endif
 
 #if defined(C_ENABLE_RSCAN_FD_LAYOUT)
-# if defined(C_ENABLE_CAN_FD_CONFIGURATION)
+#if defined(C_ENABLE_CAN_FD_CONFIGURATION)
     CanLL_WriteRegGlobal32(&Can->CGFDCFG, (vuint32)C_ENABLE_CAN_FD_CONFIGURATION);
-# endif
-# if defined(C_ENABLE_CAN_CRC_CONFIGURATION)
+#endif
+#if defined(C_ENABLE_CAN_CRC_CONFIGURATION)
     CanLL_WriteRegGlobal32(&Can->CGCRCCFG, (vuint32)C_ENABLE_CAN_CRC_CONFIGURATION);
-# endif
+#endif
 #endif
     CanLL_WriteRegGlobal32(&Can->CGCFG, kCanGlobCfg);
 
     CanLL_InitPowerOnGlobalInit();
 
 #if defined(C_ENABLE_LL_CAN_INTCTRL)
-# if !defined(C_ENABLE_ERROR_POLLING) || ((defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)))
+#if !defined(C_ENABLE_ERROR_POLLING) || ((defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)))
     canInterruptOldFlag.GErrCnt = kCanZero;
-# endif
+#endif
 #endif
 
 #if !defined(C_ENABLE_ERROR_POLLING) && ((defined(C_ENABLE_RX_BASICCAN_OBJECTS) && defined(C_ENABLE_OVERRUN)))
@@ -2222,13 +2222,13 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitMemoryPowerOn(void){
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxCancelInHw(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanTxCancellationParaStructPtr txCancellationPara){
 
   {
-# if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
+#if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
     txCancellationPara->hwObjHandle += txCancellationPara->mailboxElement;
-# endif
+#endif
 
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
     if(txCancellationPara->hwObjHandle < kCanMaxTxBuf)
-# endif
+#endif
     {
       Can->ChBC[mCanLogToPhys(canHwChannel)].TBCR[txCancellationPara->hwObjHandle] |= kCanCrTxBufCancel;
     }
@@ -2241,30 +2241,30 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxCancelInHw(CAN_CHANNEL_A
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxBegin(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanTxTransmissionParaStructPtr txPara){
 
-# if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
   if(Can_IsTxFifo(txPara->mailboxHandle)){
-#  if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
     if(txPara->hwObjHandle >= kCanMaxTxFifos){
       txPara->Buf = &CanLL_DummyBuf;
     }
     else
-#  endif
+#endif
     {
       txPara->Buf = pBufCf(mCanLogToPhys(canHwChannel), txPara->hwObjHandle);
     }
   }
   else
-# endif
+#endif
   {
-# if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
+#if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
     txPara->hwObjHandle += txPara->mailboxElement;
-# endif
-# if(CAN_SAFE_BSW == STD_ON)
+#endif
+#if(CAN_SAFE_BSW == STD_ON)
     if(txPara->hwObjHandle >= kCanMaxTxBuf){
       txPara->Buf = &CanLL_DummyBuf;
     }
     else
-# endif
+#endif
     {
       txPara->Buf = pBufTm(mCanLogToPhys(canHwChannel), txPara->hwObjHandle);
     }
@@ -2277,9 +2277,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxSetMailbox(CAN_CHANNEL_A
 
   txPara->Buf->Id = txPara->idRaw0;
   txPara->Buf->Dlc = CanActualDLCToReg(txPara->dlcRaw);
-#  if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
   txPara->Buf->Fd = (vuint32)(txPara->fdType | txPara->fdBrsType);
-#  endif
+#endif
 
   CAN_CHANNEL_AND_HW_CHANNEL_DUMMY_STATEMENT;
 }
@@ -2287,25 +2287,25 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxSetMailbox(CAN_CHANNEL_A
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxCopyToCan(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanTxTransmissionParaStructPtr txPara){
 
   tCanTmpData CanLL_TxTmpBuf;
-# if defined(C_ENABLE_CAN_FD_FULL)
+#if defined(C_ENABLE_CAN_FD_FULL)
   vuint8 canCount;
-# endif
+#endif
 
-#  if defined(C_ENABLE_CAN_FD_FULL)
-#   if(CAN_SAFE_BSW == STD_ON)
+#if defined(C_ENABLE_CAN_FD_FULL)
+#if(CAN_SAFE_BSW == STD_ON)
   if((txPara->messageLen <= 64u) && (txPara->frameLen <= 64u))
-#   endif
+#endif
   {
-    for (canCount = 0; canCount < txPara->messageLen; canCount++){
+    for(canCount = 0; canCount < txPara->messageLen; canCount++){
       CanLL_TxTmpBuf.bData[canCount] = txPara->CanMemCopySrcPtr[canCount];
     }
-    for (canCount = txPara->messageLen; canCount < txPara->frameLen; canCount++){
+    for(canCount = txPara->messageLen; canCount < txPara->frameLen; canCount++){
       CanLL_TxTmpBuf.bData[canCount] = txPara->paddingVal;
     }
 
     if(txPara->frameLen > 8u){
 
-      for (canCount = 0; canCount < (txPara->frameLen >> 2); canCount++)
+      for(canCount = 0; canCount < (txPara->frameLen >> 2); canCount++)
       {
         txPara->Buf->u.iData[canCount] = CanLL_TxTmpBuf.iData[canCount];
       }
@@ -2315,7 +2315,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxCopyToCan(CAN_CHANNEL_AN
       txPara->Buf->u.iData[1] = CanLL_TxTmpBuf.iData[1];
     }
   }
-#  else
+#else
   CanLL_TxTmpBuf.bData[0] = txPara->CanMemCopySrcPtr[0];
   CanLL_TxTmpBuf.bData[1] = txPara->CanMemCopySrcPtr[1];
   CanLL_TxTmpBuf.bData[2] = txPara->CanMemCopySrcPtr[2];
@@ -2326,7 +2326,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxCopyToCan(CAN_CHANNEL_AN
   CanLL_TxTmpBuf.bData[6] = txPara->CanMemCopySrcPtr[6];
   CanLL_TxTmpBuf.bData[7] = txPara->CanMemCopySrcPtr[7];
   txPara->Buf->u.iData[1] = CanLL_TxTmpBuf.iData[1];
-#  endif
+#endif
 
   CAN_CHANNEL_AND_HW_CHANNEL_DUMMY_STATEMENT;
 }
@@ -2334,33 +2334,33 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxCopyToCan(CAN_CHANNEL_AN
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_TxStart(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanTxTransmissionParaStructPtr txPara){
 
   vuint8 retVal = kCanOk;
-# if defined(C_MULTIPLE_PHYS_CHANNEL)
+#if defined(C_MULTIPLE_PHYS_CHANNEL)
   CanChannelHandle canPhysChannel = mCanLogToPhys(canHwChannel);
-# endif
+#endif
 
-# if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
   if(Can_IsTxFifo(txPara->mailboxHandle)){
-#  if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
     if(txPara->hwObjHandle >= kCanMaxTxFifos){
       retVal = kCanFailed;
     }
     else
-#  endif
+#endif
     {
       Can->ChFPC[canPhysChannel].TRFPCR[txPara->hwObjHandle] = kCanPcrFifoPC;
     }
   }
   else
-# endif
+#endif
   {
     {
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
       if(txPara->hwObjHandle >= kCanMaxTxBuf)
       {
         retVal = kCanFailed;
       }
       else
-# endif
+#endif
       {
         Can->ChBC[canPhysChannel].TBCR[txPara->hwObjHandle] |= kCanCrTxBufReq;
       }
@@ -2380,49 +2380,49 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxEnd(CAN_CHANNEL_AND_HW_C
 #if defined( C_ENABLE_TX_POLLING )
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_TxIsGlobalConfPending(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_ONLY){
-# if !defined(C_ENABLE_TX_HW_FIFO)
+#if !defined(C_ENABLE_TX_HW_FIFO)
 
-#  if defined(C_MULTIPLE_PHYS_CHANNEL)
+#if defined(C_MULTIPLE_PHYS_CHANNEL)
   CanChannelHandle canPhysChannel = mCanLogToPhys(canHwChannel);
-#  endif
+#endif
   vuint8 retVal = kCanFalse;
 
   if(   ((Can->CTBTCSR[CanLL_TxWordIndex(canPhysChannel)] & CanLL_TxMaskWord(canPhysChannel)) != 0u)
-#  if defined(C_ENABLE_CANCEL_IN_HW)
+#if defined(C_ENABLE_CANCEL_IN_HW)
       || ((Can->CTBASR[CanLL_TxWordIndex(canPhysChannel)] & CanLL_TxMaskWord(canPhysChannel)) != 0u)
-#  endif
+#endif
      ){
     retVal = kCanTrue;
   }
 
   CAN_CHANNEL_AND_HW_CHANNEL_DUMMY_STATEMENT;
   return (retVal);
-# else
+#else
 
   CAN_CHANNEL_AND_HW_CHANNEL_DUMMY_STATEMENT;
   return (kCanTrue);
-# endif
+#endif
 }
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxProcessPendings(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanTaskParaStructPtr taskPara){
 
   CanObjectHandle mailboxElement = kCanZero;
-# if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
   vuint8 canCount;
   vuint8 requestCount;
   vuint8 pendingCount;
-# endif
-# if defined(C_MULTIPLE_PHYS_CHANNEL)
+#endif
+#if defined(C_MULTIPLE_PHYS_CHANNEL)
   CanChannelHandle canPhysChannel = mCanLogToPhys(canHwChannel);
-# endif
+#endif
 
-# if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
   if(Can_IsTxFifo(taskPara->mailboxHandle)){
 
     canCount = Can_GetFifoProcCountOfChannelData(canHwChannel);
     requestCount = (vuint8)Can_GetTxHwFifoFillCount(Can_GetMailboxTxHwFifo(taskPara->mailboxHandle));
     pendingCount = (vuint8)((Can->ChFS[canPhysChannel].TRFSR[taskPara->hwObjHandle] & kCanSrFifoMsgCount) >> 8);
-    while (((requestCount - pendingCount) > 0u) && (canCount > 0u)){
+    while(((requestCount - pendingCount) > 0u) && (canCount > 0u)){
       canCount--;
       CanHL_TxConfirmationPolling(CAN_HW_CHANNEL_CANPARA_FIRST taskPara->mailboxHandle, kCanZero, taskPara->hwObjHandle);
       requestCount = (vuint8)Can_GetTxHwFifoFillCount(Can_GetMailboxTxHwFifo(taskPara->mailboxHandle));
@@ -2430,12 +2430,12 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxProcessPendings(CAN_CHAN
     }
   }
   else
-# endif
+#endif
   {
 
-# if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
-    for (; mailboxElement < Can_GetMailboxSize(taskPara->mailboxHandle); mailboxElement++)
-# endif
+#if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
+    for(; mailboxElement < Can_GetMailboxSize(taskPara->mailboxHandle); mailboxElement++)
+#endif
     {
       if((Can->ChBS[canPhysChannel].TBSR[taskPara->hwObjHandle + mailboxElement] & kCanSrTxBufMaskPending) != 0u)
       {
@@ -2449,9 +2449,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxProcessPendings(CAN_CHAN
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxConfBegin(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanTxConfirmationParaStructPtr txConfPara){
 
-# if defined(C_MULTIPLE_PHYS_CHANNEL)
+#if defined(C_MULTIPLE_PHYS_CHANNEL)
   CanChannelHandle canPhysChannel = mCanLogToPhys(canHwChannel);
-# endif
+#endif
 
 #if defined(C_ENABLE_TX_HW_FIFO)
   if(!Can_IsTxFifo(txConfPara->mailboxHandle))
@@ -2494,12 +2494,12 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxConfSetTxConfStruct(CAN_
 
   tCanBufPtr Buf;
 
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
   if(txConfPara->hwObjHandle >= kCanMaxTxBuf){
     Buf = &CanLL_DummyBuf;
   }
   else
-# endif
+#endif
   {
     Buf = pBufTm(mCanLogToPhys(canHwChannel), txConfPara->hwObjHandle);
   }
@@ -2521,18 +2521,18 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_TxConfEnd(CAN_CHANNEL_AND_
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxBasicMsgReceivedBegin(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanRxBasicParaStructPtr rxBasicPara){
 
   tCanBufPtr Buf;
-# if defined(C_ENABLE_CAN_FD_FULL)
+#if defined(C_ENABLE_CAN_FD_FULL)
   vuint8 canCount;
   vuint8 canDlc;
-# endif
+#endif
   vuint8 retVal = kCanOk;
 
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
   if(rxBasicPara->hwObjHandle >= kCanMaxRxFifos){
     retVal = kCanFailed;
   }
   else
-# endif
+#endif
   {
     Buf = pBufRf(rxBasicPara->hwObjHandle);
 
@@ -2540,20 +2540,20 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxBasicMsgReceivedBegin(
 
     Can_GetRxTmpBuf(canHwChannel).Id           = Buf->Id;
     Can_GetRxTmpBuf(canHwChannel).Dlc          = Buf->Dlc;
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
     Can_GetRxTmpBuf(canHwChannel).Fd           = Buf->Fd;
-# endif
-# if defined(C_ENABLE_CAN_FD_FULL)
+#endif
+#if defined(C_ENABLE_CAN_FD_FULL)
     canDlc = CanRegToActualDLC(Can_GetRxTmpBuf(canHwChannel).Dlc);
     if(canDlc > 8u){
 
-      for (canCount = 0u; canCount < (CAN_DLC2LEN(canDlc) >> 2); canCount++)
+      for(canCount = 0u; canCount < (CAN_DLC2LEN(canDlc) >> 2); canCount++)
       {
         Can_GetRxTmpBuf(canHwChannel).u.iData[canCount] = Buf->u.iData[canCount];
       }
     }
     else
-# endif
+#endif
     {
       Can_GetRxTmpBuf(canHwChannel).u.iData[0] = Buf->u.iData[0];
       Can_GetRxTmpBuf(canHwChannel).u.iData[1] = Buf->u.iData[1];
@@ -2564,20 +2564,20 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxBasicMsgReceivedBegin(
     rxBasicPara->rxStruct.pChipMsgObj = (CanChipMsgPtr)&(Can_GetRxTmpBuf(canHwChannel));
     rxBasicPara->rxStruct.pChipData = (CanChipDataPtr)&(Can_GetRxTmpBuf(canHwChannel).u.bData[0]);
 
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
 
     if((Can_GetInitObjectFdBrsConfig(Can_GetLastInitObject(channel)) == CAN_NONE) && ((Can_GetRxTmpBuf(canHwChannel).Fd & kCanFdTypeFd) == kCanFdTypeFd)){
       retVal = kCanFailed;
     }
-# endif
+#endif
   }
 
-# if defined(C_ENABLE_ECC_RX_REJECT)
+#if defined(C_ENABLE_ECC_RX_REJECT)
 
   if(ApplCanEccRxReject(canHwChannel) == kCanTrue){
     retVal = kCanFailed;
   }
-# endif
+#endif
 
   return (retVal);
 }
@@ -2594,7 +2594,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_RxBasicMsgReceivedEnd(CAN_
   CAN_DUMMY_STATEMENT(rxBasicPara);
 }
 
-# if defined( C_ENABLE_RX_BASICCAN_POLLING )
+#if defined( C_ENABLE_RX_BASICCAN_POLLING )
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxBasicIsGlobalIndPending(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_ONLY){
 
@@ -2611,13 +2611,13 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_RxBasicProcessPendings(CAN
 
   vuint8 canCount = Can_GetFifoProcCountOfChannelData(canHwChannel);
 
-  while (((Can->CRFSR[taskPara->hwObjHandle] & kCanSrFifoEmpty) == 0u) && (canCount > 0u)){
+  while(((Can->CRFSR[taskPara->hwObjHandle] & kCanSrFifoEmpty) == 0u) && (canCount > 0u)){
     canCount--;
     CanHL_BasicCanMsgReceivedPolling(CAN_HW_CHANNEL_CANPARA_FIRST taskPara->mailboxHandle, taskPara->hwObjHandle);
   }
 }
 
-# endif
+#endif
 #endif
 
 #if defined( C_ENABLE_RX_FULLCAN_OBJECTS )
@@ -2625,21 +2625,21 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_RxBasicProcessPendings(CAN
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxFullMsgReceivedBegin(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanRxFullParaStructPtr rxFullPara){
 
   tCanBufPtr Buf;
-# if defined(C_ENABLE_HW_LOOP_TIMER)
+#if defined(C_ENABLE_HW_LOOP_TIMER)
   tCanLoopRet canHwLoopRetVal;
-# endif
-# if defined(C_ENABLE_CAN_FD_FULL)
+#endif
+#if defined(C_ENABLE_CAN_FD_FULL)
   vuint8 canCount;
   vuint8 canDlc;
-# endif
+#endif
   vuint8 retVal = kCanOk;
 
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
   if(CanLL_BitIndex(rxFullPara->hwObjHandle) >= kCanNumberOfSharedReg16){
     retVal = kCanFailed;
   }
   else
-# endif
+#endif
   {
     Buf = pBufRm(rxFullPara->hwObjHandle);
 
@@ -2647,20 +2647,20 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxFullMsgReceivedBegin(C
 
     Can_GetRxTmpBuf(canHwChannel).Id           = Buf->Id;
     Can_GetRxTmpBuf(canHwChannel).Dlc          = Buf->Dlc;
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
     Can_GetRxTmpBuf(canHwChannel).Fd           = Buf->Fd;
-# endif
-# if defined(C_ENABLE_CAN_FD_FULL)
+#endif
+#if defined(C_ENABLE_CAN_FD_FULL)
     canDlc = CanRegToActualDLC(Can_GetRxTmpBuf(canHwChannel).Dlc);
     if(canDlc > 8u){
 
-      for (canCount = 0u; canCount < (CAN_DLC2LEN(canDlc) >> 2); canCount++)
+      for(canCount = 0u; canCount < (CAN_DLC2LEN(canDlc) >> 2); canCount++)
       {
         Can_GetRxTmpBuf(canHwChannel).u.iData[canCount] = Buf->u.iData[canCount];
       }
     }
     else
-# endif
+#endif
     {
       Can_GetRxTmpBuf(canHwChannel).u.iData[0] = Buf->u.iData[0];
       Can_GetRxTmpBuf(canHwChannel).u.iData[1] = Buf->u.iData[1];
@@ -2675,61 +2675,61 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxFullMsgReceivedBegin(C
 
         Can_GetRxTmpBuf(canHwChannel).Id           = Buf->Id;
         Can_GetRxTmpBuf(canHwChannel).Dlc          = Buf->Dlc;
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
         Can_GetRxTmpBuf(canHwChannel).Fd           = Buf->Fd;
-# endif
-# if defined(C_ENABLE_CAN_FD_FULL)
+#endif
+#if defined(C_ENABLE_CAN_FD_FULL)
         canDlc = CanRegToActualDLC(Can_GetRxTmpBuf(canHwChannel).Dlc);
         if(canDlc > 8u)
         {
 
-          for (canCount = 0u; canCount < (CAN_DLC2LEN(canDlc) >> 2); canCount++)
+          for(canCount = 0u; canCount < (CAN_DLC2LEN(canDlc) >> 2); canCount++)
           {
             Can_GetRxTmpBuf(canHwChannel).u.iData[canCount] = Buf->u.iData[canCount];
           }
         }
         else
-# endif
+#endif
         {
           Can_GetRxTmpBuf(canHwChannel).u.iData[0] = Buf->u.iData[0];
           Can_GetRxTmpBuf(canHwChannel).u.iData[1] = Buf->u.iData[1];
         }
 
-# if defined(C_ENABLE_HW_LOOP_TIMER)
+#if defined(C_ENABLE_HW_LOOP_TIMER)
         canHwLoopRetVal = CanLL_CanTimerLoop(kCanLoopRxFcProcess);
-      } while ((canHwLoopRetVal != CAN_NOT_OK) && ((Can->CRBRCF[CanLL_BitIndex(rxFullPara->hwObjHandle)] & CanLL_SLRS(rxFullPara->hwObjHandle)) != 0u));
-# else
-      } while ((Can->CRBRCF[CanLL_BitIndex(rxFullPara->hwObjHandle)] & CanLL_SLRS(rxFullPara->hwObjHandle)) != 0u);
-# endif
+      } while((canHwLoopRetVal != CAN_NOT_OK) && ((Can->CRBRCF[CanLL_BitIndex(rxFullPara->hwObjHandle)] & CanLL_SLRS(rxFullPara->hwObjHandle)) != 0u));
+#else
+      } while((Can->CRBRCF[CanLL_BitIndex(rxFullPara->hwObjHandle)] & CanLL_SLRS(rxFullPara->hwObjHandle)) != 0u);
+#endif
       CanLL_CanTimerEnd(kCanLoopRxFcProcess);
 
-# if defined(C_ENABLE_HW_LOOP_TIMER)
+#if defined(C_ENABLE_HW_LOOP_TIMER)
 
       if(canHwLoopRetVal == CAN_NOT_OK)
       {
         Can->CRBRCF[CanLL_BitIndex(rxFullPara->hwObjHandle)] = CanLL_ClearBitRS(rxFullPara->hwObjHandle);
         retVal = kCanFailed;
       }
-# endif
+#endif
     }
 
     rxFullPara->rxStruct.pChipMsgObj = (CanChipMsgPtr)&(Can_GetRxTmpBuf(canHwChannel));
     rxFullPara->rxStruct.pChipData = (CanChipDataPtr)&(Can_GetRxTmpBuf(canHwChannel).u.bData[0]);
 
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
 
     if((Can_GetInitObjectFdBrsConfig(Can_GetLastInitObject(channel)) == CAN_NONE) && ((Can_GetRxTmpBuf(canHwChannel).Fd & kCanFdTypeFd) == kCanFdTypeFd)){
       retVal = kCanFailed;
     }
-# endif
+#endif
   }
 
-# if defined(C_ENABLE_ECC_RX_REJECT)
+#if defined(C_ENABLE_ECC_RX_REJECT)
 
   if(ApplCanEccRxReject(canHwChannel) == kCanTrue){
     retVal = kCanFailed;
   }
-# endif
+#endif
 
   return (retVal);
 }
@@ -2746,7 +2746,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_RxFullMsgReceivedEnd(CAN_C
   CAN_DUMMY_STATEMENT(rxFullPara);
 }
 
-# if defined( C_ENABLE_RX_FULLCAN_POLLING )
+#if defined( C_ENABLE_RX_FULLCAN_POLLING )
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxFullIsGlobalIndPending(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_ONLY){
 
@@ -2776,7 +2776,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_RxFullProcessPendings(CAN_
   }
 }
 
-# endif
+#endif
 #endif
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_ErrorHandlingBegin(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_ONLY){
@@ -2807,14 +2807,14 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxBasicCanOverrun(CAN_CH
 
   if(((Can->CFMLSR & kCanRxFifoMask) & Can_GetRxBcMaskOfChannelData(canHwChannel)) != 0u){
     mailboxHandle = CAN_HL_MB_RX_BASIC_STARTINDEX(canHwChannel);
-# if defined(C_ENABLE_MULTIPLE_BASICCAN)
-    for (; mailboxHandle < CAN_HL_MB_RX_BASIC_STOPINDEX(canHwChannel); mailboxHandle++)
-# endif
+#if defined(C_ENABLE_MULTIPLE_BASICCAN)
+    for(; mailboxHandle < CAN_HL_MB_RX_BASIC_STOPINDEX(canHwChannel); mailboxHandle++)
+#endif
     {
       hwObjHandle = Can_GetMailboxHwHandle(mailboxHandle);
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
       if(hwObjHandle < kCanMaxRxFifos)
-# endif
+#endif
       {
         Can->CRFSR[hwObjHandle] &= ((kCanRegSize) ~kCanSrFifoOverrun);
       }
@@ -2849,15 +2849,15 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_WakeUpOccured(CAN_CHANNE
 
   if(CanLL_HwIsSleep(canHwChannel) &&
       (
-#  if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL)
+#if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL)
         (CanLL_CanWakeupOccurred(CAN_HW_CHANNEL_CANPARA_ONLY) == kCanOk)
-#  endif
-#  if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL) && defined(C_ENABLE_LL_CAN_WAKEUP_INTCB)
+#endif
+#if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL) && defined(C_ENABLE_LL_CAN_WAKEUP_INTCB)
         ||
-#  endif
-#  if defined(C_ENABLE_LL_CAN_WAKEUP_INTCB)
+#endif
+#if defined(C_ENABLE_LL_CAN_WAKEUP_INTCB)
         (ApplCanWakeupOccurred(canHwChannel) == CAN_OK)
-#  endif
+#endif
       )
      ){
     retVal = kCanTrue;
@@ -2954,116 +2954,116 @@ V_DEF_FUNC(CAN_STATIC, vuint8, STATIC_CODE) CanLL_ModeTransition(CAN_CHANNEL_AND
 #if defined( C_ENABLE_CAN_CAN_INTERRUPT_CONTROL )
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_CanInterruptDisable(CAN_HW_CHANNEL_CANTYPE_FIRST tCanLLCanIntOldPtr localInterruptOldFlagPtr){
-# if defined(C_ENABLE_LL_CAN_INTCTRL)
+#if defined(C_ENABLE_LL_CAN_INTCTRL)
 
-#  if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
   vuint8 canDummy = 0;
-#   if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
   tCanIntcChTxPtr CanIntcChTx = (tCanIntcChTxPtr)mCanIntcChTxAdr(canHwChannel);
-#   endif
-#   if !defined(C_ENABLE_ERROR_POLLING)
+#endif
+#if !defined(C_ENABLE_ERROR_POLLING)
   tCanIntcChErrPtr CanIntcChErr = (tCanIntcChErrPtr)mCanIntcChErrorAdr(canHwChannel);
-#   endif
-#   if defined(C_ENABLE_LL_WAKEUP_SUPPORT) && !defined(C_ENABLE_WAKEUP_POLLING)
+#endif
+#if defined(C_ENABLE_LL_WAKEUP_SUPPORT) && !defined(C_ENABLE_WAKEUP_POLLING)
   tCanIntcChWupPtr CanIntcChWup = (tCanIntcChWupPtr)mCanIntcChWakeupAdr(canHwChannel);
-#   endif
-#  endif
+#endif
+#endif
 
   if(canInterruptOldFlag.GErrCnt == kCanZero){
-#  if(defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
+#if(defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
 
     CanLL_IntcIntSave(CanIsrRxFifo, canInterruptOldFlag.RF, CanIntcRxFifo->RF);
     CanLL_IntcIntDisable(CanIsrRxFifo, CanIntcRxFifo->RF);
-#   if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
     CanLL_IntcIntSave(CanIsrRxFifo, canDummy, CanIntcRxFifo->RF);
-#   endif
-#  endif
-#  if !defined(C_ENABLE_ERROR_POLLING) && defined(C_ENABLE_OVERRUN) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
+#endif
+#endif
+#if !defined(C_ENABLE_ERROR_POLLING) && defined(C_ENABLE_OVERRUN) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
 
     CanLL_IntcIntSave(CanIsrGlobalStatus, canInterruptOldFlag.GErr, CanIntcGErr->GErr);
     CanLL_IntcIntDisable(CanIsrGlobalStatus, CanIntcGErr->GErr);
-#   if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
     CanLL_IntcIntSave(CanIsrGlobalStatus, canDummy, CanIntcGErr->GErr);
-#   endif
-#  endif
+#endif
+#endif
   }
   canInterruptOldFlag.GErrCnt++;
-#  if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
 
   CanLL_IntcIntSave(Can_GetIsrTxIdOfOsIsrId(canHwChannel), (*(localInterruptOldFlagPtr)).Tx, CanIntcChTx->Tx);
   CanLL_IntcIntDisable(Can_GetIsrTxIdOfOsIsrId(canHwChannel), CanIntcChTx->Tx);
-#   if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
   CanLL_IntcIntSave(Can_GetIsrTxIdOfOsIsrId(canHwChannel), canDummy, CanIntcChTx->Tx);
-#   endif
-#  endif
-#  if !defined(C_ENABLE_ERROR_POLLING)
+#endif
+#endif
+#if !defined(C_ENABLE_ERROR_POLLING)
 
   CanLL_IntcIntSave(Can_GetIsrStatusIdOfOsIsrId(canHwChannel), (*(localInterruptOldFlagPtr)).Err, CanIntcChErr->Err);
   CanLL_IntcIntDisable(Can_GetIsrStatusIdOfOsIsrId(canHwChannel), CanIntcChErr->Err);
-#   if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
   CanLL_IntcIntSave(Can_GetIsrStatusIdOfOsIsrId(canHwChannel), canDummy, CanIntcChErr->Err);
-#   endif
-#  endif
-#  if defined(C_ENABLE_LL_WAKEUP_SUPPORT) && !defined(C_ENABLE_WAKEUP_POLLING)
+#endif
+#endif
+#if defined(C_ENABLE_LL_WAKEUP_SUPPORT) && !defined(C_ENABLE_WAKEUP_POLLING)
 
   CanLL_IntcIntSave(Can_GetIsrWakeupIdOfOsIsrId(canHwChannel), (*(localInterruptOldFlagPtr)).Wup, CanIntcChWup->Wup);
   CanLL_IntcIntDisable(Can_GetIsrWakeupIdOfOsIsrId(canHwChannel), CanIntcChWup->Wup);
-#   if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
   CanLL_IntcIntSave(Can_GetIsrWakeupIdOfOsIsrId(canHwChannel), canDummy, CanIntcChWup->Wup);
-#   endif
-#  endif
+#endif
+#endif
 
-#  if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
 
   CanLL_SYNCP();
 
   CAN_DUMMY_STATEMENT(canDummy);
-#  endif
-# endif
+#endif
+#endif
   CAN_DUMMY_STATEMENT(localInterruptOldFlagPtr);
   CAN_HW_CHANNEL_DUMMY_STATEMENT;
 }
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_CanInterruptRestore(CAN_HW_CHANNEL_CANTYPE_FIRST tCanLLCanIntOld localInterruptOldFlag){
-# if defined(C_ENABLE_LL_CAN_INTCTRL)
+#if defined(C_ENABLE_LL_CAN_INTCTRL)
 
-#  if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
-#   if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
   tCanIntcChTxPtr CanIntcChTx = (tCanIntcChTxPtr)mCanIntcChTxAdr(canHwChannel);
-#   endif
-#   if !defined(C_ENABLE_ERROR_POLLING)
+#endif
+#if !defined(C_ENABLE_ERROR_POLLING)
   tCanIntcChErrPtr CanIntcChErr = (tCanIntcChErrPtr)mCanIntcChErrorAdr(canHwChannel);
-#   endif
-#   if defined(C_ENABLE_LL_WAKEUP_SUPPORT) && !defined(C_ENABLE_WAKEUP_POLLING)
+#endif
+#if defined(C_ENABLE_LL_WAKEUP_SUPPORT) && !defined(C_ENABLE_WAKEUP_POLLING)
   tCanIntcChWupPtr CanIntcChWup = (tCanIntcChWupPtr)mCanIntcChWakeupAdr(canHwChannel);
-#   endif
-#  endif
+#endif
+#endif
 
   canInterruptOldFlag.GErrCnt--;
 
   if(canInterruptOldFlag.GErrCnt == kCanZero){
-#  if(defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
+#if(defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
 
     CanLL_IntcIntRestore(CanIsrRxFifo, CanIntcRxFifo->RF, canInterruptOldFlag.RF);
-#  endif
-#  if !defined(C_ENABLE_ERROR_POLLING) && defined(C_ENABLE_OVERRUN) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
+#endif
+#if !defined(C_ENABLE_ERROR_POLLING) && defined(C_ENABLE_OVERRUN) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
 
     CanLL_IntcIntRestore(CanIsrGlobalStatus, CanIntcGErr->GErr, canInterruptOldFlag.GErr);
-#  endif
+#endif
   }
-#  if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
 
   CanLL_IntcIntRestore(Can_GetIsrTxIdOfOsIsrId(canHwChannel), CanIntcChTx->Tx, localInterruptOldFlag.Tx);
-#  endif
-#  if !defined(C_ENABLE_ERROR_POLLING)
+#endif
+#if !defined(C_ENABLE_ERROR_POLLING)
 
   CanLL_IntcIntRestore(Can_GetIsrStatusIdOfOsIsrId(canHwChannel), CanIntcChErr->Err, localInterruptOldFlag.Err);
-#  endif
-#  if defined(C_ENABLE_LL_WAKEUP_SUPPORT) && !defined(C_ENABLE_WAKEUP_POLLING)
+#endif
+#if defined(C_ENABLE_LL_WAKEUP_SUPPORT) && !defined(C_ENABLE_WAKEUP_POLLING)
 
   CanLL_IntcIntRestore(Can_GetIsrWakeupIdOfOsIsrId(canHwChannel), CanIntcChWup->Wup, localInterruptOldFlag.Wup);
-#  endif
-# endif
+#endif
+#endif
   CAN_DUMMY_STATEMENT(localInterruptOldFlag);
   CAN_HW_CHANNEL_DUMMY_STATEMENT;
 }
@@ -3074,9 +3074,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_CanInterruptRestore(CAN_HW
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_CanWakeupInterruptDisable(CAN_HW_CHANNEL_CANTYPE_FIRST tCanLLCanIntOldPtr localInterruptOldFlagPtr){
 
-# if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
   tCanIntcChWupPtr CanIntcChWup = (tCanIntcChWupPtr)mCanIntcChWakeupAdr(canHwChannel);
-# endif
+#endif
 
   CanLL_IntcIntDisable(Can_GetIsrWakeupIdOfOsIsrId(canHwChannel), CanIntcChWup->Wup);
   CanLL_IntcIntDisableLoc((*(localInterruptOldFlagPtr)).Wup);
@@ -3084,9 +3084,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_CanWakeupInterruptDisable(
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_CanWakeupInterruptEnable(CAN_HW_CHANNEL_CANTYPE_FIRST tCanLLCanIntOldPtr localInterruptOldFlagPtr){
 
-# if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
   tCanIntcChWupPtr CanIntcChWup = (tCanIntcChWupPtr)mCanIntcChWakeupAdr(canHwChannel);
-# endif
+#endif
 
   if(Can_GetCanInterruptCounter(canHwChannel) == (tCanIntCnt)0){
 
@@ -3105,9 +3105,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_CanWakeupInterruptEnable(C
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_CanWakeupOccurred(CAN_HW_CHANNEL_CANTYPE_ONLY){
 
-# if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
   tCanIntcChWupPtr CanIntcChWup = (tCanIntcChWupPtr)mCanIntcChWakeupAdr(canHwChannel);
-# endif
+#endif
   vuint8 retVal = kCanFailed;
 
   if(CanLL_IntcIntFlag(Can_GetIsrWakeupIdOfOsIsrId(canHwChannel), CanIntcChWup->uWup)){
@@ -3123,9 +3123,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_CanWakeupOccurred(CAN_HW
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_ClearCanWakeupInterruptFlag(CAN_HW_CHANNEL_CANTYPE_ONLY){
 
-# if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_INTC_ACCESS_BY_APPL) || !defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
   tCanIntcChWupPtr CanIntcChWup = (tCanIntcChWupPtr)mCanIntcChWakeupAdr(canHwChannel);
-# endif
+#endif
 
   CanLL_IntcIntClear(Can_GetIsrWakeupIdOfOsIsrId(canHwChannel), CanIntcChWup->uWup);
 }
@@ -3133,8 +3133,8 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_ClearCanWakeupInterruptFla
 #endif
 
 #if defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
-# if !defined(C_ENABLE_INTC_ACCESS_BY_APPL)
-#  if defined(C_ENABLE_LL_CAN_INTCTRL)
+#if !defined(C_ENABLE_INTC_ACCESS_BY_APPL)
+#if defined(C_ENABLE_LL_CAN_INTCTRL)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, boolean, STATIC_CODE) CanLL_OsIsInterruptSourceEnabled(Can_ExternalISRType IsrId){
 
@@ -3152,9 +3152,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_OsRestoreInterruptSource(C
   }
 }
 
-#  endif
+#endif
 
-#  if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL) && defined(C_ENABLE_WAKEUP_POLLING)
+#if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL) && defined(C_ENABLE_WAKEUP_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, boolean, STATIC_CODE) CanLL_OsIsInterruptPending(Can_ExternalISRType IsrId){
 
@@ -3164,8 +3164,8 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, boolean, STATIC_CODE) CanLL_OsIsInterruptPending(Ca
   return retVal;
 }
 
-#  endif
-# endif
+#endif
+#endif
 #endif
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnModeTransitions(void){
@@ -3181,9 +3181,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnModeTransitions
   if((Can->CGSR & kCanSrMaskRamIst) != 0u){
     CanLL_CanTimerStart(kCanLoopRamInit);
 #if defined(C_ENABLE_HW_LOOP_TIMER)
-    while (((Can->CGSR & kCanSrMaskRamIst) != 0u) && (CanLL_CanTimerLoop(kCanLoopRamInit) != CAN_NOT_OK))
+    while(((Can->CGSR & kCanSrMaskRamIst) != 0u) && (CanLL_CanTimerLoop(kCanLoopRamInit) != CAN_NOT_OK))
 #else
-    while ((Can->CGSR & kCanSrMaskRamIst) != 0u)
+    while((Can->CGSR & kCanSrMaskRamIst) != 0u)
 #endif
     {
       ;
@@ -3230,18 +3230,18 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnGlobalInit(void
   CanLL_WriteRegGlobalRegSize(&Can->CRNCFG[1], kCanZero);
 #endif
 
-  for (canFifoIndex = 0; canFifoIndex < kCanMaxRxFifos; canFifoIndex++){
+  for(canFifoIndex = 0; canFifoIndex < kCanMaxRxFifos; canFifoIndex++){
     CanLL_WriteRegGlobalRegSize(&Can->CRFCR[canFifoIndex], kCanZero);
   }
-  for (canPhysChannelIndex = 0; canPhysChannelIndex < kCanMaxPhysChannels; canPhysChannelIndex++){
-    for (canFifoIndex = 0; canFifoIndex < kCanMaxTxFifos; canFifoIndex++){
+  for(canPhysChannelIndex = 0; canPhysChannelIndex < kCanMaxPhysChannels; canPhysChannelIndex++){
+    for(canFifoIndex = 0; canFifoIndex < kCanMaxTxFifos; canFifoIndex++){
       CanLL_WriteRegGlobal32(&Can->ChFC[canPhysChannelIndex].TRFCR[canFifoIndex], kCanZero);
     }
   }
 
 #if defined(C_MULTIPLE_RECEIVE_CHANNEL)
 
-  for (channel = 0; channel < kCanNumberOfChannels; channel++)
+  for(channel = 0; channel < kCanNumberOfChannels; channel++)
 #endif
   {
 
@@ -3268,7 +3268,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnGlobalInit(void
 
 #if defined(C_ENABLE_TX_HW_FIFO)
 
-      for (canFifoIndex = kCanZero; canFifoIndex < Can_GetTxFifoCountOfChannelData(channel); canFifoIndex++)
+      for(canFifoIndex = kCanZero; canFifoIndex < Can_GetTxFifoCountOfChannelData(channel); canFifoIndex++)
       {
         CanLL_WriteRegGlobal32(&Can->ChFC[canPhysChannel].TRFCR[canFifoIndex], Can_GetTxFifoData(Can_GetTxFifoStartIndexOfChannelData(channel) + canFifoIndex));
       }
@@ -3294,9 +3294,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnGlobalInit(void
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnRuleAndFifoInit(CAN_CHANNEL_CANTYPE_ONLY){
 
 #if defined(C_MULTIPLE_PHYS_CHANNEL)
-# if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS) || defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS) || defined(C_ENABLE_TX_HW_FIFO)
   CanChannelHandle canPhysChannel;
-# endif
+#endif
 #endif
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS) || defined(C_ENABLE_TX_HW_FIFO)
   CanObjectHandle hwObjHandle;
@@ -3315,9 +3315,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnRuleAndFifoInit
 #endif
 
 #if defined(C_MULTIPLE_PHYS_CHANNEL)
-# if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS) || defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS) || defined(C_ENABLE_TX_HW_FIFO)
   canPhysChannel = mCanLogToPhys(channel);
-# endif
+#endif
 #endif
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS)
@@ -3332,29 +3332,29 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnRuleAndFifoInit
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
 
-  for (mailboxHandle=CAN_HL_MB_RX_FULL_STARTINDEX(channel); mailboxHandle<CAN_HL_MB_RX_FULL_STOPINDEX(channel); mailboxHandle++){
+  for(mailboxHandle=CAN_HL_MB_RX_FULL_STARTINDEX(channel); mailboxHandle<CAN_HL_MB_RX_FULL_STOPINDEX(channel); mailboxHandle++){
     hwObjHandle = Can_GetMailboxHwHandle(mailboxHandle);
 
     CanLL_InitPowerOnRulePageUpdate(&canFilterRulesIndex, &canFilterRulesPage);
 
-# if defined(C_ENABLE_EXTENDED_ID)
-#  if defined(C_ENABLE_MIXED_ID)
+#if defined(C_ENABLE_EXTENDED_ID)
+#if defined(C_ENABLE_MIXED_ID)
     if((Can_GetMailboxIDValue(mailboxHandle) & CAN_ID_IDE_MASK) != CAN_ID_IDE_MASK){
       CanLL_WriteRegGlobal32(&mRuleCode(canFilterRulesIndex), MK_STDID0(Can_GetMailboxIDValue(mailboxHandle)));
       CanLL_WriteRegGlobal32(&mRuleMask(canFilterRulesIndex), kCanRuleStdMustMatch);
     }
     else
-#  endif
+#endif
     {
       CanLL_WriteRegGlobal32(&mRuleCode(canFilterRulesIndex), MK_EXTID0(Can_GetMailboxIDValue(mailboxHandle)));
       CanLL_WriteRegGlobal32(&mRuleMask(canFilterRulesIndex), kCanRuleExtMustMatch);
     }
-# else
+#else
     {
       CanLL_WriteRegGlobal32(&mRuleCode(canFilterRulesIndex), MK_STDID0(Can_GetMailboxIDValue(mailboxHandle)));
       CanLL_WriteRegGlobal32(&mRuleMask(canFilterRulesIndex), kCanRuleStdMustMatch);
     }
-# endif
+#endif
 
     CanLL_WriteRegGlobal32(&mRuleBuf(canFilterRulesIndex), (kCanRuleUseBuf | (((vuint32)(hwObjHandle)) << 8)));
     CanLL_WriteRegGlobal32(&mRuleFifo(canFilterRulesIndex), kCanZero);
@@ -3366,19 +3366,19 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnRuleAndFifoInit
 
   mailboxHandle = CAN_HL_MB_RX_BASIC_STARTINDEX(channel);
   hwObjHandle = Can_GetMailboxHwHandle(mailboxHandle);
-# if defined(C_ENABLE_MULTIPLE_BASICCAN)
-  for (; mailboxHandle < CAN_HL_MB_RX_BASIC_STOPINDEX(channel); mailboxHandle++)
-# endif
+#if defined(C_ENABLE_MULTIPLE_BASICCAN)
+  for(; mailboxHandle < CAN_HL_MB_RX_BASIC_STOPINDEX(channel); mailboxHandle++)
+#endif
   {
-# if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
     if(hwObjHandle < kCanMaxRxFifos)
-# endif
+#endif
     {
 
       canLogHwFifoHandle = (vuint8)hwObjHandle;
       canFilterRulesBcStartIndex = Can_GetFilterStartIndexOfRxFifoData(canLogHwFifoHandle);
       canFilterRulesBcStopIndex = Can_GetFilterStopIndexOfRxFifoData(canLogHwFifoHandle);
-      for (canFilterRulesBcIndex=canFilterRulesBcStartIndex; canFilterRulesBcIndex<canFilterRulesBcStopIndex; canFilterRulesBcIndex++)
+      for(canFilterRulesBcIndex=canFilterRulesBcStartIndex; canFilterRulesBcIndex<canFilterRulesBcStopIndex; canFilterRulesBcIndex++)
       {
         CanLL_InitPowerOnRulePageUpdate(&canFilterRulesIndex, &canFilterRulesPage);
 
@@ -3390,38 +3390,38 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnRuleAndFifoInit
         canFilterRulesIndex++;
       }
 
-# if defined(C_ENABLE_CAN_FD_FULL)
+#if defined(C_ENABLE_CAN_FD_FULL)
       canTmpRegRs = (kCanCrRxFifoSet | ((kCanRegSize)((kCanRegSize)Can_GetFifoDepthOfRxFifoData(canLogHwFifoHandle) << 8)) | ((kCanRegSize)((kCanRegSize)Can_GetFifoPayloadStorageSizeOfRxFifoData(canLogHwFifoHandle) << 4)));
-# else
+#else
       canTmpRegRs = (kCanCrRxFifoSet | ((kCanRegSize)((kCanRegSize)Can_GetFifoDepthOfRxFifoData(canLogHwFifoHandle) << 8)));
-# endif
-# if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)
-#  if defined(C_ENABLE_INDIVIDUAL_POLLING)
+#endif
+#if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING)
       if(!Can_IsMailboxIndivPolling(mailboxHandle))
-#  endif
+#endif
       {
         canTmpRegRs |= kCanCrRxFifoIntEnable;
       }
-# endif
+#endif
       CanLL_WriteRegGlobalRegSize(&Can->CRFCR[hwObjHandle], canTmpRegRs);
     }
-# if defined(C_ENABLE_MULTIPLE_BASICCAN)
+#if defined(C_ENABLE_MULTIPLE_BASICCAN)
     hwObjHandle++;
-# endif
+#endif
   }
 #endif
 
 #if defined(C_ENABLE_GLOBAL_INIT_POST_PROCESS)
 
-# if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS)
+#if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS)
   CanLL_InitPowerOnRulePageUpdate(&canFilterRulesIndex, &canFilterRulesPage);
   CanAddFilterRulesStartPage = canFilterRulesPage;
   CanAddFilterRulesStartIndex = canFilterRulesIndex;
-# else
+#else
   CanLL_WriteRegGlobalRegSize(&Can->CRECR, kCanRuleWrite);
   CanAddFilterRulesStartPage = 0;
   CanAddFilterRulesStartIndex = 0;
-# endif
+#endif
 #endif
 
 #if !defined(C_ENABLE_RX_FULLCAN_OBJECTS) && !defined(C_ENABLE_RX_BASICCAN_OBJECTS)
@@ -3463,9 +3463,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_WriteReg32(CAN_CHANNEL_CAN
     CAN_RAM_CHECK_READ_BACK_RESULT(channel)
     initPara->isChRamCheckFail |= result;
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(initPara);
-# endif
+#endif
   CAN_CHANNEL_DUMMY_STATEMENT;
 }
 
@@ -3491,9 +3491,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_ModeWait(CAN_CHANNEL_CANTY
 
   CanLL_CanTimerStart(Loop);
 #if defined(C_ENABLE_HW_LOOP_TIMER)
-  while ((!CanLL_ModeCheck_Phys(PhysChannel, Mode)) && (CanLL_CanTimerLoop(Loop) != CAN_NOT_OK))
+  while((!CanLL_ModeCheck_Phys(PhysChannel, Mode)) && (CanLL_CanTimerLoop(Loop) != CAN_NOT_OK))
 #else
-  while (!CanLL_ModeCheck_Phys(PhysChannel, Mode))
+  while(!CanLL_ModeCheck_Phys(PhysChannel, Mode))
 #endif
   {
     ;
@@ -3518,9 +3518,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_GlobalModeWait(vuint8 Mode
 
   CanLL_CanTimerStart(Loop);
 #if defined(C_ENABLE_HW_LOOP_TIMER)
-  while ((!CanLL_GlobalModeCheck(Mode)) && (CanLL_CanTimerLoop(Loop) != CAN_NOT_OK))
+  while((!CanLL_GlobalModeCheck(Mode)) && (CanLL_CanTimerLoop(Loop) != CAN_NOT_OK))
 #else
-  while (!CanLL_GlobalModeCheck(Mode))
+  while(!CanLL_GlobalModeCheck(Mode))
 #endif
   {
     ;
@@ -3559,9 +3559,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_ChannelTransitionReset(C
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_ChannelTransitionSleep(CAN_CHANNEL_CANTYPE_ONLY){
 
-# if defined(C_MULTIPLE_PHYS_CHANNEL)
+#if defined(C_MULTIPLE_PHYS_CHANNEL)
   CanChannelHandle canPhysChannel = mCanLogToPhys(canHwChannel);
-# endif
+#endif
   vuint8 retVal = kCanFailed;
 
   CanLL_ModeReq_Phys(canPhysChannel, kCanStopMode);
@@ -3570,22 +3570,22 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_ChannelTransitionSleep(C
     CanLL_ModeWait(CAN_CHANNEL_CANPARA_FIRST canPhysChannel, kCanStopMode, kCanLoopChannelTransition);
   }
 
-# if defined(C_ENABLE_HW_LOOP_TIMER)
+#if defined(C_ENABLE_HW_LOOP_TIMER)
   if(CanLL_ModeCheck_Phys(canPhysChannel, kCanStopMode))
-# endif
+#endif
   {
 
-#  if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL)
+#if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL)
     CanLL_ClearCanWakeupInterruptFlag(CAN_HW_CHANNEL_CANPARA_ONLY);
-#  endif
-#  if !defined(C_ENABLE_WAKEUP_POLLING) && defined(C_ENABLE_LL_CAN_INTCTRL)
+#endif
+#if !defined(C_ENABLE_WAKEUP_POLLING) && defined(C_ENABLE_LL_CAN_INTCTRL)
 
     CanLL_CanWakeupInterruptEnable(CAN_HW_CHANNEL_CANPARA_FIRST &Can_GetCanInterruptOldStatus(canHwChannel));
-#  endif
-#  if defined(C_ENABLE_LL_CAN_INTCB) || defined(C_ENABLE_LL_CAN_WAKEUP_INTCB)
+#endif
+#if defined(C_ENABLE_LL_CAN_INTCB) || defined(C_ENABLE_LL_CAN_WAKEUP_INTCB)
 
     ApplCanWakeupInterruptEnable(canHwChannel);
-#  endif
+#endif
     retVal = kCanOk;
   }
 
@@ -3619,7 +3619,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_ChannelTransitionStart(C
     {
 #if defined(C_ENABLE_TX_HW_FIFO)
 
-      for (hwObjHandle = kCanZero; hwObjHandle < Can_GetTxFifoCountOfChannelData(channel); hwObjHandle++)
+      for(hwObjHandle = kCanZero; hwObjHandle < Can_GetTxFifoCountOfChannelData(channel); hwObjHandle++)
       {
         Can->ChFC[canPhysChannel].TRFCR[hwObjHandle] |= kCanCrFifoEnable;
       }
@@ -3668,52 +3668,52 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_IsGlobalRegisterCorrupt(
 
   canGlobalRegCheckFailed = kCanFalse;
 
-  for (idx=0u; idx<3u; idx++){
+  for(idx=0u; idx<3u; idx++){
 
     Can->CGCFG = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskCGCFG);
 
     Can->CGCR = ((CanMemCheckValues32bit[idx] & kCanRamCheckMaskCGCR) | kCanResetMode);
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
-#  if defined(C_ENABLE_CAN_FD_CONFIGURATION)
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#if defined(C_ENABLE_CAN_FD_CONFIGURATION)
 
     Can->CGFDCFG = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskCGFDCFG);
-#  endif
-#  if defined(C_ENABLE_CAN_CRC_CONFIGURATION)
+#endif
+#if defined(C_ENABLE_CAN_CRC_CONFIGURATION)
 
     Can->CGCRCCFG = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskCGCRCCFG);
-#  endif
-# endif
+#endif
+#endif
 
     Can->CRECR = (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRECR);
 
     Can->CRNCFG[0] = (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRNCFG0);
-# if(kCanMaxPhysChannels > 4)
+#if(kCanMaxPhysChannels > 4)
     Can->CRNCFG[1] = (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRNCFG1);
-# endif
+#endif
 
     Can->CRBNUM = (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRBNUM);
 
     if(   ((Can->CGCFG & kCanRamCheckMaskCGCFG) != (CanMemCheckValues32bit[idx] & kCanRamCheckMaskCGCFG))
         || ((Can->CGCR & kCanRamCheckMaskCGCR) != (CanMemCheckValues32bit[idx] & kCanRamCheckMaskCGCR))
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
-#  if defined(C_ENABLE_CAN_FD_CONFIGURATION)
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#if defined(C_ENABLE_CAN_FD_CONFIGURATION)
         || ((Can->CGFDCFG & kCanRamCheckMaskCGFDCFG) != (CanMemCheckValues32bit[idx] & kCanRamCheckMaskCGFDCFG))
-#  endif
-#  if defined(C_ENABLE_CAN_CRC_CONFIGURATION)
+#endif
+#if defined(C_ENABLE_CAN_CRC_CONFIGURATION)
         || ((Can->CGCRCCFG & kCanRamCheckMaskCGCRCCFG) != (CanMemCheckValues32bit[idx] & kCanRamCheckMaskCGCRCCFG))
-#  endif
-# endif
+#endif
+#endif
         || ((Can->CRECR & kCanRamCheckMaskCRECR) != (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRECR))
         || ((Can->CRNCFG[0] & kCanRamCheckMaskCRNCFG0) != (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRNCFG0))
-# if(kCanMaxPhysChannels > 4)
+#if(kCanMaxPhysChannels > 4)
         || ((Can->CRNCFG[1] & kCanRamCheckMaskCRNCFG1) != (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRNCFG1))
-# endif
+#endif
         || ((Can->CRBNUM & kCanRamCheckMaskCRBNUM) != (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRBNUM))
        ){
       canGlobalRegCheckFailed = kCanTrue;
     }
 
-    for (canFifoIndex=0; canFifoIndex<kCanMaxRxFifos; canFifoIndex++){
+    for(canFifoIndex=0; canFifoIndex<kCanMaxRxFifos; canFifoIndex++){
 
       Can->CRFCR[canFifoIndex] = (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRFCR);
       if((Can->CRFCR[canFifoIndex] & kCanRamCheckMaskCRFCR) != (CanMemCheckValuesRegSize[idx] & kCanRamCheckMaskCRFCR))
@@ -3722,8 +3722,8 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_IsGlobalRegisterCorrupt(
       }
     }
 
-    for (canPhysChannelIndex = 0; canPhysChannelIndex < kCanMaxPhysChannels; canPhysChannelIndex++){
-      for (canFifoIndex=0; canFifoIndex<kCanMaxTxFifos; canFifoIndex++)
+    for(canPhysChannelIndex = 0; canPhysChannelIndex < kCanMaxPhysChannels; canPhysChannelIndex++){
+      for(canFifoIndex=0; canFifoIndex<kCanMaxTxFifos; canFifoIndex++)
       {
 
         Can->ChFC[canPhysChannelIndex].TRFCR[canFifoIndex] = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskTRFCR);
@@ -3736,7 +3736,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_IsGlobalRegisterCorrupt(
 
     Can->CRECR = kCanRuleWrite | kCanZero;
 
-    for (canFilterRulesIndex=0; canFilterRulesIndex<kCanMaxRuleAccessCell; canFilterRulesIndex++){
+    for(canFilterRulesIndex=0; canFilterRulesIndex<kCanMaxRuleAccessCell; canFilterRulesIndex++){
 
       mRuleCode(canFilterRulesIndex) = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskRuleCode);
       mRuleMask(canFilterRulesIndex) = (CanMemCheckValues32bit[idx] & kCanRamCheckMaskRuleMask);
@@ -3769,23 +3769,23 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_CheckGeneratedData(void)
   CanChannelHandle physChannelIndex;
   vuint8 retVal = kCanOk;
 
-# if defined(C_ENABLE_CAN_FD_FULL)
+#if defined(C_ENABLE_CAN_FD_FULL)
   if((sizeof(Can_GetRxTmpBuf(0).u.iData) / sizeof(Can_GetRxTmpBuf(0).u.iData[0])) < 16u)
-# else
+#else
   if((sizeof(Can_GetRxTmpBuf(0).u.iData) / sizeof(Can_GetRxTmpBuf(0).u.iData[0])) < 2u)
-# endif
+#endif
   {
     retVal = kCanFailed;
   }
   else{
-# if defined(C_MULTIPLE_RECEIVE_CHANNEL)
+#if defined(C_MULTIPLE_RECEIVE_CHANNEL)
 
-    for (channel = 0; channel < kCanNumberOfChannels; channel++)
-# endif
+    for(channel = 0; channel < kCanNumberOfChannels; channel++)
+#endif
     {
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
       if(Can_GetCanIfChannelId(channel) != CAN_NO_CANIFCHANNELID)
-# endif
+#endif
       {
 #if defined(C_ENABLE_TX_HW_FIFO)
 
@@ -3802,99 +3802,99 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_CheckGeneratedData(void)
           {
             retVal = kCanFailed;
           }
-# if defined(C_MULTIPLE_RECEIVE_CHANNEL)
+#if defined(C_MULTIPLE_RECEIVE_CHANNEL)
           else
           {
 
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
             if(Can_GetPhysToLogChannel(physChannelIndex) != channel)
             {
               retVal = kCanFailed;
             }
-#  else
+#else
             switch(physChannelIndex)
             {
-#   if defined(kCanPhysToLogChannelIndex_0)
+#if defined(kCanPhysToLogChannelIndex_0)
               case 0:
                 if(kCanPhysToLogChannelIndex_0 != channel)
                 {
                   retVal = kCanFailed;
                 }
                 break;
-#   endif
-#   if defined(kCanPhysToLogChannelIndex_1)
+#endif
+#if defined(kCanPhysToLogChannelIndex_1)
               case 1:
                 if(kCanPhysToLogChannelIndex_1 != channel)
                 {
                   retVal = kCanFailed;
                 }
                 break;
-#   endif
-#   if defined(kCanPhysToLogChannelIndex_2)
+#endif
+#if defined(kCanPhysToLogChannelIndex_2)
               case 2:
                 if(kCanPhysToLogChannelIndex_2 != channel)
                 {
                   retVal = kCanFailed;
                 }
                 break;
-#   endif
-#   if defined(kCanPhysToLogChannelIndex_3)
+#endif
+#if defined(kCanPhysToLogChannelIndex_3)
               case 3:
                 if(kCanPhysToLogChannelIndex_3 != channel)
                 {
                   retVal = kCanFailed;
                 }
                 break;
-#   endif
-#   if defined(kCanPhysToLogChannelIndex_4)
+#endif
+#if defined(kCanPhysToLogChannelIndex_4)
               case 4:
                 if(kCanPhysToLogChannelIndex_4 != channel)
                 {
                   retVal = kCanFailed;
                 }
                 break;
-#   endif
-#   if defined(kCanPhysToLogChannelIndex_5)
+#endif
+#if defined(kCanPhysToLogChannelIndex_5)
               case 5:
                 if(kCanPhysToLogChannelIndex_5 != channel)
                 {
                   retVal = kCanFailed;
                 }
                 break;
-#   endif
-#   if defined(kCanPhysToLogChannelIndex_6)
+#endif
+#if defined(kCanPhysToLogChannelIndex_6)
               case 6:
                 if(kCanPhysToLogChannelIndex_6 != channel)
                 {
                   retVal = kCanFailed;
                 }
                 break;
-#   endif
-#   if defined(kCanPhysToLogChannelIndex_7)
+#endif
+#if defined(kCanPhysToLogChannelIndex_7)
               case 7:
                 if(kCanPhysToLogChannelIndex_7 != channel)
                 {
                   retVal = kCanFailed;
                 }
                 break;
-#   endif
+#endif
               default:
                 retVal = kCanFailed;
                 break;
             }
-#  endif
+#endif
           }
-# endif
+#endif
         }
       }
     }
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(retVal != kCanOk){
     Can_CallDetReportError(CAN_INIT_ID, CAN_E_GENDATA);
   }
-# endif
+#endif
 
   return (retVal);
 }
@@ -3929,23 +3929,23 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
 #endif
 
 #if(CAN_DEV_ERROR_DETECT == STD_ON)
-# if !defined(C_ENABLE_TX_POLLING)
+#if !defined(C_ENABLE_TX_POLLING)
 
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
+#endif
   if(
-#  if defined(C_ENABLE_TX_FULLCAN_OBJECTS)
+#if defined(C_ENABLE_TX_FULLCAN_OBJECTS)
        ((txConfPara.mailboxHandle < Can_GetTxFullHandleStart(canHwChannel)) || (txConfPara.mailboxHandle >= Can_GetTxFullHandleStop(canHwChannel))) &&
-#  endif
+#endif
        ((txConfPara.mailboxHandle < Can_GetTxBasicHandleStart(canHwChannel)) || (txConfPara.mailboxHandle >= Can_GetTxBasicHandleStop(canHwChannel))) ){
     errorId = CAN_E_PARAM_HANDLE;
   }
   else
-# endif
+#endif
 #endif
   {
 
@@ -3967,12 +3967,12 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
     if(Can_GetMailboxType(txConfPara.mailboxHandle) == CAN_TX_BASICCAN_FIFO_TYPE){
       SchM_Enter_Can_CAN_EXCLUSIVE_AREA_7();
       txHwFifo = Can_GetMailboxTxHwFifo(txConfPara.mailboxHandle);
-#  if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
       if(txHwFifo >= (uint16)Can_GetSizeOfTxHwFifo())
       {
         txHwFifo = 0u;
       }
-#  endif
+#endif
       txConfPara.mailboxElement = (CanObjectHandle)Can_GetTxHwFifoReadIndex(txHwFifo);
 
       if(Can_GetTxHwFifoReadIndex(txHwFifo) < ((uint16)Can_GetMailboxSize(txConfPara.mailboxHandle) - (uint16)1u) )
@@ -4007,16 +4007,16 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
         Can_SetActiveSendState(txConfPara.activeSendObject, kCanBufferFree);
         if(Appl_GenericConfirmation( tmp_pdu ) == CAN_OK)
 #elif defined(CAN_ENABLE_GENERIC_CONFIRMATION_API2)
-# if defined(C_ENABLE_MIRROR_MODE)
+#if defined(C_ENABLE_MIRROR_MODE)
         if(Can_GetMirrorModeState(channel) == CDDMIRROR_INACTIVE)
         {
           Can_SetActiveSendState(txConfPara.activeSendObject, kCanBufferFree);
           generic_retval = CAN_OK;
         }
         else
-# endif
+#endif
         {
-# if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
           if(Can_GetMailboxType(txConfPara.mailboxHandle) == CAN_TX_BASICCAN_FIFO_TYPE)
           {
             Can_SetActiveSendState(txConfPara.activeSendObject, kCanBufferFree);
@@ -4024,32 +4024,32 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
             generic_retval = Appl_GenericConfirmation( (uint8)channel, &Can_GetActiveSendPduInfo(txConfPara.activeSendObject) );
           }
           else
-# endif
+#endif
           {
             Can_PduType canPdu;
             CanLL_TxConfSetTxConfStruct(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST &txConfPara);
             canPdu.sdu = (Can_SduPtrType) txConfPara.txStructConf->pChipData;
             canPdu.length = CanTxActualDLC(txConfPara.txStructConf);
-# if defined(C_ENABLE_EXTENDED_ID)
-#  if defined(C_ENABLE_MIXED_ID)
+#if defined(C_ENABLE_EXTENDED_ID)
+#if defined(C_ENABLE_MIXED_ID)
             if( CanTxActualIdType(txConfPara.txStructConf) == kCanIdTypeStd)
             {
               canPdu.id = (Can_IdType)CanTxActualStdId(txConfPara.txStructConf);
             }
             else
-#  endif
+#endif
             {
               canPdu.id = (Can_IdType)(CanTxActualExtId(txConfPara.txStructConf) | CAN_ID_IDE_MASK);
             }
-# else
+#else
             canPdu.id = CanTxActualStdId(txConfPara.txStructConf);
-# endif
-# if defined(C_ENABLE_CAN_FD_USED)
+#endif
+#if defined(C_ENABLE_CAN_FD_USED)
             if( CanTxActualFdType(txConfPara.txStructConf) == kCanFdTypeFd )
             {
               canPdu.id |= (Can_IdType)CAN_ID_FD_MASK;
             }
-# endif
+#endif
             canPdu.id &= CAN_ID_MASK_IN_GENERIC_CALLOUT;
             canPdu.swPduHandle = tmp_pdu;
             Can_SetActiveSendState(txConfPara.activeSendObject, kCanBufferFree);
@@ -4079,11 +4079,11 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
 
         else
         {
-# if defined(C_ENABLE_CANCEL_SUPPORT_API)
+#if defined(C_ENABLE_CANCEL_SUPPORT_API)
           CanIf_CancelTxNotification( tmp_pdu, FALSE );
-# else
-#  error "When using Generic Confirmation and Transmit buffer (If) the Cancel-support-api (if) has to be activated"
-# endif
+#else
+#error "When using Generic Confirmation and Transmit buffer (If) the Cancel-support-api (if) has to be activated"
+#endif
         }
 #endif
       }
@@ -4091,7 +4091,7 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
 
       else
       {
-#  if defined(C_ENABLE_CANCEL_SUPPORT_API)
+#if defined(C_ENABLE_CANCEL_SUPPORT_API)
         if(tmp_state == kCanBufferCancelSw)
         {
           Can_SetActiveSendState(txConfPara.activeSendObject, kCanBufferFree);
@@ -4099,18 +4099,18 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
           CanIf_CancelTxNotification( tmp_pdu, TRUE );
         }
         else
-#  endif
+#endif
         {
-#  if defined(C_ENABLE_CANCEL_IN_HW)
+#if defined(C_ENABLE_CANCEL_IN_HW)
 
-#   if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
           if(Can_GetActiveSendState(txConfPara.activeSendObject) == kCanBufferFree)
           {
             errorId = CAN_E_PARAM_HANDLE;
           }
           else
-#   endif
+#endif
           {
             SchM_Enter_Can_CAN_EXCLUSIVE_AREA_3();
 
@@ -4119,7 +4119,7 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
             CanIf_CancelTxConfirmation( Can_GetActiveSendSwPduHandle(txConfPara.activeSendObject), &Can_GetActiveSendPduInfo(txConfPara.activeSendObject) );
             SchM_Exit_Can_CAN_EXCLUSIVE_AREA_3();
           }
-#  endif
+#endif
         }
       }
 #endif
@@ -4133,18 +4133,18 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation( CAN_HW_CHANNEL_C
   }
 
 #if(CAN_DEV_ERROR_REPORT == STD_ON)
-# if !defined(C_ENABLE_TX_POLLING)
+#if !defined(C_ENABLE_TX_POLLING)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_TXCNF_ID, errorId);
   }
-# endif
+#endif
 #endif
   CAN_DUMMY_STATEMENT(errorId);
   CanHookEnd_CanHL_TxConfirmation();
 }
 
 #if defined(C_ENABLE_RX_BASICCAN_OBJECTS)
-# if defined(C_ENABLE_RX_BASICCAN_POLLING)
+#if defined(C_ENABLE_RX_BASICCAN_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_BasicCanMsgReceivedPolling( CAN_HW_CHANNEL_CANTYPE_FIRST CanObjectHandle rxMailboxHandle, CanObjectHandle hwObjHandle ){
 
@@ -4164,49 +4164,49 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_BasicCanMsgReceived( CAN_HW_CHAN
   rxBasicPara.mailboxHandle = rxMailboxHandle;
   rxBasicPara.hwObjHandle = hwObjHandle;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON) && !defined(C_ENABLE_RX_BASICCAN_POLLING)
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if(CAN_DEV_ERROR_DETECT == STD_ON) && !defined(C_ENABLE_RX_BASICCAN_POLLING)
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
 
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-# endif
+#endif
+#endif
   {
 
     if(CanLL_RxBasicMsgReceivedBegin(CAN_CHANNEL_CANPARA_FIRST &rxBasicPara) == kCanOk){
-# if defined(C_ENABLE_CAN_RAM_CHECK)
+#if defined(C_ENABLE_CAN_RAM_CHECK)
 
       if((Can_GetLogStatus(channel) & CAN_DEACTIVATE_CONTROLLER) != CAN_DEACTIVATE_CONTROLLER)
-# endif
+#endif
       {
-# if defined(C_ENABLE_OVERRUN)
-#  if !defined(C_HL_ENABLE_OVERRUN_IN_STATUS)
-#  endif
-# endif
+#if defined(C_ENABLE_OVERRUN)
+#if !defined(C_HL_ENABLE_OVERRUN_IN_STATUS)
+#endif
+#endif
 
         {
 
           rxBasicPara.rxStruct.localDlc = CanRxActualDLC((&(rxBasicPara.rxStruct)));
 
-# if defined(C_ENABLE_EXTENDED_ID)
-#  if defined(C_ENABLE_MIXED_ID)
+#if defined(C_ENABLE_EXTENDED_ID)
+#if defined(C_ENABLE_MIXED_ID)
           if( CanRxActualIdType((&(rxBasicPara.rxStruct))) == kCanIdTypeStd)
           {
             rxBasicPara.rxStruct.localId = (Can_IdType)CanRxActualStdId((&(rxBasicPara.rxStruct)));
           }
           else
-#  endif
+#endif
           {
             rxBasicPara.rxStruct.localId = (Can_IdType)(CanRxActualExtId((&(rxBasicPara.rxStruct))) | CAN_ID_IDE_MASK);
           }
           {
-# else
+#else
           {
             rxBasicPara.rxStruct.localId = CanRxActualStdId((&(rxBasicPara.rxStruct)));
-# endif
-# if defined(C_ENABLE_CAN_FD_USED)
+#endif
+#if defined(C_ENABLE_CAN_FD_USED)
             if( CanRxActualFdType((&(rxBasicPara.rxStruct))) == kCanFdTypeFd )
             {
               rxBasicPara.rxStruct.localId |= (Can_IdType)CAN_ID_FD_MASK;
@@ -4217,9 +4217,9 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_BasicCanMsgReceived( CAN_HW_CHAN
               errorId = CAN_E_PARAM_DLC;
             }
             else
-# endif
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
-#  if(!defined(C_ENABLE_RX_BASICCAN_POLLING) || defined(C_ENABLE_INDIVIDUAL_POLLING))
+#endif
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(!defined(C_ENABLE_RX_BASICCAN_POLLING) || defined(C_ENABLE_INDIVIDUAL_POLLING))
 
             if( (rxBasicPara.mailboxHandle < Can_GetRxBasicHandleStart(canHwChannel)) ||
                  (rxBasicPara.mailboxHandle >= Can_GetRxBasicHandleStop(canHwChannel)) )
@@ -4227,8 +4227,8 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_BasicCanMsgReceived( CAN_HW_CHAN
               errorId = CAN_E_PARAM_HANDLE;
             }
             else
-#  endif
-# endif
+#endif
+#endif
 
             if(rxBasicPara.rxStruct.localDlc > CAN_MAX_DATALEN_OBJ(rxBasicPara.mailboxHandle))
             {
@@ -4249,19 +4249,19 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_BasicCanMsgReceived( CAN_HW_CHAN
     CanLL_RxBasicMsgReceivedEnd(CAN_CHANNEL_CANPARA_FIRST &rxBasicPara);
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_RXINDI_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
+#endif
   CanHookEnd_CanHL_BasicCanMsgReceived();
 }
 #endif
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
-# if defined(C_ENABLE_RX_FULLCAN_POLLING)
+#if defined(C_ENABLE_RX_FULLCAN_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_FullCanMsgReceivedPolling( CAN_HW_CHANNEL_CANTYPE_FIRST CanObjectHandle rxMailboxHandle, CanObjectHandle hwObjHandle ){
 
@@ -4270,7 +4270,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_FullCanMsgReceivedPolling(
   CanHL_FullCanMsgReceived( CAN_HW_CHANNEL_CANPARA_FIRST rxMailboxHandle, hwObjHandle );
   Can_EnableControllerInterrupts((uint8)channel);
 }
-# endif
+#endif
 
 V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_FullCanMsgReceived( CAN_HW_CHANNEL_CANTYPE_FIRST CanObjectHandle rxMailboxHandle, CanObjectHandle hwObjHandle ){
 
@@ -4281,46 +4281,46 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_FullCanMsgReceived( CAN_HW_CHANN
   rxFullPara.mailboxHandle = rxMailboxHandle;
   rxFullPara.hwObjHandle = hwObjHandle;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
-#  if !defined(C_ENABLE_RX_FULLCAN_POLLING)
-#   if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if !defined(C_ENABLE_RX_FULLCAN_POLLING)
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
 
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#   endif
-#  endif
-# endif
+#endif
+#endif
+#endif
   {
 
     if(CanLL_RxFullMsgReceivedBegin(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST &rxFullPara) == kCanOk){
 
-# if defined(C_ENABLE_CAN_RAM_CHECK)
+#if defined(C_ENABLE_CAN_RAM_CHECK)
       if((Can_GetLogStatus(channel) & CAN_DEACTIVATE_CONTROLLER) != CAN_DEACTIVATE_CONTROLLER)
-# endif
+#endif
       {
 
         {
 
           rxFullPara.rxStruct.localDlc = CanRxActualDLC((&(rxFullPara.rxStruct)));
 
-# if defined(C_ENABLE_EXTENDED_ID)
-#  if defined(C_ENABLE_MIXED_ID)
+#if defined(C_ENABLE_EXTENDED_ID)
+#if defined(C_ENABLE_MIXED_ID)
           if( CanRxActualIdType((&(rxFullPara.rxStruct))) == kCanIdTypeStd)
           {
             rxFullPara.rxStruct.localId = (Can_IdType)CanRxActualStdId((&(rxFullPara.rxStruct)));
           }
           else
-#  endif
+#endif
           {
             rxFullPara.rxStruct.localId = (Can_IdType)(CanRxActualExtId((&(rxFullPara.rxStruct))) | CAN_ID_IDE_MASK);
           }
-# else
+#else
           rxFullPara.rxStruct.localId = CanRxActualStdId((&(rxFullPara.rxStruct)));
-# endif
+#endif
           {
-# if defined(C_ENABLE_CAN_FD_USED)
+#if defined(C_ENABLE_CAN_FD_USED)
             if( CanRxActualFdType((&(rxFullPara.rxStruct))) == kCanFdTypeFd )
             {
               rxFullPara.rxStruct.localId |= (Can_IdType)CAN_ID_FD_MASK;
@@ -4331,9 +4331,9 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_FullCanMsgReceived( CAN_HW_CHANN
               errorId = CAN_E_PARAM_DLC;
             }
             else
-# endif
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
-#  if(!defined(C_ENABLE_RX_FULLCAN_POLLING) || defined(C_ENABLE_INDIVIDUAL_POLLING))
+#endif
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(!defined(C_ENABLE_RX_FULLCAN_POLLING) || defined(C_ENABLE_INDIVIDUAL_POLLING))
 
             if( (rxFullPara.mailboxHandle < Can_GetRxFullHandleStart(canHwChannel)) ||
                  (rxFullPara.mailboxHandle >= Can_GetRxFullHandleStop(canHwChannel)) )
@@ -4341,8 +4341,8 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_FullCanMsgReceived( CAN_HW_CHANN
               errorId = CAN_E_PARAM_HANDLE;
             }
             else
-#  endif
-# endif
+#endif
+#endif
 
             if(rxFullPara.rxStruct.localDlc > CAN_MAX_DATALEN_OBJ(rxFullPara.mailboxHandle))
             {
@@ -4363,13 +4363,13 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_FullCanMsgReceived( CAN_HW_CHANN
     CanLL_RxFullMsgReceivedEnd(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST &rxFullPara);
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_RXINDI_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
+#endif
   CanHookEnd_CanHL_FullCanMsgReceived();
 }
 #endif
@@ -4380,15 +4380,15 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_ErrorHandling( CAN_HW_CHANNEL_CA
   errorId = CAN_E_NO_ERROR;
 
 #if(CAN_DEV_ERROR_DETECT == STD_ON)
-# if !defined(C_ENABLE_ERROR_POLLING)
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined(C_ENABLE_ERROR_POLLING)
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
 
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-# endif
+#endif
+#endif
 #endif
   {
 
@@ -4409,16 +4409,16 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_ErrorHandling( CAN_HW_CHANNEL_CA
     }
 #if defined(C_HL_ENABLE_OVERRUN_IN_STATUS)
 
-# if defined(C_ENABLE_OVERRUN) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
+#if defined(C_ENABLE_OVERRUN) && defined(C_ENABLE_RX_BASICCAN_OBJECTS)
 
     if(CanLL_RxBasicCanOverrun(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_ONLY) == kCanTrue){
-#  if(CAN_OVERRUN_NOTIFICATION == CAN_DET)
+#if(CAN_OVERRUN_NOTIFICATION == CAN_DET)
       errorId = CAN_E_DATALOST;
-#  else
+#else
       Appl_CanOverrun( (uint8)channel );
-#  endif
+#endif
     }
-# endif
+#endif
 #endif
 
     CanLL_ErrorHandlingEnd(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_ONLY);
@@ -4433,13 +4433,13 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_ErrorHandling( CAN_HW_CHANNEL_CA
 #endif
 }
 
-# if defined(C_ENABLE_SLEEP_WAKEUP)
+#if defined(C_ENABLE_SLEEP_WAKEUP)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WakeUpHandling( CAN_CHANNEL_CANTYPE_ONLY ){
 
-#  if(CAN_DEV_ERROR_DETECT == STD_ON)
-#   if !defined(C_ENABLE_WAKEUP_POLLING)
-#    if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if !defined(C_ENABLE_WAKEUP_POLLING)
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
 
   if(channel >= kCanNumberOfChannels){
 #     if(CAN_DEV_ERROR_REPORT == STD_ON)
@@ -4448,9 +4448,9 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WakeUpHandling( CAN_CHANNE
 #     endif
   }
   else
-#    endif
-#   endif
-#  endif
+#endif
+#endif
+#endif
   {
 
     Can_SetIsWakeup(channel, TRUE);
@@ -4458,7 +4458,7 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WakeUpHandling( CAN_CHANNE
     EcuM_CheckWakeup(Can_GetWakeupSourceRef(channel));
   }
 }
-# endif
+#endif
 
 #define CAN_STOP_SEC_STATIC_CODE
 #include "MemMap.hpp"
@@ -4473,13 +4473,13 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_GetVersionInfo( Can_VersionInfoPtrType Versio
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if(VersionInfo == NULL_PTR){
     errorId = CAN_E_PARAM_POINTER;
   }
   else
-# endif
+#endif
   {
 
     VersionInfo->vendorID   = CAN_VENDOR_ID;
@@ -4489,17 +4489,17 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_GetVersionInfo( Can_VersionInfoPtrType Versio
     VersionInfo->sw_patch_version = (uint8)CAN_SW_PATCH_VERSION;
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_VERSION_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
+#endif
 }
 #endif
 
-V_DEF_FUNC(V_NONE, void, CODE) Can_InitMemory( void ){
+V_DEF_FUNC(V_NONE, void, CODE) Can_InitMemory(void){
 
   canConfigInitFlag = CAN_STATUS_UNINIT;
 #if defined(CAN_ENABLE_USE_INIT_ROOT_POINTER)
@@ -4522,27 +4522,27 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_ChangeBaudrate( uint8 Controller, V
   retval = E_NOT_OK;
   errorId = CAN_E_PARAM_BAUDRATE;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if( canConfigInitFlag == CAN_STATUS_UNINIT ){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if( channel >= kCanNumberOfChannels ){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
+#endif
   if( (Can_GetLogStatus(channel) & CAN_STATUS_STOP) != CAN_STATUS_STOP ){
     errorId = CAN_E_TRANSITION;
   }
   else
-# endif
+#endif
   {
 
     uint8_least baudrateIndex;
-    for (baudrateIndex = Can_GetInitObjectStartIndex(channel); baudrateIndex < Can_GetInitObjectStartIndex(channel + 1u); baudrateIndex++){
+    for(baudrateIndex = Can_GetInitObjectStartIndex(channel); baudrateIndex < Can_GetInitObjectStartIndex(channel + 1u); baudrateIndex++){
       if(Can_GetInitObjectBaudrate(baudrateIndex) == Baudrate)
       {
         uint8 transitionState;
@@ -4559,16 +4559,16 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_ChangeBaudrate( uint8 Controller, V
     }
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_CHANGE_BR_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return retval;
 }
 #endif
@@ -4582,23 +4582,23 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_CheckBaudrate( uint8 Controller, V_
   retval = E_NOT_OK;
   errorId = CAN_E_PARAM_BAUDRATE;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if( canConfigInitFlag == CAN_STATUS_UNINIT ){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if( channel >= kCanNumberOfChannels ){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-# endif
+#endif
+#endif
   {
 
     uint8_least baudrateIndex;
-    for (baudrateIndex = Can_GetInitObjectStartIndex(channel); baudrateIndex < Can_GetInitObjectStartIndex(channel + 1u); baudrateIndex++){
+    for(baudrateIndex = Can_GetInitObjectStartIndex(channel); baudrateIndex < Can_GetInitObjectStartIndex(channel + 1u); baudrateIndex++){
       if(Can_GetInitObjectBaudrate(baudrateIndex) == Baudrate)
       {
         retval = E_OK;
@@ -4608,16 +4608,16 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_CheckBaudrate( uint8 Controller, V_
     }
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_CHECK_BR_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return retval;
 }
 #endif
@@ -4632,18 +4632,18 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_SetBaudrate( uint8 Controller, uint
   retval = E_NOT_OK;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if( canConfigInitFlag == CAN_STATUS_UNINIT ){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if( channel >= kCanNumberOfChannels ){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
+#endif
   if( (Can_GetLogStatus(channel) & CAN_STATUS_STOP) != CAN_STATUS_STOP ){
     errorId = CAN_E_TRANSITION;
   }
@@ -4652,7 +4652,7 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_SetBaudrate( uint8 Controller, uint
     errorId = CAN_E_PARAM_BAUDRATE;
   }
   else
-# endif
+#endif
   {
     uint8 transitionState;
 
@@ -4665,16 +4665,16 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_SetBaudrate( uint8 Controller, uint
     }
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_SET_BR_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return retval;
 }
 #endif
@@ -4687,32 +4687,32 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_Init( Can_ConfigPtrType ConfigPtr ){
   errorId = CAN_E_NO_ERROR;
 #if defined(CAN_ENABLE_USE_INIT_ROOT_POINTER)
   Can_ConfigDataPtr = ConfigPtr;
-# if defined(CAN_ENABLE_USE_ECUM_BSW_ERROR_HOOK)
+#if defined(CAN_ENABLE_USE_ECUM_BSW_ERROR_HOOK)
   if(ConfigPtr == NULL_PTR){
     EcuM_BswErrorHook((uint16) CAN_MODULE_ID, (uint8) ECUM_BSWERROR_NULLPTR);
   }
   else
-#  if(CAN_FINALMAGICNUMBER == STD_ON)
+#if(CAN_FINALMAGICNUMBER == STD_ON)
   if(Can_GetFinalMagicNumber() != 20510u){
     EcuM_BswErrorHook((uint16) CAN_MODULE_ID, (uint8) ECUM_BSWERROR_MAGICNUMBER);
   }
   else
-#  endif
-# else
+#endif
+#else
 
-#  if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if(ConfigPtr == NULL_PTR){
     errorId = CAN_E_PARAM_POINTER;
   }
   else
-#  endif
-# endif
+#endif
+#endif
 #else
   CAN_DUMMY_STATEMENT(ConfigPtr);
-# if defined(V_ENABLE_USE_DUMMY_STATEMENT)
+#if defined(V_ENABLE_USE_DUMMY_STATEMENT)
   ConfigPtr = Can_ConfigDataPtr;
-# endif
+#endif
 #endif
 #if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag != CAN_STATUS_UNINIT){
@@ -4746,7 +4746,7 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_Init( Can_ConfigPtrType ConfigPtr ){
       {
         canConfigInitFlag = CAN_STATUS_INIT;
 #if !defined( C_SINGLE_RECEIVE_CHANNEL )
-        for (channel = 0u; channel < kCanNumberOfChannels; channel++)
+        for(channel = 0u; channel < kCanNumberOfChannels; channel++)
 #endif
         {
 #if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
@@ -4824,18 +4824,18 @@ V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_SetControllerMode( uint8 Controller
     errorId = CAN_E_UNINIT;
   }
   else
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-# endif
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-# endif
+#endif
 #endif
   {
 #if(CAN_DEV_ERROR_DETECT == STD_ON)
@@ -4847,14 +4847,14 @@ V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_SetControllerMode( uint8 Controller
       errorId = CAN_E_TRANSITION;
     }
     else
-# if(CAN_TRANSITION_CHECK == STD_ON)
+#if(CAN_TRANSITION_CHECK == STD_ON)
     if( ((!CanHL_IsStop(channel)) && (!CanHL_IsSleep(channel)) && ((Transition == CAN_T_WAKEUP) || (Transition == CAN_T_SLEEP))) ||
          ((CanHL_IsSleep(channel)) && (Transition == CAN_T_STOP)) ){
 
       errorId = CAN_E_TRANSITION;
     }
     else
-# endif
+#endif
 #endif
 #if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
 
@@ -5008,18 +5008,18 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_DisableControllerInterrupts( uint8 Controller
     errorId = CAN_E_UNINIT;
   }
   else
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-# endif
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-# endif
+#endif
   if(!CanHL_IsControllerInit(channel)){
     errorId = CAN_E_UNINIT;
   }
@@ -5066,18 +5066,18 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_EnableControllerInterrupts( uint8 Controller 
     errorId = CAN_E_UNINIT;
   }
   else
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-# endif
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-# endif
+#endif
   if(!CanHL_IsControllerInit(channel)){
     errorId = CAN_E_UNINIT;
   }
@@ -5116,52 +5116,51 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_EnableControllerInterrupts( uint8 Controller 
 #endif
 }
 
-V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_Write( Can_HwHandleType Hth, Can_PduInfoPtrType PduInfo ){
-
-  Can_ReturnType retval;
-  CAN_CHANNEL_CANTYPE_LOCAL
-  uint8 errorId;
-  CanHookBegin_Can_Write();
-  errorId = CAN_E_NO_ERROR;
-  retval = CAN_NOT_OK;
-
+V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_Write(
+   Can_HwHandleType Hth, Can_PduInfoPtrType PduInfo
+){
+   Can_ReturnType retval;
+   CAN_CHANNEL_CANTYPE_LOCAL
+   uint8 errorId;
+   CanHookBegin_Can_Write();
+   errorId = CAN_E_NO_ERROR;
+   retval = CAN_NOT_OK;
 #if(CAN_DEV_ERROR_DETECT == STD_ON)
-
-  if(canConfigInitFlag == CAN_STATUS_UNINIT){
-    errorId = CAN_E_UNINIT;
-  }
-  else
-  if(Hth >= Can_GetSizeOfMailbox()) {
-    errorId = CAN_E_PARAM_HANDLE;
-  }
-  else
+   if(canConfigInitFlag == CAN_STATUS_UNINIT){
+      errorId = CAN_E_UNINIT;
+   }
+   else if(Hth >= Can_GetSizeOfMailbox()
+   ){
+      errorId = CAN_E_PARAM_HANDLE;
+   }
+   else
 #endif
   {
 #if !defined( C_SINGLE_RECEIVE_CHANNEL )
     channel = Can_GetMailboxController(Hth);
 #endif
 #if(CAN_DEV_ERROR_DETECT == STD_ON)
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
     if(channel >= kCanNumberOfChannels){
       errorId = CAN_E_PARAM_HANDLE;
     }
     else
-# endif
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
     if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
       errorId = CAN_E_PARAM_HANDLE;
     }
     else
-# endif
+#endif
     if(!CanHL_IsControllerInit(channel)){
       errorId = CAN_E_UNINIT;
     }
     else
-# if defined(C_ENABLE_TX_FULLCAN_OBJECTS)
+#if defined(C_ENABLE_TX_FULLCAN_OBJECTS)
     if((Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_MUX_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_FIFO_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_FULLCAN_TYPE))
-# else
+#else
     if((Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_MUX_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_FIFO_TYPE))
-# endif
+#endif
     {
       errorId = CAN_E_PARAM_HANDLE;
     }
@@ -5170,13 +5169,13 @@ V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_Write( Can_HwHandleType Hth, Can_Pd
       errorId = CAN_E_PARAM_POINTER;
     }
     else
-# if !defined(C_ENABLE_CAN_FD_USED)
+#if !defined(C_ENABLE_CAN_FD_USED)
     if( CanHL_IsFdMessage(PduInfo->id) ){
       errorId = CAN_E_PARAM_POINTER;
     }
     else
-# endif
-# if defined(C_ENABLE_CAN_FD_FULL)
+#endif
+#if defined(C_ENABLE_CAN_FD_FULL)
     if( ((PduInfo->length > 8u) && (Can_GetInitObjectFdBrsConfig(Can_GetLastInitObject(channel)) == CAN_NONE)) ||
          (PduInfo->length > CAN_MAX_DATALEN_OBJ(Hth)) )
          {
@@ -5184,18 +5183,21 @@ V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_Write( Can_HwHandleType Hth, Can_Pd
       errorId = CAN_E_PARAM_DLC;
     }
     else
-# else
-    if( PduInfo->length > CAN_MAX_DATALEN_OBJ(Hth) ){
+#else
+   if(
+         PduInfo->length
+      >  CAN_MAX_DATALEN_OBJ(Hth)
+   ){
       errorId = CAN_E_PARAM_DLC;
-    }
+   }
     else
-# endif
-# if defined(C_ENABLE_MIXED_ID)
+#endif
+#if defined(C_ENABLE_MIXED_ID)
     if( ((PduInfo->id & (Can_IdType)CAN_ID_IDE_MASK) != (Can_IdType)CAN_ID_IDE_MASK ) && ( (PduInfo->id & (Can_IdType)CAN_ID_MASK) > (Can_IdType)CAN_ID_MASK_STD ) ){
       errorId = CAN_E_PARAM_POINTER;
     }
     else
-# endif
+#endif
     if( (PduInfo->id & (Can_IdType)CAN_ID_UNUSED_MASK) != (Can_IdType)0UL ){
       errorId = CAN_E_PARAM_POINTER;
     }
@@ -5253,9 +5255,9 @@ V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_Write( Can_HwHandleType Hth, Can_Pd
       }
       txPara.messageLen = txPara.pdu.length;
       txPara.frameLen = CAN_DLC2LEN(CAN_LEN2DLC(txPara.messageLen));
-# if defined(C_ENABLE_CAN_FD_FULL)
+#if defined(C_ENABLE_CAN_FD_FULL)
       txPara.paddingVal = Can_GetMailboxFdPadding(txPara.mailboxHandle);
-# endif
+#endif
 #endif
 
       CanHL_WritePrepare(CAN_CHANNEL_CANPARA_FIRST &txPara);
@@ -5281,14 +5283,14 @@ V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_Write( Can_HwHandleType Hth, Can_Pd
 }
 
 #if defined(C_ENABLE_CHECK_WAKEUP_CAN_RET_TYPE)
-# define CAN_CHECKWAKEUP_RETTYPE Can_ReturnType
-# define CAN_CHECKWAKEUP_RETVAL_OK     CAN_OK
-# define CAN_CHECKWAKEUP_RETVAL_NOT_OK CAN_NOT_OK
+#define CAN_CHECKWAKEUP_RETTYPE Can_ReturnType
+#define CAN_CHECKWAKEUP_RETVAL_OK     CAN_OK
+#define CAN_CHECKWAKEUP_RETVAL_NOT_OK CAN_NOT_OK
 V_DEF_FUNC(V_NONE, Can_ReturnType, CODE) Can_CheckWakeup( uint8 Controller )
 #else
-# define CAN_CHECKWAKEUP_RETTYPE Std_ReturnType
-# define CAN_CHECKWAKEUP_RETVAL_OK     E_OK
-# define CAN_CHECKWAKEUP_RETVAL_NOT_OK E_NOT_OK
+#define CAN_CHECKWAKEUP_RETTYPE Std_ReturnType
+#define CAN_CHECKWAKEUP_RETVAL_OK     E_OK
+#define CAN_CHECKWAKEUP_RETVAL_NOT_OK E_NOT_OK
 V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_CheckWakeup( uint8 Controller )
 #endif
 {
@@ -5300,29 +5302,29 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_CheckWakeup( uint8 Controller )
     uint8 errorId;
     errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
     if(canConfigInitFlag == CAN_STATUS_UNINIT){
       errorId = CAN_E_UNINIT;
     }
     else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
     if(channel >= kCanNumberOfChannels){
       errorId = CAN_E_PARAM_CONTROLLER;
     }
     else
-#  endif
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
     if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
       errorId = CAN_E_PARAM_CONTROLLER;
     }
     else
-#  endif
+#endif
     if(!CanHL_IsControllerInit(channel)){
       errorId = CAN_E_UNINIT;
     }
     else
-# endif
+#endif
     {
 
      if(Can_IsIsWakeup(channel))
@@ -5334,16 +5336,16 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_CheckWakeup( uint8 Controller )
       }
     }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
     if(errorId != CAN_E_NO_ERROR){
       Can_CallDetReportError(CAN_CKWAKEUP_ID, errorId);
     }
-#  else
+#else
     CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
     CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   }
 #else
   CAN_DUMMY_STATEMENT(Controller);
@@ -5351,7 +5353,7 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_CheckWakeup( uint8 Controller )
   return retval;
 }
 
-V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Write( void ){
+V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Write(void){
 
 #if defined(C_ENABLE_TX_POLLING)
   CAN_CHANNEL_CANTYPE_LOCAL
@@ -5359,87 +5361,87 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Write( void ){
   errorId = CAN_E_NO_ERROR;
   CanHookBegin_Can_MainFunction_Write();
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-# endif
+#endif
   {
 
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
-    for (channel = 0u; channel < kCanNumberOfChannels; channel++)
-# endif
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
+    for(channel = 0u; channel < kCanNumberOfChannels; channel++)
+#endif
     {
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
       if( Can_GetCanIfChannelId(channel) == kCanChannelNotUsed )
       {
         continue;
       }
-# endif
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#endif
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
       if(!CanHL_IsControllerInit(channel))
       {
         errorId = CAN_E_UNINIT;
       }
       else
-# endif
+#endif
       {
         if( !CanHL_IsSleep(channel) )
         {
           tCanTaskParaStruct taskPara;
-# if defined(C_ENABLE_TX_POLLING)
+#if defined(C_ENABLE_TX_POLLING)
 
           if( CanLL_TxIsGlobalConfPending(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_ONLY) == kCanTrue )
           {
-            for ( taskPara.mailboxHandle = Can_GetTxBasicHandleStart(canHwChannel); taskPara.mailboxHandle < Can_GetTxBasicHandleStop(canHwChannel); taskPara.mailboxHandle++ )
+            for( taskPara.mailboxHandle = Can_GetTxBasicHandleStart(canHwChannel); taskPara.mailboxHandle < Can_GetTxBasicHandleStop(canHwChannel); taskPara.mailboxHandle++ )
             {
               taskPara.hwObjHandle = Can_GetMailboxHwHandle(taskPara.mailboxHandle);
-#  if defined(C_ENABLE_INDIVIDUAL_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING)
               if( Can_IsMailboxIndivPolling(taskPara.mailboxHandle))
-#  endif
+#endif
               {
 
                 CanLL_TxProcessPendings(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST &taskPara);
               }
             }
           }
-# endif
-# if defined(C_ENABLE_CANCEL_TX_IN_HW)
-# endif
-# if defined(C_ENABLE_TX_FULLCAN_OBJECTS)
-#  if defined(C_ENABLE_TX_POLLING)
+#endif
+#if defined(C_ENABLE_CANCEL_TX_IN_HW)
+#endif
+#if defined(C_ENABLE_TX_FULLCAN_OBJECTS)
+#if defined(C_ENABLE_TX_POLLING)
 
           if( CanLL_TxIsGlobalConfPending(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_ONLY) == kCanTrue )
           {
-            for ( taskPara.mailboxHandle = Can_GetTxFullHandleStart(canHwChannel); taskPara.mailboxHandle < Can_GetTxFullHandleStop(canHwChannel); taskPara.mailboxHandle++ )
+            for( taskPara.mailboxHandle = Can_GetTxFullHandleStart(canHwChannel); taskPara.mailboxHandle < Can_GetTxFullHandleStop(canHwChannel); taskPara.mailboxHandle++ )
             {
               taskPara.hwObjHandle = Can_GetMailboxHwHandle(taskPara.mailboxHandle);
-#   if defined(C_ENABLE_INDIVIDUAL_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING)
               if( Can_IsMailboxIndivPolling(taskPara.mailboxHandle))
-#   endif
+#endif
               {
 
                 CanLL_TxProcessPendings(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST &taskPara);
               }
             }
           }
-#  endif
-#  if defined(C_ENABLE_CANCEL_TX_IN_HW)
-#  endif
-# endif
+#endif
+#if defined(C_ENABLE_CANCEL_TX_IN_HW)
+#endif
+#endif
         }
       }
     }
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_MAINFCT_WRITE_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
+#endif
 
 #else
   CanHookBegin_Can_MainFunction_Write();
@@ -5447,7 +5449,7 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Write( void ){
   CanHookEnd_Can_MainFunction_Write();
 }
 
-V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Read( void ){
+V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Read(void){
 
   uint8 errorId;
   CanHookBegin_Can_MainFunction_Read();
@@ -5467,35 +5469,35 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Read( void ){
 #endif
     canIsRxTaskLocked = kCanTrue;
 #if defined(C_ENABLE_RX_POLLING)
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
-    for (channel = 0u; channel < kCanNumberOfChannels; channel++)
-# endif
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
+    for(channel = 0u; channel < kCanNumberOfChannels; channel++)
+#endif
     {
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
       if( Can_GetCanIfChannelId(channel) == kCanChannelNotUsed )
       {
         continue;
       }
-# endif
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#endif
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
       if(!CanHL_IsControllerInit(channel))
       {
         errorId = CAN_E_UNINIT;
       }
       else
-# endif
+#endif
       {
         if( !CanHL_IsSleep(channel) )
         {
 
-# if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
+#if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
 
           CanHL_RxFullCanPolling(CAN_HW_CHANNEL_CANPARA_ONLY);
-# endif
-# if defined(C_ENABLE_RX_BASICCAN_OBJECTS)
+#endif
+#if defined(C_ENABLE_RX_BASICCAN_OBJECTS)
 
           CanHL_RxBasicCanPolling(CAN_HW_CHANNEL_CANPARA_ONLY);
-# endif
+#endif
         }
       }
     }
@@ -5517,38 +5519,38 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Read( void ){
   CanHookEnd_Can_MainFunction_Read();
 }
 
-V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_BusOff( void ){
+V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_BusOff(void){
 
 #if defined(C_ENABLE_ERROR_POLLING)
   CAN_CHANNEL_CANTYPE_LOCAL
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-# endif
+#endif
   {
 
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
-    for (channel = 0u; channel < kCanNumberOfChannels; channel++)
-# endif
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
+    for(channel = 0u; channel < kCanNumberOfChannels; channel++)
+#endif
     {
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
       if( Can_GetCanIfChannelId(channel) == kCanChannelNotUsed )
       {
         continue;
       }
-# endif
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#endif
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
       if(!CanHL_IsControllerInit(channel))
       {
         errorId = CAN_E_UNINIT;
       }
       else
-# endif
+#endif
       {
         if( !CanHL_IsSleep(channel) )
         {
@@ -5562,49 +5564,49 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_BusOff( void ){
     }
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_MAINFCT_BO_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
+#endif
 #endif
 }
 
-V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Wakeup( void ){
+V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Wakeup(void){
 
 #if defined(C_ENABLE_WAKEUP_POLLING)
-# if defined(C_ENABLE_SLEEP_WAKEUP)
+#if defined(C_ENABLE_SLEEP_WAKEUP)
   CAN_CHANNEL_CANTYPE_LOCAL
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-#  if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  endif
+#endif
   {
 
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
-    for (channel = 0u; channel < kCanNumberOfChannels; channel++)
-#  endif
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
+    for(channel = 0u; channel < kCanNumberOfChannels; channel++)
+#endif
     {
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
       if( Can_GetCanIfChannelId(channel) == kCanChannelNotUsed )
       {
         continue;
       }
-#  endif
-#  if(CAN_DEV_ERROR_DETECT == STD_ON)
+#endif
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
       if(!CanHL_IsControllerInit(channel))
       {
         errorId = CAN_E_UNINIT;
       }
       else
-#  endif
+#endif
       {
 
         if(CanLL_WakeUpOccured(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_ONLY) == kCanTrue)
@@ -5619,49 +5621,49 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Wakeup( void ){
     }
   }
 
-#  if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_MAINFCT_WU_ID, errorId);
   }
-#  else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-#  endif
-# endif
+#endif
+#endif
 #endif
 }
 
-V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Mode( void ){
+V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Mode(void){
 
   CAN_CHANNEL_CANTYPE_LOCAL
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-# endif
+#endif
   {
 
     SchM_Enter_Can_CAN_EXCLUSIVE_AREA_6();
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
-    for (channel = 0u; channel < kCanNumberOfChannels; channel++)
-# endif
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
+    for(channel = 0u; channel < kCanNumberOfChannels; channel++)
+#endif
     {
-# if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
       if( Can_GetCanIfChannelId(channel) == kCanChannelNotUsed )
       {
         continue;
       }
-# endif
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#endif
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
       if(!CanHL_IsControllerInit(channel))
       {
         errorId = CAN_E_UNINIT;
       }
       else
-# endif
+#endif
       {
         uint8 transitionRequest;
         uint8 busOffRecovery;
@@ -5676,24 +5678,24 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Mode( void ){
           transitionState = CanLL_ModeTransition(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST transitionRequest, busOffRecovery, doRamCheck);
           switch(transitionRequest)
           {
-# if defined(C_ENABLE_SLEEP_WAKEUP)
+#if defined(C_ENABLE_SLEEP_WAKEUP)
             case kCanModeSleep:
               CanHL_NotifyTransition(CAN_CHANNEL_CANPARA_FIRST CAN_STATUS_SLEEP, CANIF_CS_SLEEP, transitionState);
               break;
-# endif
+#endif
             case kCanModeStopReinitFast:
             case kCanModeStopReinit:
-# if defined(C_ENABLE_SLEEP_WAKEUP)
+#if defined(C_ENABLE_SLEEP_WAKEUP)
             case kCanModeWakeupStopReinit:
-# endif
+#endif
               CanHL_NotifyTransition(CAN_CHANNEL_CANPARA_FIRST CAN_STATUS_STOP, CANIF_CS_STOPPED, transitionState);
               break;
             case kCanModeStart:
             case kCanModeStartReinit:
             case kCanModeResetBusOffEnd:
-# if defined(C_ENABLE_SILENT_MODE)
+#if defined(C_ENABLE_SILENT_MODE)
             case kCanModeSilent:
-# endif
+#endif
               CanHL_NotifyTransition(CAN_CHANNEL_CANPARA_FIRST CAN_STATUS_START, CANIF_CS_STARTED, transitionState);
               if( transitionState == kCanOk )
               {
@@ -5710,13 +5712,13 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_MainFunction_Mode( void ){
     SchM_Exit_Can_CAN_EXCLUSIVE_AREA_6();
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_MAINFCT_MODE_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
+#endif
 }
 
 V_DEF_FUNC(V_NONE, void, CODE) Can_CancelTx( Can_HwHandleType Hth, PduIdType PduId ){
@@ -5727,7 +5729,7 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_CancelTx( Can_HwHandleType Hth, PduIdType Pdu
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
@@ -5736,117 +5738,117 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_CancelTx( Can_HwHandleType Hth, PduIdType Pdu
     errorId = CAN_E_PARAM_HANDLE;
   }
   else
-#  if defined(C_ENABLE_TX_FULLCAN_OBJECTS)
+#if defined(C_ENABLE_TX_FULLCAN_OBJECTS)
   if((Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_MUX_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_FIFO_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_FULLCAN_TYPE))
-#  else
+#else
   if((Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_MUX_TYPE) && (Can_GetMailboxType(Hth) != CAN_TX_BASICCAN_FIFO_TYPE))
-#  endif
+#endif
   {
     errorId = CAN_E_PARAM_HANDLE;
   }
   else
-# endif
+#endif
   {
-# if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
     channel = Can_GetMailboxController(Hth);
-# endif
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
     if(channel >= kCanNumberOfChannels){
       errorId = CAN_E_PARAM_CONTROLLER;
     }
     else
-#  endif
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
     if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
       errorId = CAN_E_PARAM_CONTROLLER;
     }
     else
-#  endif
+#endif
     if(!CanHL_IsControllerInit(channel)){
       errorId = CAN_E_UNINIT;
     }
     else
-# endif
+#endif
     {
 
       txCancellationPara.mailboxHandle = Hth;
-# if defined(C_ENABLE_CANCEL_TX_IN_HW)
+#if defined(C_ENABLE_CANCEL_TX_IN_HW)
       txCancellationPara.hwObjHandle = Can_GetMailboxHwHandle(Hth);
-# endif
+#endif
       txCancellationPara.mailboxElement = 0u;
       txCancellationPara.activeSendObject = CanHL_GetActiveSendObject(txCancellationPara.mailboxHandle, txCancellationPara.mailboxElement);
 
-# if defined (C_ENABLE_TX_FULLCAN_OBJECTS)
+#if defined (C_ENABLE_TX_FULLCAN_OBJECTS)
       if( Can_GetMailboxType(Hth) != CAN_TX_FULLCAN_TYPE )
-# endif
+#endif
       {
-# if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION) || defined(C_ENABLE_TX_HW_FIFO)
-        for (; txCancellationPara.mailboxElement < Can_GetMailboxSize(Hth); txCancellationPara.mailboxElement++, txCancellationPara.activeSendObject++)
-# endif
+#if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION) || defined(C_ENABLE_TX_HW_FIFO)
+        for(; txCancellationPara.mailboxElement < Can_GetMailboxSize(Hth); txCancellationPara.mailboxElement++, txCancellationPara.activeSendObject++)
+#endif
         {
           if(Can_GetActiveSendPdu(txCancellationPara.activeSendObject) == PduId)
           {
             if((Can_GetActiveSendState(txCancellationPara.activeSendObject) == kCanBufferSend)
-# if defined(C_ENABLE_CANCEL_TX_IN_HW)
+#if defined(C_ENABLE_CANCEL_TX_IN_HW)
                 || (Can_GetActiveSendState(txCancellationPara.activeSendObject) == kCanBufferCancel)
-# endif
+#endif
                 )
             {
 
-# if defined(C_ENABLE_CANCEL_IN_HW)
+#if defined(C_ENABLE_CANCEL_IN_HW)
               {
 
                 txCancellationPara.canHandleCurTxObj = kCanBufferCancelSw;
                 CanLL_TxCancelInHw(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST &txCancellationPara);
                 Can_SetActiveSendState(txCancellationPara.activeSendObject, kCanBufferCancelSw);
               }
-# else
+#else
               Can_SetActiveSendState(txCancellationPara.activeSendObject, kCanBufferCancelSw);
-# endif
-# if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION) || defined(C_ENABLE_TX_HW_FIFO)
+#endif
+#if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION) || defined(C_ENABLE_TX_HW_FIFO)
               break;
-# endif
+#endif
             }
           }
         }
       }
-# if defined (C_ENABLE_TX_FULLCAN_OBJECTS)
+#if defined (C_ENABLE_TX_FULLCAN_OBJECTS)
       else
       {
         if(Can_GetActiveSendPdu(txCancellationPara.activeSendObject) == PduId)
         {
           if((Can_GetActiveSendState(txCancellationPara.activeSendObject) == kCanBufferSend)
-#  if defined(C_ENABLE_CANCEL_TX_IN_HW)
+#if defined(C_ENABLE_CANCEL_TX_IN_HW)
               || (Can_GetActiveSendState(txCancellationPara.activeSendObject) == kCanBufferCancel)
-#  endif
+#endif
              )
           {
 
-#  if defined(C_ENABLE_CANCEL_TX_IN_HW)
+#if defined(C_ENABLE_CANCEL_TX_IN_HW)
             {
 
               txCancellationPara.canHandleCurTxObj = kCanBufferCancelSw;
               CanLL_TxCancelInHw(CAN_CHANNEL_AND_HW_CHANNEL_CANPARA_FIRST &txCancellationPara);
               Can_SetActiveSendState(txCancellationPara.activeSendObject, kCanBufferCancelSw);
             }
-#  endif
+#endif
             Can_SetActiveSendState(txCancellationPara.activeSendObject, kCanBufferCancelSw);
           }
         }
       }
-# endif
+#endif
     }
     CAN_CHANNEL_DUMMY_STATEMENT;
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_WRITE_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
+#endif
 #else
   CAN_DUMMY_STATEMENT(Hth);
   CAN_DUMMY_STATEMENT(PduId);
@@ -5862,29 +5864,29 @@ V_DEF_FUNC(V_NONE, uint8, CODE) Can_GetStatus( uint8 Controller ){
   errorId = CAN_E_NO_ERROR;
   canReturnCode = CAN_STATUS_INCONSISTENT;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
+#endif
   if(!CanHL_IsControllerInit(channel)){
     errorId = CAN_E_UNINIT;
   }
   else
-# endif
+#endif
   {
 
     CanLL_GetStatusBegin(CAN_CHANNEL_CANPARA_ONLY);
@@ -5893,7 +5895,7 @@ V_DEF_FUNC(V_NONE, uint8, CODE) Can_GetStatus( uint8 Controller ){
     if( CanLL_HwIsBusOff(channel) ){
       canReturnCode |= CAN_STATUS_BUSOFF;
     }
-# if defined(C_ENABLE_EXTENDED_STATUS)
+#if defined(C_ENABLE_EXTENDED_STATUS)
     {
       if( CanLL_HwIsPassive(channel) )
       {
@@ -5904,19 +5906,19 @@ V_DEF_FUNC(V_NONE, uint8, CODE) Can_GetStatus( uint8 Controller ){
         canReturnCode |= CAN_STATUS_WARNING;
       }
     }
-# endif
+#endif
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_HW_ACCESS_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return (uint8)canReturnCode;
 }
 
@@ -5927,29 +5929,29 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_GetControllerMode( uint8 Controller
   errorId = CAN_E_NO_ERROR;
   canReturnCode = E_NOT_OK;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
+#endif
   if(ControllerModePtr == NULL_PTR){
     errorId = CAN_E_PARAM_POINTER;
   }
   else
-# endif
+#endif
   {
 
     if(!CanHL_IsControllerInit(channel)){
@@ -5967,16 +5969,16 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_GetControllerMode( uint8 Controller
     canReturnCode = E_OK;
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_GETCTR_MODE_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return canReturnCode;
 }
 
@@ -5987,24 +5989,24 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_GetControllerErrorState( uint8 Cont
   errorId = CAN_E_NO_ERROR;
   canReturnCode = E_NOT_OK;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
+#endif
   if(!CanHL_IsControllerInit(channel)){
     errorId = CAN_E_UNINIT;
   }
@@ -6013,34 +6015,34 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_GetControllerErrorState( uint8 Cont
     errorId = CAN_E_PARAM_POINTER;
   }
   else
-# endif
+#endif
   {
 
     CanLL_GetStatusBegin(CAN_CHANNEL_CANPARA_ONLY);
     if( CanLL_HwIsBusOff(channel) ){
       *ErrorStatePtr = CAN_ERRORSTATE_BUSOFF;
     }
-# if defined(C_ENABLE_EXTENDED_STATUS)
+#if defined(C_ENABLE_EXTENDED_STATUS)
     else if( CanLL_HwIsPassive(channel) ){
       *ErrorStatePtr = CAN_ERRORSTATE_PASSIVE;
     }
-# endif
+#endif
     else{
       *ErrorStatePtr = CAN_ERRORSTATE_ACTIVE;
     }
     canReturnCode = E_OK;
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_GETCTR_STATE_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return canReturnCode;
 }
 
@@ -6051,24 +6053,24 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_GetControllerTxErrorCounter( uint8 
   errorId = CAN_E_NO_ERROR;
   canReturnCode = E_NOT_OK;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
+#endif
   if(!CanHL_IsControllerInit(channel)){
     errorId = CAN_E_UNINIT;
   }
@@ -6077,27 +6079,27 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_GetControllerTxErrorCounter( uint8 
     errorId = CAN_E_PARAM_POINTER;
   }
   else
-# endif
+#endif
   {
 
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
     *TxErrorCounterPtr = CanTxActualErrorCounter();
-# else
+#else
     *TxErrorCounterPtr = CanTxActualErrorCounter(channel);
-# endif
+#endif
     canReturnCode = E_OK;
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_GETCTR_TXCNT_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return canReturnCode;
 }
 
@@ -6108,24 +6110,24 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_GetControllerRxErrorCounter( uint8 
   errorId = CAN_E_NO_ERROR;
   canReturnCode = E_NOT_OK;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
 
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-#  if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#endif
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
   if(Can_GetCanIfChannelId(channel) == kCanChannelNotUsed){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
+#endif
   if(!CanHL_IsControllerInit(channel)){
     errorId = CAN_E_UNINIT;
   }
@@ -6134,27 +6136,27 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_GetControllerRxErrorCounter( uint8 
     errorId = CAN_E_PARAM_POINTER;
   }
   else
-# endif
+#endif
   {
 
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
     *RxErrorCounterPtr = CanRxActualErrorCounter();
-# else
+#else
     *RxErrorCounterPtr = CanRxActualErrorCounter(channel);
-# endif
+#endif
     canReturnCode = E_OK;
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_GETCTR_RXCNT_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return canReturnCode;
 }
 
@@ -6167,33 +6169,33 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_SetMirrorMode( uint8 Controller, CddMirror_Mi
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-# endif
+#endif
+#endif
   {
 
     Can_SetMirrorModeState(channel, mirrorMode);
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_HW_ACCESS_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
 }
 #endif
 
@@ -6206,34 +6208,34 @@ V_DEF_FUNC(V_NONE, Std_ReturnType, CODE) Can_SetSilentMode( uint8 Controller, Ca
   errorId = CAN_E_NO_ERROR;
   retval = E_NOT_OK;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-# endif
+#endif
+#endif
   {
 
     Can_SetSilentModeState(channel, silentMode);
     retval = E_OK;
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_HW_ACCESS_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
   return retval;
 }
 #endif
@@ -6245,18 +6247,18 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckExecute( uint8 Controller ){
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-# endif
+#endif
+#endif
   {
     uint8 transitionState;
 
@@ -6266,16 +6268,16 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckExecute( uint8 Controller ){
     }
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_HW_ACCESS_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
 }
 
 V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckEnableMailbox( Can_HwHandleType htrh ){
@@ -6283,7 +6285,7 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckEnableMailbox( Can_HwHandleType htrh 
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
@@ -6292,7 +6294,7 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckEnableMailbox( Can_HwHandleType htrh 
     errorId = CAN_E_PARAM_HANDLE;
   }
   else
-# endif
+#endif
   {
 
     Can_SetLogStatus(Can_GetMailboxController(htrh), CAN_DEACTIVATE_CONTROLLER);
@@ -6300,13 +6302,13 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckEnableMailbox( Can_HwHandleType htrh 
     Can_SetMailboxState(htrh, kCanOk);
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_HW_ACCESS_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
+#endif
 }
 
 V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckEnableController( uint8 Controller ){
@@ -6314,18 +6316,18 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckEnableController( uint8 Controller ){
   uint8 errorId;
   errorId = CAN_E_NO_ERROR;
 
-# if(CAN_DEV_ERROR_DETECT == STD_ON)
+#if(CAN_DEV_ERROR_DETECT == STD_ON)
   if(canConfigInitFlag == CAN_STATUS_UNINIT){
     errorId = CAN_E_UNINIT;
   }
   else
-#  if !defined( C_SINGLE_RECEIVE_CHANNEL )
+#if !defined( C_SINGLE_RECEIVE_CHANNEL )
   if(channel >= kCanNumberOfChannels){
     errorId = CAN_E_PARAM_CONTROLLER;
   }
   else
-#  endif
-# endif
+#endif
+#endif
   {
 
     if( (Can_GetLogStatus(channel) & CAN_DEACTIVATE_CONTROLLER) == CAN_DEACTIVATE_CONTROLLER ){
@@ -6340,16 +6342,16 @@ V_DEF_FUNC(V_NONE, void, CODE) Can_RamCheckEnableController( uint8 Controller ){
     }
   }
 
-# if(CAN_DEV_ERROR_REPORT == STD_ON)
+#if(CAN_DEV_ERROR_REPORT == STD_ON)
   if(errorId != CAN_E_NO_ERROR){
     Can_CallDetReportError(CAN_HW_ACCESS_ID, errorId);
   }
-# else
+#else
   CAN_DUMMY_STATEMENT(errorId);
-# endif
-# if defined( C_SINGLE_RECEIVE_CHANNEL )
+#endif
+#if defined( C_SINGLE_RECEIVE_CHANNEL )
   CAN_DUMMY_STATEMENT(Controller);
-# endif
+#endif
 }
 #endif
 
@@ -6404,9 +6406,9 @@ V_DEF_FUNC_API(V_NONE, vuint8, CODE) CanGetFilterRulesStartIndex(void){
 
 #endif
 
-# if defined(C_ENABLE_RX_BASICCAN_OBJECTS)
-#  if defined(C_ENABLE_RX_BASICCAN_POLLING ) && !defined(C_ENABLE_INDIVIDUAL_POLLING)
-#  else
+#if defined(C_ENABLE_RX_BASICCAN_OBJECTS)
+#if defined(C_ENABLE_RX_BASICCAN_POLLING ) && !defined(C_ENABLE_INDIVIDUAL_POLLING)
+#else
 
 V_DEF_FUNC(V_NONE, void, CODE) CanInterruptRxFifo(void){
 
@@ -6420,7 +6422,7 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptRxFifo(void){
 
 #     if defined(C_MULTIPLE_RECEIVE_CHANNEL)
 
-    for (canHwChannel=0; canHwChannel<kCanNumberOfChannels; canHwChannel++)
+    for(canHwChannel=0; canHwChannel<kCanNumberOfChannels; canHwChannel++)
 #     endif
     {
 
@@ -6431,7 +6433,7 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptRxFifo(void){
 
         mailboxHandle = CAN_HL_MB_RX_BASIC_STARTINDEX(canHwChannel);
 #     if defined(C_ENABLE_MULTIPLE_BASICCAN)
-        for (; mailboxHandle < CAN_HL_MB_RX_BASIC_STOPINDEX(canHwChannel); mailboxHandle++)
+        for(; mailboxHandle < CAN_HL_MB_RX_BASIC_STOPINDEX(canHwChannel); mailboxHandle++)
 #     endif
         {
 #     if defined(C_ENABLE_INDIVIDUAL_POLLING)
@@ -6450,7 +6452,7 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptRxFifo(void){
                 canCount--;
 
                 CanHL_BasicCanMsgReceived(CAN_HW_CHANNEL_CANPARA_FIRST mailboxHandle, hwObjHandle);
-              } while (((Can->CRFSR[hwObjHandle] & kCanSrFifoEmpty) == 0u) && (canCount > 0u));
+              } while(((Can->CRFSR[hwObjHandle] & kCanSrFifoEmpty) == 0u) && (canCount > 0u));
             }
           }
         }
@@ -6461,11 +6463,11 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptRxFifo(void){
   CanLL_RtmStop(CanInterruptRxFifo);
 }
 
-#  endif
-# endif
+#endif
+#endif
 
-# if defined(C_ENABLE_TX_POLLING) && !defined(C_ENABLE_INDIVIDUAL_POLLING)
-# else
+#if defined(C_ENABLE_TX_POLLING) && !defined(C_ENABLE_INDIVIDUAL_POLLING)
+#else
 
 V_DEF_FUNC(V_NONE, void, CODE) CanInterruptTx(CAN_HW_CHANNEL_CANTYPE_ONLY){
 
@@ -6473,41 +6475,41 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptTx(CAN_HW_CHANNEL_CANTYPE_ONLY){
   CanObjectHandle mailboxHandle;
   CanObjectHandle hwObjHandle;
   CanObjectHandle mailboxElement = kCanZero;
-#  if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
   vuint8 canCount;
   vuint8 requestCount;
   vuint8 pendingCount;
-#  endif
-#  if defined(C_MULTIPLE_PHYS_CHANNEL)
+#endif
+#if defined(C_MULTIPLE_PHYS_CHANNEL)
   CanChannelHandle canPhysChannel = mCanLogToPhys(canHwChannel);
-#  endif
+#endif
 
   CanLL_RtmStart(CanInterruptTx);
   CanLL_EI();
 
     localReg = CanLL_TxSharedRegToWord(canPhysChannel, Can->CTBTCSR[CanLL_TxWordIndex(canPhysChannel)]) & Can_GetTxIntMaskOfChannelData(canHwChannel);
-#   if defined(C_ENABLE_CANCEL_IN_HW)
+#if defined(C_ENABLE_CANCEL_IN_HW)
 
-#    if defined(C_ENABLE_INDIVIDUAL_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING)
     localReg |= CanLL_TxSharedRegToWord(canPhysChannel, Can->CTBASR[CanLL_TxWordIndex(canPhysChannel)]);
 #    else
     localReg |= CanLL_TxSharedRegToWord(canPhysChannel, Can->CTBASR[CanLL_TxWordIndex(canPhysChannel)]) & Can_GetTxIntMaskOfChannelData(canHwChannel);
-#    endif
-#   endif
+#endif
+#endif
 
     if(localReg != 0u){
 
-#  if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
       if      ((localReg & 0x000000FFu) != 0u) { hwObjHandle = 0u; }
       else if((localReg & 0x0000FF00u) != 0u) { hwObjHandle = 8u; }
       else if((localReg & 0x00FF0000u) != 0u) { hwObjHandle = 16u; }
       else                                     { hwObjHandle = 24u; }
-#  else
+#else
       if      ((localReg & 0x000Fu) != 0u) { hwObjHandle = 0u; }
       else if((localReg & 0x00F0u) != 0u) { hwObjHandle = 4u; }
       else if((localReg & 0x0F00u) != 0u) { hwObjHandle = 8u; }
       else                                 { hwObjHandle = 12u; }
-#  endif
+#endif
 
       do
       {
@@ -6515,23 +6517,23 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptTx(CAN_HW_CHANNEL_CANTYPE_ONLY){
         {
 
           mailboxHandle = Can_GetTxHwToMbHandle(canHwChannel, hwObjHandle);
-#  if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
+#if defined(C_ENABLE_MULTIPLEXED_TRANSMISSION)
           mailboxElement = hwObjHandle - Can_GetMailboxHwHandle(mailboxHandle);
-#  endif
+#endif
           CanHL_TxConfirmation(CAN_HW_CHANNEL_CANPARA_FIRST mailboxHandle, mailboxElement, hwObjHandle);
           localReg &= (localReg-1u);
         }
         hwObjHandle++;
-      }  while (localReg != 0u);
+      }  while(localReg != 0u);
     }
 
-#  if defined(C_ENABLE_TX_HW_FIFO)
+#if defined(C_ENABLE_TX_HW_FIFO)
 
-  for (hwObjHandle = kCanZero; hwObjHandle < Can_GetTxFifoCountOfChannelData(channel); hwObjHandle++){
+  for(hwObjHandle = kCanZero; hwObjHandle < Can_GetTxFifoCountOfChannelData(channel); hwObjHandle++){
     mailboxHandle = Can_GetTxFifoHwToMbHandle(canHwChannel, hwObjHandle);
-#   if defined(C_ENABLE_INDIVIDUAL_POLLING)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING)
     if(!Can_IsMailboxIndivPolling(mailboxHandle))
-#   endif
+#endif
     {
       if((Can->ChFS[canPhysChannel].TRFSR[hwObjHandle] & kCanSrTxFifoIntFlag) != 0u)
       {
@@ -6541,7 +6543,7 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptTx(CAN_HW_CHANNEL_CANTYPE_ONLY){
         canCount = Can_GetFifoProcCountOfChannelData(canHwChannel);
         requestCount = (vuint8)Can_GetTxHwFifoFillCount(Can_GetMailboxTxHwFifo(mailboxHandle));
         pendingCount = (vuint8)((Can->ChFS[canPhysChannel].TRFSR[hwObjHandle] & kCanSrFifoMsgCount) >> 8);
-        while (((requestCount - pendingCount) > 0u) && (canCount > 0u))
+        while(((requestCount - pendingCount) > 0u) && (canCount > 0u))
         {
           canCount--;
           CanHL_TxConfirmation(CAN_HW_CHANNEL_CANPARA_FIRST mailboxHandle, kCanZero, hwObjHandle);
@@ -6551,17 +6553,17 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptTx(CAN_HW_CHANNEL_CANTYPE_ONLY){
       }
     }
   }
-#  endif
+#endif
 
   CanLL_DI();
   CanLL_RtmStop(CanInterruptTx);
 }
 
-# endif
+#endif
 
-# if defined(C_ENABLE_LL_WAKEUP_SUPPORT)
-#  if defined(C_ENABLE_WAKEUP_POLLING)
-#  else
+#if defined(C_ENABLE_LL_WAKEUP_SUPPORT)
+#if defined(C_ENABLE_WAKEUP_POLLING)
+#else
 
 V_DEF_FUNC(V_NONE, void, CODE) CanInterruptWakeup(CAN_HW_CHANNEL_CANTYPE_ONLY){
 
@@ -6574,11 +6576,11 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptWakeup(CAN_HW_CHANNEL_CANTYPE_ONLY){
   CanLL_RtmStop(CanInterruptWakeup);
 }
 
-#  endif
-# endif
+#endif
+#endif
 
-# if defined(C_ENABLE_ERROR_POLLING)
-# else
+#if defined(C_ENABLE_ERROR_POLLING)
+#else
 
 V_DEF_FUNC(V_NONE, void, CODE) CanInterruptStatus(CAN_HW_CHANNEL_CANTYPE_ONLY){
 
@@ -6591,7 +6593,7 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptStatus(CAN_HW_CHANNEL_CANTYPE_ONLY){
   CanLL_RtmStop(CanInterruptStatus);
 }
 
-#  if(defined(C_ENABLE_RX_BASICCAN_OBJECTS) && defined(C_ENABLE_OVERRUN))
+#if(defined(C_ENABLE_RX_BASICCAN_OBJECTS) && defined(C_ENABLE_OVERRUN))
 
 V_DEF_FUNC(V_NONE, void, CODE) CanInterruptGlobalStatus(void){
 
@@ -6600,15 +6602,15 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptGlobalStatus(void){
   CanLL_RtmStart(CanInterruptGlobalStatus);
   CanLL_EI();
 
-#   if defined(C_MULTIPLE_RECEIVE_CHANNEL)
+#if defined(C_MULTIPLE_RECEIVE_CHANNEL)
 
-    for (canHwChannel=0; canHwChannel<kCanNumberOfChannels; canHwChannel++)
-#   endif
+    for(canHwChannel=0; canHwChannel<kCanNumberOfChannels; canHwChannel++)
+#endif
     {
 
-#   if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
+#if(CAN_POSTBUILD_VARIANT_SUPPORT == STD_ON)
       if(Can_GetCanIfChannelId(canHwChannel) != CAN_NO_CANIFCHANNELID)
-#   endif
+#endif
       {
 
         CanHL_ErrorHandling(CAN_HW_CHANNEL_CANPARA_ONLY);
@@ -6619,8 +6621,8 @@ V_DEF_FUNC(V_NONE, void, CODE) CanInterruptGlobalStatus(void){
   CanLL_RtmStop(CanInterruptGlobalStatus);
 }
 
-#  endif
-# endif
+#endif
+#endif
 
 #define CAN_STOP_SEC_CODE
 #include "MemMap.hpp"

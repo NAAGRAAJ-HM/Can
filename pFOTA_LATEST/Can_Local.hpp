@@ -23,17 +23,17 @@
 #endif
 
 #if defined(C_ENABLE_MIXED_ID) || defined(C_ENABLE_EXTENDED_ID)
-# define CAN_ID_IDE_MASK            0x80000000UL
-# define CAN_ID_FD_MASK             0x40000000UL
-# define CAN_ID_MASK                0x1FFFFFFFUL
-# define CAN_ID_MASK_STD            0x000007FFUL
-# define CAN_ID_UNUSED_MASK         0x20000000UL
+#define CAN_ID_IDE_MASK            0x80000000UL
+#define CAN_ID_FD_MASK             0x40000000UL
+#define CAN_ID_MASK                0x1FFFFFFFUL
+#define CAN_ID_MASK_STD            0x000007FFUL
+#define CAN_ID_UNUSED_MASK         0x20000000UL
 #else
-# define CAN_ID_IDE_MASK            0x0000U
-# define CAN_ID_FD_MASK             0x4000U
-# define CAN_ID_MASK                0x07FFU
-# define CAN_ID_MASK_STD            0x07FFU
-# define CAN_ID_UNUSED_MASK         0x3800U
+#define CAN_ID_IDE_MASK            0x0000U
+#define CAN_ID_FD_MASK             0x4000U
+#define CAN_ID_MASK                0x07FFU
+#define CAN_ID_MASK_STD            0x07FFU
+#define CAN_ID_UNUSED_MASK         0x3800U
 #endif
 #define kCanAllChannels  ((CanChannelHandle)0xFFU)
 
@@ -47,21 +47,21 @@
 
 #if defined( C_SINGLE_RECEIVE_CHANNEL )
 
-# define channel                                ((CanChannelHandle)0)
-# define canHwChannel                           ((CanChannelHandle)0)
-# define CAN_HL_HW_CHANNEL_STARTINDEX(ch)       ((CanChannelHandle)0)
-# define CAN_HL_HW_CHANNEL_STOPINDEX(ch)        ((CanChannelHandle)0)
+#define channel                                ((CanChannelHandle)0)
+#define canHwChannel                           ((CanChannelHandle)0)
+#define CAN_HL_HW_CHANNEL_STARTINDEX(ch)       ((CanChannelHandle)0)
+#define CAN_HL_HW_CHANNEL_STOPINDEX(ch)        ((CanChannelHandle)0)
 #else
-# define channel                                Controller
-# define canHwChannel                           Controller
-# define CAN_HL_HW_CHANNEL_STARTINDEX(ch)       (ch)
-# define CAN_HL_HW_CHANNEL_STOPINDEX(ch)        (ch)
+#define channel                                Controller
+#define canHwChannel                           Controller
+#define CAN_HL_HW_CHANNEL_STARTINDEX(ch)       (ch)
+#define CAN_HL_HW_CHANNEL_STOPINDEX(ch)        (ch)
 #endif
 #if !defined(CAN_TRANSITION_CHECK)
-# define CAN_TRANSITION_CHECK STD_ON
+#define CAN_TRANSITION_CHECK STD_ON
 #endif
 #if !defined(CAN_REINIT_START)
-# define CAN_REINIT_START STD_OFF
+#define CAN_REINIT_START STD_OFF
 #endif
 
 #if !defined(CAN_OS_TICK2MS)
@@ -72,7 +72,7 @@
 #endif
 
 #if !defined(CAN_ID_MASK_IN_GENERIC_CALLOUT)
-# define CAN_ID_MASK_IN_GENERIC_CALLOUT (CAN_ID_IDE_MASK | CAN_ID_FD_MASK | CAN_ID_MASK)
+#define CAN_ID_MASK_IN_GENERIC_CALLOUT (CAN_ID_IDE_MASK | CAN_ID_FD_MASK | CAN_ID_MASK)
 
 #endif
 
@@ -94,9 +94,9 @@
 #define Can_GetCanControllerDefaultBaudrate(logCh)    Can_GetCanControllerDefaultBaudrateOfControllerConfig(logCh)
 #define Can_GetCanControllerDefaultBaudrateIdx(logCh) Can_GetCanControllerDefaultBaudrateIdxOfControllerConfig(logCh)
 #if !defined(Can_GetMailboxRxBasicLengthOfControllerConfig)
-# define Can_GetMailboxRxBasicLengthOfControllerConfig(logCh) 0u
-# define Can_GetMailboxRxBasicStartIdxOfControllerConfig(logCh) 0u
-# define Can_GetMailboxRxBasicEndIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxRxBasicLengthOfControllerConfig(logCh) 0u
+#define Can_GetMailboxRxBasicStartIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxRxBasicEndIdxOfControllerConfig(logCh) 0u
 #endif
 #define Can_GetRxBasicHandleMax(logCh)                Can_GetMailboxRxBasicLengthOfControllerConfig(logCh)
 #define Can_GetRxBasicHandleStart(logCh)              (Can_HwHandleType)Can_GetMailboxRxBasicStartIdxOfControllerConfig(logCh)
@@ -104,9 +104,9 @@
 #define Can_GetRxBasicHwStart(logCh)                  Can_GetRxBasicHwStartOfControllerConfig(logCh)
 #define Can_GetRxBasicHwStop(logCh)                   Can_GetRxBasicHwStopOfControllerConfig(logCh)
 #if !defined(Can_GetMailboxRxFullLengthOfControllerConfig)
-# define Can_GetMailboxRxFullLengthOfControllerConfig(logCh) 0u
-# define Can_GetMailboxRxFullStartIdxOfControllerConfig(logCh) 0u
-# define Can_GetMailboxRxFullEndIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxRxFullLengthOfControllerConfig(logCh) 0u
+#define Can_GetMailboxRxFullStartIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxRxFullEndIdxOfControllerConfig(logCh) 0u
 #endif
 #define Can_GetRxFullHandleMax(logCh)                 Can_GetMailboxRxFullLengthOfControllerConfig(logCh)
 #define Can_GetRxFullHandleStart(logCh)               (Can_HwHandleType)Can_GetMailboxRxFullStartIdxOfControllerConfig(logCh)
@@ -114,9 +114,9 @@
 #define Can_GetRxFullHwStart(logCh)                   Can_GetRxFullHwStartOfControllerConfig(logCh)
 #define Can_GetRxFullHwStop(logCh)                    Can_GetRxFullHwStopOfControllerConfig(logCh)
 #if !defined(Can_GetMailboxTxBasicLengthOfControllerConfig)
-# define Can_GetMailboxTxBasicLengthOfControllerConfig(logCh) 0u
-# define Can_GetMailboxTxBasicStartIdxOfControllerConfig(logCh) 0u
-# define Can_GetMailboxTxBasicEndIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxTxBasicLengthOfControllerConfig(logCh) 0u
+#define Can_GetMailboxTxBasicStartIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxTxBasicEndIdxOfControllerConfig(logCh) 0u
 #endif
 #define Can_GetTxBasicHandleMax(logCh)                Can_GetMailboxTxBasicLengthOfControllerConfig(logCh)
 #define Can_GetTxBasicHandleStart(logCh)              (Can_HwHandleType)Can_GetMailboxTxBasicStartIdxOfControllerConfig(logCh)
@@ -124,9 +124,9 @@
 #define Can_GetTxBasicHwStart(logCh)                  Can_GetTxBasicHwStartOfControllerConfig(logCh)
 #define Can_GetTxBasicHwStop(logCh)                   Can_GetTxBasicHwStopOfControllerConfig(logCh)
 #if !defined(Can_GetMailboxTxFullLengthOfControllerConfig)
-# define Can_GetMailboxTxFullLengthOfControllerConfig(logCh) 0u
-# define Can_GetMailboxTxFullStartIdxOfControllerConfig(logCh) 0u
-# define Can_GetMailboxTxFullEndIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxTxFullLengthOfControllerConfig(logCh) 0u
+#define Can_GetMailboxTxFullStartIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxTxFullEndIdxOfControllerConfig(logCh) 0u
 #endif
 #define Can_GetTxFullHandleMax(logCh)                 Can_GetMailboxTxFullLengthOfControllerConfig(logCh)
 #define Can_GetTxFullHandleStart(logCh)               (Can_HwHandleType)Can_GetMailboxTxFullStartIdxOfControllerConfig(logCh)
@@ -134,9 +134,9 @@
 #define Can_GetTxFullHwStart(logCh)                   Can_GetTxFullHwStartOfControllerConfig(logCh)
 #define Can_GetTxFullHwStop(logCh)                    Can_GetTxFullHwStopOfControllerConfig(logCh)
 #if !defined(Can_GetMailboxUnusedLengthOfControllerConfig)
-# define Can_GetMailboxUnusedLengthOfControllerConfig(logCh) 0u
-# define Can_GetMailboxUnusedStartIdxOfControllerConfig(logCh) 0u
-# define Can_GetMailboxUnusedEndIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxUnusedLengthOfControllerConfig(logCh) 0u
+#define Can_GetMailboxUnusedStartIdxOfControllerConfig(logCh) 0u
+#define Can_GetMailboxUnusedEndIdxOfControllerConfig(logCh) 0u
 #endif
 #define Can_GetUnusedHandleMax(logCh)                 Can_GetMailboxUnusedLengthOfControllerConfig(logCh)
 #define Can_GetUnusedHandleStart(logCh)               (Can_HwHandleType)Can_GetMailboxUnusedStartIdxOfControllerConfig(logCh)
@@ -218,181 +218,181 @@
 #define Can_IncTxHwFifoFillCount(fifo)                 Can_IncFillCountOfTxHwFifo(fifo)
 #define Can_DecTxHwFifoFillCount(fifo)                 Can_DecFillCountOfTxHwFifo(fifo)
 
-# define Can_GetRxTmpBuf(logCh)                        Can_GetRxTmpBufOfControllerData(logCh)
-# define Can_GetRxFcCount(logCh)                       (vuint8) Can_GetRxFullHandleMax(logCh)
-# if defined(C_ENABLE_TX_HW_FIFO)
-#  define Can_IsTxFifo(htrh)                           (Can_GetMailboxType(htrh) == CAN_TX_BASICCAN_FIFO_TYPE_MAILBOXTYPEOFMAILBOX)
-#  define Can_GetTxHwToMbHandle(logCh, Index)          Can_GetMemSecObjMailboxHandle(Can_GetMemSecStartIndex((logCh) << 1) + (Index))
-#  define Can_GetTxFifoHwToMbHandle(logCh, Index)      Can_GetMemSecObjMailboxHandle(Can_GetMemSecStartIndex(((logCh) << 1) + 1u) + (Index))
-# else
-#  define Can_GetTxHwToMbHandle(logCh, Index)          Can_GetMemSecObjMailboxHandle(Can_GetMemSecStartIndex(logCh) + (Index))
-# endif
+#define Can_GetRxTmpBuf(logCh)                        Can_GetRxTmpBufOfControllerData(logCh)
+#define Can_GetRxFcCount(logCh)                       (vuint8) Can_GetRxFullHandleMax(logCh)
+#if defined(C_ENABLE_TX_HW_FIFO)
+#define Can_IsTxFifo(htrh)                           (Can_GetMailboxType(htrh) == CAN_TX_BASICCAN_FIFO_TYPE_MAILBOXTYPEOFMAILBOX)
+#define Can_GetTxHwToMbHandle(logCh, Index)          Can_GetMemSecObjMailboxHandle(Can_GetMemSecStartIndex((logCh) << 1) + (Index))
+#define Can_GetTxFifoHwToMbHandle(logCh, Index)      Can_GetMemSecObjMailboxHandle(Can_GetMemSecStartIndex(((logCh) << 1) + 1u) + (Index))
+#else
+#define Can_GetTxHwToMbHandle(logCh, Index)          Can_GetMemSecObjMailboxHandle(Can_GetMemSecStartIndex(logCh) + (Index))
+#endif
 
-# define C_HL_ENABLE_OVERRUN_IN_STATUS
+#define C_HL_ENABLE_OVERRUN_IN_STATUS
 
-# define C_HL_DISABLE_HW_RANGES_FILTER
+#define C_HL_DISABLE_HW_RANGES_FILTER
 
-# define C_HL_ENABLE_IDTYPE_IN_ID
+#define C_HL_ENABLE_IDTYPE_IN_ID
 
-# define C_LL_RX_IDTYPE_TABLE      CanRxId0
-# define C_LL_TX_IDTYPE_TABLE      CanTxId0
+#define C_LL_RX_IDTYPE_TABLE      CanRxId0
+#define C_LL_TX_IDTYPE_TABLE      CanTxId0
 
-# define C_HL_DISABLE_DUMMY_FCT_CALL
+#define C_HL_DISABLE_DUMMY_FCT_CALL
 
-# define C_HL_DISABLE_TX_MSG_DESTROYED
+#define C_HL_DISABLE_TX_MSG_DESTROYED
 
-# define C_HL_DISABLE_CANCEL_IN_HW_TASK
+#define C_HL_DISABLE_CANCEL_IN_HW_TASK
 
-# define C_HL_DISABLE_HW_EXIT_TRANSMIT
+#define C_HL_DISABLE_HW_EXIT_TRANSMIT
 
-# define C_HL_DISABLE_ADJUST_RXHANDLE
+#define C_HL_DISABLE_ADJUST_RXHANDLE
 
-# define C_HL_DISABLE_REJECT_UNWANTED_IDTYPE
+#define C_HL_DISABLE_REJECT_UNWANTED_IDTYPE
 
-# define C_HL_DISABLE_REJECT_REMOTE_FRAME
+#define C_HL_DISABLE_REJECT_REMOTE_FRAME
 
-# define C_HL_DISABLE_REJECT_REMOTE_FRAME_FULLCAN
+#define C_HL_DISABLE_REJECT_REMOTE_FRAME_FULLCAN
 
-# define C_HL_ENABLE_REJECT_ILLEGAL_DLC
+#define C_HL_ENABLE_REJECT_ILLEGAL_DLC
 
-# define C_HL_DISABLE_COPROCESSOR_SUPPORT
+#define C_HL_DISABLE_COPROCESSOR_SUPPORT
 
-# define C_HL_DISABLE_AVOID_REENTRANT_APPLCANCANCELNOTIFICATION
+#define C_HL_DISABLE_AVOID_REENTRANT_APPLCANCANCELNOTIFICATION
 
-# define C_ENABLE_TX_ACTUAL_MACROS
+#define C_ENABLE_TX_ACTUAL_MACROS
 
-# define CAN_HL_HW_LAYOUT_TXBASIC_FIRST
+#define CAN_HL_HW_LAYOUT_TXBASIC_FIRST
 
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
-#  define C_ENABLE_RSCAN_FD_LAYOUT
-# else
-#  if defined(C_ENABLE_CAN_FD_USED)
-#   define C_ENABLE_RSCAN_FD_LAYOUT
-#  endif
-# endif
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#define C_ENABLE_RSCAN_FD_LAYOUT
+#else
+#if defined(C_ENABLE_CAN_FD_USED)
+#define C_ENABLE_RSCAN_FD_LAYOUT
+#endif
+#endif
 
-# define CAN_CAST_ADDR(val)                      (val)
+#define CAN_CAST_ADDR(val)                      (val)
 
-# if defined(C_ENABLE_SINGLE_PHYS_CHANNEL_OPTIMIZATION)
-#  define C_SINGLE_PHYS_CHANNEL
-#  define mCanLogToPhys(ch)                      kCanLogToPhys
-#   define mCanIntcChTxAdr(ch)                   kCanIntcChTxBaseAdr
-#   define mCanIntcChErrorAdr(ch)                kCanIntcChErrorBaseAdr
-#   define mCanIntcChWakeupAdr(ch)               kCanIntcChWakeupBaseAdr
-# else
-#  define C_MULTIPLE_PHYS_CHANNEL
-#  define mCanLogToPhys(ch)                      Can_GetLogToPhys(ch)
-#  define mCanIntcChTxAdr(ch)                    Can_GetIntcChTxBaseAdrOfIntcAddresses(ch)
-#  define mCanIntcChErrorAdr(ch)                 Can_GetIntcChErrorBaseAdrOfIntcAddresses(ch)
-#  define mCanIntcChWakeupAdr(ch)                Can_GetIntcChWakeupBaseAdrOfIntcAddresses(ch)
-# endif
+#if defined(C_ENABLE_SINGLE_PHYS_CHANNEL_OPTIMIZATION)
+#define C_SINGLE_PHYS_CHANNEL
+#define mCanLogToPhys(ch)                      kCanLogToPhys
+#define mCanIntcChTxAdr(ch)                   kCanIntcChTxBaseAdr
+#define mCanIntcChErrorAdr(ch)                kCanIntcChErrorBaseAdr
+#define mCanIntcChWakeupAdr(ch)               kCanIntcChWakeupBaseAdr
+#else
+#define C_MULTIPLE_PHYS_CHANNEL
+#define mCanLogToPhys(ch)                      Can_GetLogToPhys(ch)
+#define mCanIntcChTxAdr(ch)                    Can_GetIntcChTxBaseAdrOfIntcAddresses(ch)
+#define mCanIntcChErrorAdr(ch)                 Can_GetIntcChErrorBaseAdrOfIntcAddresses(ch)
+#define mCanIntcChWakeupAdr(ch)                Can_GetIntcChWakeupBaseAdrOfIntcAddresses(ch)
+#endif
 
-# define kCanNumberOfUsedCanRxIdTables           1u
-# define kCanNumberOfUsedCanTxIdTables           1u
+#define kCanNumberOfUsedCanRxIdTables           1u
+#define kCanNumberOfUsedCanTxIdTables           1u
 
-# define MK_RX_RANGE_MASK_IDSTD0(id)             (MK_STDID0(id))
-# define MK_RX_RANGE_CODE_IDSTD0(id)             (MK_STDID0(id))
-# define MK_RX_RANGE_MASK_IDEXT0(id)             (MK_EXTID0(id) & ~kCanIdTypeExt)
-# define MK_RX_RANGE_CODE_IDEXT0(id)             (MK_EXTID0(id))
+#define MK_RX_RANGE_MASK_IDSTD0(id)             (MK_STDID0(id))
+#define MK_RX_RANGE_CODE_IDSTD0(id)             (MK_STDID0(id))
+#define MK_RX_RANGE_MASK_IDEXT0(id)             (MK_EXTID0(id) & ~kCanIdTypeExt)
+#define MK_RX_RANGE_CODE_IDEXT0(id)             (MK_EXTID0(id))
 
-# define MK_STDID0(id)                           ((id) & kCanStdIdMask)
-# define MK_EXTID0(id)                           (((id) & kCanExtIdMask) | kCanIdTypeExt)
+#define MK_STDID0(id)                           ((id) & kCanStdIdMask)
+#define MK_EXTID0(id)                           (((id) & kCanExtIdMask) | kCanIdTypeExt)
 
-# define MK_TX_DLC(dlc)                          ((tCanDlc)((dlc) & kCanDlcLogMask))
-# define MK_TX_DLC_EXT(dlc)                      ((tCanDlc)((dlc) & kCanDlcLogMask))
+#define MK_TX_DLC(dlc)                          ((tCanDlc)((dlc) & kCanDlcLogMask))
+#define MK_TX_DLC_EXT(dlc)                      ((tCanDlc)((dlc) & kCanDlcLogMask))
 
-# define XT_TX_DLC(dlc_raw)                      ((vuint8)(dlc_raw))
+#define XT_TX_DLC(dlc_raw)                      ((vuint8)(dlc_raw))
 
-# define CanActualDLCToReg(dlc)                  ((kCanRegSize) (((kCanRegSize) (dlc)) << 28))
+#define CanActualDLCToReg(dlc)                  ((kCanRegSize) (((kCanRegSize) (dlc)) << 28))
 
-# define CanRegToActualDLC(reg)                  ((vuint8) ((reg) >> 28))
+#define CanRegToActualDLC(reg)                  ((vuint8) ((reg) >> 28))
 
-# define CanRxActualIdRaw0(rxStruct)             ((tCanRxId0)  ((rxStruct)->pChipMsgObj->Id))
+#define CanRxActualIdRaw0(rxStruct)             ((tCanRxId0)  ((rxStruct)->pChipMsgObj->Id))
 
-# if defined(C_ENABLE_EXTENDED_ID)
-#  define CanRxActualIdExtHi(rxStruct)           ((vuint8)   ((((rxStruct)->pChipMsgObj->Id) >> 24) & 0x1Fu))
-#  define CanRxActualIdExtMidHi(rxStruct)        ((vuint8)    (((rxStruct)->pChipMsgObj->Id) >> 16))
-#  define CanRxActualIdExtMidLo(rxStruct)        ((vuint8)    (((rxStruct)->pChipMsgObj->Id) >> 8 ))
-#  define CanRxActualIdExtLo(rxStruct)           ((vuint8)     ((rxStruct)->pChipMsgObj->Id))
-# endif
-# define CanRxActualIdType(rxStruct)             ((tCanIdType)(((rxStruct)->pChipMsgObj->Id) & kCanIdTypeExt))
-# define CanRxActualExtId(rxStruct)              ((vuint32)   (((rxStruct)->pChipMsgObj->Id) & kCanExtIdMask))
-# define CanRxActualStdId(rxStruct)              ((vuint16)   (((rxStruct)->pChipMsgObj->Id) & kCanStdIdMask))
-# define CanRxActualData(rxStruct, i)            ((vuint8)     ((rxStruct)->pChipData[i]))
-# define CanRxActualDLC(rxStruct)                CAN_DLC2LEN(CanRegToActualDLC((rxStruct)->pChipMsgObj->Dlc))
-# if defined(C_ENABLE_CAN_FD_USED)
-#  define CanRxActualFdType(rxStruct)            ((tCanFdType)(((rxStruct)->pChipMsgObj->Fd) & kCanFdTypeFd))
-# endif
+#if defined(C_ENABLE_EXTENDED_ID)
+#define CanRxActualIdExtHi(rxStruct)           ((vuint8)   ((((rxStruct)->pChipMsgObj->Id) >> 24) & 0x1Fu))
+#define CanRxActualIdExtMidHi(rxStruct)        ((vuint8)    (((rxStruct)->pChipMsgObj->Id) >> 16))
+#define CanRxActualIdExtMidLo(rxStruct)        ((vuint8)    (((rxStruct)->pChipMsgObj->Id) >> 8 ))
+#define CanRxActualIdExtLo(rxStruct)           ((vuint8)     ((rxStruct)->pChipMsgObj->Id))
+#endif
+#define CanRxActualIdType(rxStruct)             ((tCanIdType)(((rxStruct)->pChipMsgObj->Id) & kCanIdTypeExt))
+#define CanRxActualExtId(rxStruct)              ((vuint32)   (((rxStruct)->pChipMsgObj->Id) & kCanExtIdMask))
+#define CanRxActualStdId(rxStruct)              ((vuint16)   (((rxStruct)->pChipMsgObj->Id) & kCanStdIdMask))
+#define CanRxActualData(rxStruct, i)            ((vuint8)     ((rxStruct)->pChipData[i]))
+#define CanRxActualDLC(rxStruct)                CAN_DLC2LEN(CanRegToActualDLC((rxStruct)->pChipMsgObj->Dlc))
+#if defined(C_ENABLE_CAN_FD_USED)
+#define CanRxActualFdType(rxStruct)            ((tCanFdType)(((rxStruct)->pChipMsgObj->Fd) & kCanFdTypeFd))
+#endif
 
-# define CanTxActualIdType(txConfStruct)         CanRxActualIdType(txConfStruct)
-# define CanTxActualExtId(txConfStruct)          CanRxActualExtId(txConfStruct)
-# define CanTxActualStdId(txConfStruct)          CanRxActualStdId(txConfStruct)
-# define CanTxActualData(txConfStruct, i)        CanRxActualData((txConfStruct), (i))
-# define CanTxActualDLC(txConfStruct)            CanRxActualDLC(txConfStruct)
-# if defined(C_ENABLE_CAN_FD_USED)
-#  define CanTxActualFdType(txConfStruct)        CanRxActualFdType(txConfStruct)
-# endif
+#define CanTxActualIdType(txConfStruct)         CanRxActualIdType(txConfStruct)
+#define CanTxActualExtId(txConfStruct)          CanRxActualExtId(txConfStruct)
+#define CanTxActualStdId(txConfStruct)          CanRxActualStdId(txConfStruct)
+#define CanTxActualData(txConfStruct, i)        CanRxActualData((txConfStruct), (i))
+#define CanTxActualDLC(txConfStruct)            CanRxActualDLC(txConfStruct)
+#if defined(C_ENABLE_CAN_FD_USED)
+#define CanTxActualFdType(txConfStruct)        CanRxActualFdType(txConfStruct)
+#endif
 
-# if defined(C_MULTIPLE_RECEIVE_CHANNEL)
-#  define CanRxActualErrorCounter(ch)            ((vuint8) ((Can->ChCtrl[mCanLogToPhys(ch)].SR & kCanRecMask) >> 16))
-#  define CanTxActualErrorCounter(ch)            ((vuint8) ((Can->ChCtrl[mCanLogToPhys(ch)].SR & kCanTecMask) >> 24))
-# else
-#  define CanRxActualErrorCounter()              ((vuint8) ((Can->ChCtrl[mCanLogToPhys(0)].SR & kCanRecMask) >> 16))
-#  define CanTxActualErrorCounter()              ((vuint8) ((Can->ChCtrl[mCanLogToPhys(0)].SR & kCanTecMask) >> 24))
-# endif
+#if defined(C_MULTIPLE_RECEIVE_CHANNEL)
+#define CanRxActualErrorCounter(ch)            ((vuint8) ((Can->ChCtrl[mCanLogToPhys(ch)].SR & kCanRecMask) >> 16))
+#define CanTxActualErrorCounter(ch)            ((vuint8) ((Can->ChCtrl[mCanLogToPhys(ch)].SR & kCanTecMask) >> 24))
+#else
+#define CanRxActualErrorCounter()              ((vuint8) ((Can->ChCtrl[mCanLogToPhys(0)].SR & kCanRecMask) >> 16))
+#define CanTxActualErrorCounter()              ((vuint8) ((Can->ChCtrl[mCanLogToPhys(0)].SR & kCanTecMask) >> 24))
+#endif
 
-# if defined( C_ENABLE_CAN_FD_USED )
-#  define CanTxWriteActId(txStruct, id)          { ((txStruct).pChipMsgObj->Id) = MK_STDID0(id); ((txStruct).pChipMsgObj->Fd) = kCanFdTypeClassic | kCanFdBrsTypeFalse; }
-#  if defined(C_ENABLE_EXTENDED_ID)
-#   define CanTxWriteActExtId(txStruct, id)      { ((txStruct).pChipMsgObj->Id) = MK_EXTID0(id); ((txStruct).pChipMsgObj->Fd) = kCanFdTypeClassic | kCanFdBrsTypeFalse; }
-#  endif
-#   define CanTxWriteActFdId(txStruct, id)       { ((txStruct).pChipMsgObj->Id) = MK_STDID0(id); ((txStruct).pChipMsgObj->Fd) = kCanFdTypeFd | kCanFdBrsTypeTrue; }
-#   if defined(C_ENABLE_EXTENDED_ID)
-#    define CanTxWriteActFdExtId(txStruct, id)   { ((txStruct).pChipMsgObj->Id) = MK_EXTID0(id); ((txStruct).pChipMsgObj->Fd) = kCanFdTypeFd | kCanFdBrsTypeTrue; }
-#   endif
-# else
-#  define CanTxWriteActId(txStruct, id)          { ((txStruct).pChipMsgObj->Id) = MK_STDID0(id); }
-#  if defined(C_ENABLE_EXTENDED_ID)
-#   define CanTxWriteActExtId(txStruct, id)      { ((txStruct).pChipMsgObj->Id) = MK_EXTID0(id); }
-#  endif
-# endif
-# define CanTxWriteActDLC(txStruct, len)         { ((txStruct).pChipMsgObj->Dlc) = CanActualDLCToReg(CAN_LEN2DLC(len)); }
+#if defined( C_ENABLE_CAN_FD_USED )
+#define CanTxWriteActId(txStruct, id)          { ((txStruct).pChipMsgObj->Id) = MK_STDID0(id); ((txStruct).pChipMsgObj->Fd) = kCanFdTypeClassic | kCanFdBrsTypeFalse; }
+#if defined(C_ENABLE_EXTENDED_ID)
+#define CanTxWriteActExtId(txStruct, id)      { ((txStruct).pChipMsgObj->Id) = MK_EXTID0(id); ((txStruct).pChipMsgObj->Fd) = kCanFdTypeClassic | kCanFdBrsTypeFalse; }
+#endif
+#define CanTxWriteActFdId(txStruct, id)       { ((txStruct).pChipMsgObj->Id) = MK_STDID0(id); ((txStruct).pChipMsgObj->Fd) = kCanFdTypeFd | kCanFdBrsTypeTrue; }
+#if defined(C_ENABLE_EXTENDED_ID)
+#define CanTxWriteActFdExtId(txStruct, id)   { ((txStruct).pChipMsgObj->Id) = MK_EXTID0(id); ((txStruct).pChipMsgObj->Fd) = kCanFdTypeFd | kCanFdBrsTypeTrue; }
+#endif
+#else
+#define CanTxWriteActId(txStruct, id)          { ((txStruct).pChipMsgObj->Id) = MK_STDID0(id); }
+#if defined(C_ENABLE_EXTENDED_ID)
+#define CanTxWriteActExtId(txStruct, id)      { ((txStruct).pChipMsgObj->Id) = MK_EXTID0(id); }
+#endif
+#endif
+#define CanTxWriteActDLC(txStruct, len)         { ((txStruct).pChipMsgObj->Dlc) = CanActualDLCToReg(CAN_LEN2DLC(len)); }
 
 #define CAN_HL_MIN(x, y) (((x)>(y)) ? (y) : (x))
 #define CAN_HL_MAX(x, y) (((x)<(y)) ? (y) : (x))
 
 #if !defined(CAN_DUMMY_STATEMENT)
-# if defined(V_ENABLE_USE_DUMMY_STATEMENT)
-#  define CAN_DUMMY_STATEMENT(x) (x) = (x)
-# else
-#  define CAN_DUMMY_STATEMENT(x)
-# endif
+#if defined(V_ENABLE_USE_DUMMY_STATEMENT)
+#define CAN_DUMMY_STATEMENT(x) (x) = (x)
+#else
+#define CAN_DUMMY_STATEMENT(x)
+#endif
 #endif
 #if !defined(CAN_DUMMY_STATEMENT_CONST)
-# if defined(V_ENABLE_USE_DUMMY_STATEMENT)
-#  define CAN_DUMMY_STATEMENT_CONST(x) (void)(x)
-# else
-#  define CAN_DUMMY_STATEMENT_CONST(x)
-# endif
+#if defined(V_ENABLE_USE_DUMMY_STATEMENT)
+#define CAN_DUMMY_STATEMENT_CONST(x) (void)(x)
+#else
+#define CAN_DUMMY_STATEMENT_CONST(x)
+#endif
 #endif
 
 #if(CAN_DEV_ERROR_REPORT == STD_ON)
 
-# define Can_CallDetReportError(api, err) ((void) Det_ReportError(CAN_MODULE_ID, CAN_INSTANCE_ID, (api), (err)))
-# define assertHardware(a, b, c)  if(!(a)) {Can_CallDetReportError(CAN_HW_ACCESS_ID, (c));}
-# define assertInternal(a, b, c)  if(!(a)) {Can_CallDetReportError(CAN_HW_ACCESS_ID, (c));}
-# define assertUser(a, b, c)      if(!(a)) {Can_CallDetReportError(CAN_HW_ACCESS_ID, (c));}
-# define assertGen(a, b, c)       if(!(a)) {Can_CallDetReportError(CAN_HW_ACCESS_ID, (c));}
-# define C_ENABLE_HARDWARE_CHECK
-# define C_ENABLE_INTERNAL_CHECK
-# define C_ENABLE_USER_CHECK
-# define C_ENABLE_GEN_CHECK
+#define Can_CallDetReportError(api, err) ((void) Det_ReportError(CAN_MODULE_ID, CAN_INSTANCE_ID, (api), (err)))
+#define assertHardware(a, b, c)  if(!(a)) {Can_CallDetReportError(CAN_HW_ACCESS_ID, (c));}
+#define assertInternal(a, b, c)  if(!(a)) {Can_CallDetReportError(CAN_HW_ACCESS_ID, (c));}
+#define assertUser(a, b, c)      if(!(a)) {Can_CallDetReportError(CAN_HW_ACCESS_ID, (c));}
+#define assertGen(a, b, c)       if(!(a)) {Can_CallDetReportError(CAN_HW_ACCESS_ID, (c));}
+#define C_ENABLE_HARDWARE_CHECK
+#define C_ENABLE_INTERNAL_CHECK
+#define C_ENABLE_USER_CHECK
+#define C_ENABLE_GEN_CHECK
 #else
-# define Can_CallDetReportError(api, err)
-# define assertHardware(a, b, c)
-# define assertInternal(a, b, c)
-# define assertUser(a, b, c)
-# define assertGen(a, b, c)
+#define Can_CallDetReportError(api, err)
+#define assertHardware(a, b, c)
+#define assertInternal(a, b, c)
+#define assertUser(a, b, c)
+#define assertGen(a, b, c)
 #endif
 
 #define CanDeclareGlobalInterruptOldStatus
@@ -405,41 +405,41 @@
 #define CanNestedGlobalInterruptRestore()     SchM_Exit_Can_CAN_EXCLUSIVE_AREA_0()
 
 #if defined(C_ENABLE_SLEEP_WAKEUP)
-# define APPL_CAN_WAKEUP(ch)   (CanHL_WakeUpHandling( CAN_CHANNEL_CANPARA_ONLY ))
-# define CAN_WAKEUP(ch)              ((void) Can_SetControllerMode((uint8)(ch), CAN_T_WAKEUP))
+#define APPL_CAN_WAKEUP(ch)   (CanHL_WakeUpHandling( CAN_CHANNEL_CANPARA_ONLY ))
+#define CAN_WAKEUP(ch)              ((void) Can_SetControllerMode((uint8)(ch), CAN_T_WAKEUP))
 #endif
 
-# define kCanMaxPhysChannelsCell         8u
-# define kCanMaxRxFifosCell              8u
-# define kCanMaxTxFifosCell              3u
-# define kCanMaxRxBufCell                128u
-# define kCanNumberOfSharedReg8Cell      2u
-# define kCanNumberOfSharedReg16Cell     4u
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
-#  define kCanMaxTxBufCell               32u
-#  define kCanNumberOfSharedRegTxCell    8u
-#  define kCanTxSize                     vuint32
-# else
-#  define kCanMaxTxBufCell               16u
-#  define kCanNumberOfSharedRegTxCell    4u
-#  define kCanTxSize                     vuint16
-# endif
-# define kCanMaxRuleAccessCell           16u
-# define kCanMaxRamTestAccessCell        64u
-# define kCanRegSize                     vuint32
-# define kCanRegSizeCast                 kCanRegSize
+#define kCanMaxPhysChannelsCell         8u
+#define kCanMaxRxFifosCell              8u
+#define kCanMaxTxFifosCell              3u
+#define kCanMaxRxBufCell                128u
+#define kCanNumberOfSharedReg8Cell      2u
+#define kCanNumberOfSharedReg16Cell     4u
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#define kCanMaxTxBufCell               32u
+#define kCanNumberOfSharedRegTxCell    8u
+#define kCanTxSize                     vuint32
+#else
+#define kCanMaxTxBufCell               16u
+#define kCanNumberOfSharedRegTxCell    4u
+#define kCanTxSize                     vuint16
+#endif
+#define kCanMaxRuleAccessCell           16u
+#define kCanMaxRamTestAccessCell        64u
+#define kCanRegSize                     vuint32
+#define kCanRegSizeCast                 kCanRegSize
 
-# define pBufRm(idx)                     (tCanBufPtr)&(Can->BufRm[idx])
-# define pBufRf(idx)                     (tCanBufPtr)&(Can->BufRf[idx])
-# define pBufCf(pch, idx)                (tCanBufPtr)&(Can->BufCfCh[pch].BufCf[idx])
-# define pBufTm(pch, idx)                (tCanBufPtr)&(Can->BufTmCh[pch].BufTm[idx])
-# define mTHAR0(idx)                     Can->THA[idx].THAR0
-# define mTHAR1(idx)                     Can->THA[idx].THAR1
-# define mRuleCode(idx)                  Can->Rule[idx].Code
-# define mRuleMask(idx)                  Can->Rule[idx].Mask
-# define mRuleBuf(idx)                   Can->Rule[idx].Buf
-# define mRuleFifo(idx)                  Can->Rule[idx].Fifo
-# define mCRAMTR(idx)                    Can->CRAMTR[idx]
+#define pBufRm(idx)                     (tCanBufPtr)&(Can->BufRm[idx])
+#define pBufRf(idx)                     (tCanBufPtr)&(Can->BufRf[idx])
+#define pBufCf(pch, idx)                (tCanBufPtr)&(Can->BufCfCh[pch].BufCf[idx])
+#define pBufTm(pch, idx)                (tCanBufPtr)&(Can->BufTmCh[pch].BufTm[idx])
+#define mTHAR0(idx)                     Can->THA[idx].THAR0
+#define mTHAR1(idx)                     Can->THA[idx].THAR1
+#define mRuleCode(idx)                  Can->Rule[idx].Code
+#define mRuleMask(idx)                  Can->Rule[idx].Mask
+#define mRuleBuf(idx)                   Can->Rule[idx].Buf
+#define mRuleFifo(idx)                  Can->Rule[idx].Fifo
+#define mCRAMTR(idx)                    Can->CRAMTR[idx]
 
 typedef volatile struct{
   volatile vuint32      BCFG;
@@ -449,7 +449,7 @@ typedef volatile struct{
   volatile vuint16      CRC;
 }tCanChCtrl;
 
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
 typedef volatile struct{
   volatile vuint32      BCFG;
   volatile vuint32      FDCFG;
@@ -458,7 +458,7 @@ typedef volatile struct{
   volatile vuint32      CRC;
   volatile vuint32      Unused04[3];
 }tCanChCtrlFd;
-# endif
+#endif
 
 typedef volatile struct{
   volatile vuint32      TRFCR[kCanMaxTxFifosCell];
@@ -488,15 +488,15 @@ typedef volatile struct{
 }tCanRule;
 
 typedef volatile struct{
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
   volatile kCanRegSize  THAR0;
   volatile kCanRegSize  THAR1;
-# else
+#else
   volatile kCanRegSize  THAR0;
-# endif
+#endif
 }tCanTHA;
 
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
 typedef volatile struct{
   volatile vuint32      Id;
   volatile vuint32      Dlc;
@@ -510,7 +510,7 @@ typedef volatile struct{
   volatile vuint32      Unused07[13];
 }tCanMsgObj64;
 
-#  if defined(C_ENABLE_IF_RSCAN_FD)
+#if defined(C_ENABLE_IF_RSCAN_FD)
 typedef volatile struct{
   volatile vuint32      Id;
   volatile vuint32      Dlc;
@@ -526,16 +526,16 @@ typedef volatile struct{
 typedef volatile struct{
   tCanMsgObj20          BufTm[kCanMaxTxBufCell];
 }tCanBufTm;
-#  else
+#else
 typedef volatile struct{
   tCanMsgObj64          BufTm[kCanMaxTxBufCell];
 }tCanBufTm;
-#  endif
+#endif
 
 typedef volatile struct{
   tCanMsgObj64          BufCf[kCanMaxTxFifosCell];
 }tCanBufCf;
-# else
+#else
 typedef volatile struct{
   volatile vuint32      Id;
   volatile kCanRegSize  Dlc;
@@ -554,7 +554,7 @@ typedef volatile struct{
 typedef volatile struct{
   tCanMsgObj8           BufTm[kCanMaxTxBufCell];
 }tCanBufTm;
-# endif
+#endif
 
 typedef volatile struct{
 
@@ -592,9 +592,9 @@ typedef volatile struct{
   volatile kCanRegSize  CTBTCSR[kCanNumberOfSharedRegTxCell];
   volatile kCanRegSize  CTBASR[kCanNumberOfSharedRegTxCell];
   volatile kCanRegSize  CTBIER[kCanNumberOfSharedRegTxCell];
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
   volatile vuint32      Unused0x[24];
-# endif
+#endif
 
   volatile kCanRegSize  TQCR[kCanMaxPhysChannelsCell];
   volatile kCanRegSize  TQSR[kCanMaxPhysChannelsCell];
@@ -607,29 +607,29 @@ typedef volatile struct{
   volatile kCanRegSize  CGTINTSTS[kCanNumberOfSharedReg8Cell];
   volatile kCanRegSize  CGTCFG;
   volatile kCanRegSize  CGTCR;
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
   volatile kCanRegSize  Unused02;
 
   volatile kCanRegSize  CGFDCFG;
   volatile kCanRegSize  CGCRCCFG;
-# else
+#else
   volatile kCanRegSize  Unused02[3];
-# endif
+#endif
   volatile kCanRegSize  CGTPUR;
-# if defined(C_ENABLE_IF_RSCAN)
+#if defined(C_ENABLE_IF_RSCAN)
   volatile kCanRegSize  Unused03[32];
-# endif
-# if defined(C_ENABLE_IF_RSCAN_FD)
+#endif
+#if defined(C_ENABLE_IF_RSCAN_FD)
   volatile kCanRegSize  Unused03[31];
   volatile kCanRegSize  CGRMCFG;
-# endif
-# if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#endif
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
   volatile kCanRegSize  Unused03[52];
-# endif
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#endif
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
 
   tCanChCtrlFd          ChCtrlFd[kCanMaxPhysChannelsCell];
-#  if defined(C_ENABLE_IF_RSCAN_FD_V3)
+#if defined(C_ENABLE_IF_RSCAN_FD_V3)
   volatile vuint32      Unused05[512];
 
   tCanRule              Rule[kCanMaxRuleAccessCell];
@@ -642,7 +642,7 @@ typedef volatile struct{
   tCanBufTm             BufTmCh[kCanMaxPhysChannelsCell];
   tCanTHA               THA[kCanMaxPhysChannelsCell];
   volatile vuint32      Unused09[240];
-#  else
+#else
   volatile vuint32      Unused05[640];
 
   tCanRule              Rule[kCanMaxRuleAccessCell];
@@ -655,8 +655,8 @@ typedef volatile struct{
   volatile vuint32      Unused08[1024];
   tCanTHA               THA[kCanMaxPhysChannelsCell];
   volatile vuint32      Unused09[248];
-#  endif
-# else
+#endif
+#else
 
   tCanRule              Rule[kCanMaxRuleAccessCell];
 
@@ -666,170 +666,170 @@ typedef volatile struct{
   tCanBufTm             BufTmCh[kCanMaxPhysChannelsCell];
   tCanTHA               THA[kCanMaxPhysChannelsCell];
   volatile kCanRegSize  Unused04[56];
-# endif
+#endif
 
   volatile vuint32      CRAMTR[kCanMaxRamTestAccessCell];
 }tCanCell;
 
 V_DEF_P2SFR_CAN_TYPE(V_NONE, tCanCell) tCanCellPtr;
-# define Can ((tCanCellPtr) CAN_CAST_ADDR(kCanBaseAdr))
+#define Can ((tCanCellPtr) CAN_CAST_ADDR(kCanBaseAdr))
 
-# if defined(C_ENABLE_RSCAN_FD_LAYOUT)
+#if defined(C_ENABLE_RSCAN_FD_LAYOUT)
 V_DEF_P2SFR_CAN_TYPE(V_NONE, tCanMsgObj64) tCanBufPtr;
-#  if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
 V_DEF_VAR_TYPE(V_NONE, tCanMsgObj64) tCanDummyBuf;
-#  endif
-# else
+#endif
+#else
 V_DEF_P2SFR_CAN_TYPE(V_NONE, tCanMsgObj8) tCanBufPtr;
-#  if(CAN_SAFE_BSW == STD_ON)
+#if(CAN_SAFE_BSW == STD_ON)
 V_DEF_VAR_TYPE(V_NONE, tCanMsgObj8) tCanDummyBuf;
-#  endif
-# endif
+#endif
+#endif
 
-# if defined(C_ENABLE_LL_CAN_INTCTRL)
-#  if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
+#if defined(C_ENABLE_LL_CAN_INTCTRL)
+#if defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_TX_POLLING)
 typedef volatile struct{
   volatile vuint8       Tx;
   volatile vuint8       uTx;
 }tCanIntcChTxObj;
 
 V_DEF_P2SFR_CAN_TYPE(V_NONE, tCanIntcChTxObj) tCanIntcChTxPtr;
-#  endif
+#endif
 
-#  if !defined(C_ENABLE_ERROR_POLLING)
+#if !defined(C_ENABLE_ERROR_POLLING)
 typedef volatile struct{
   volatile vuint8       Err;
   volatile vuint8       uErr;
 }tCanIntcChErrObj;
 
 V_DEF_P2SFR_CAN_TYPE(V_NONE, tCanIntcChErrObj) tCanIntcChErrPtr;
-#  endif
+#endif
 
-#  if((defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)) && defined(C_ENABLE_RX_BASICCAN_OBJECTS))
+#if((defined(C_ENABLE_INDIVIDUAL_POLLING) || !defined(C_ENABLE_RX_BASICCAN_POLLING)) && defined(C_ENABLE_RX_BASICCAN_OBJECTS))
 typedef volatile struct{
   volatile vuint8       RF;
   volatile vuint8       uRF;
 }tCanIntcRxFifoObj;
 
 V_DEF_P2SFR_CAN_TYPE(V_NONE, tCanIntcRxFifoObj) tCanIntcRxFifoPtr;
-#   define CanIntcRxFifo ((tCanIntcRxFifoPtr) CAN_CAST_ADDR(kCanIntcRxFifoBaseAdr))
-#  endif
+#define CanIntcRxFifo ((tCanIntcRxFifoPtr) CAN_CAST_ADDR(kCanIntcRxFifoBaseAdr))
+#endif
 
-#  if(!defined(C_ENABLE_ERROR_POLLING) && defined(C_ENABLE_OVERRUN) && defined(C_ENABLE_RX_BASICCAN_OBJECTS))
+#if(!defined(C_ENABLE_ERROR_POLLING) && defined(C_ENABLE_OVERRUN) && defined(C_ENABLE_RX_BASICCAN_OBJECTS))
 typedef volatile struct{
   volatile vuint8       GErr;
   volatile vuint8       uGErr;
 }tCanIntcGErrObj;
 
 V_DEF_P2SFR_CAN_TYPE(V_NONE, tCanIntcGErrObj) tCanIntcGErrPtr;
-#   define CanIntcGErr ((tCanIntcGErrPtr) CAN_CAST_ADDR(kCanIntcGErrorBaseAdr))
-#  endif
-# endif
+#define CanIntcGErr ((tCanIntcGErrPtr) CAN_CAST_ADDR(kCanIntcGErrorBaseAdr))
+#endif
+#endif
 
-# if defined(C_ENABLE_LL_WAKEUP_SUPPORT)
-#  if(defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL) || (defined(C_ENABLE_WAKEUP_POLLING) && !defined(C_ENABLE_LL_CAN_WAKEUP_INTCB)))
+#if defined(C_ENABLE_LL_WAKEUP_SUPPORT)
+#if(defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL) || (defined(C_ENABLE_WAKEUP_POLLING) && !defined(C_ENABLE_LL_CAN_WAKEUP_INTCB)))
 typedef volatile struct{
   volatile vuint8       Wup;
   volatile vuint8       uWup;
 }tCanIntcChWupObj;
 
 V_DEF_P2SFR_CAN_TYPE(V_NONE, tCanIntcChWupObj) tCanIntcChWupPtr;
-#  endif
-# endif
+#endif
+#endif
 
 #if defined( C_ENABLE_RX_FULLCAN_OBJECTS )
-# if( kCanNumberOfUsedCanRxIdTables > 4 )
-#  define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
+#if( kCanNumberOfUsedCanRxIdTables > 4 )
+#define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id); \
                                    (paraStruct)->idRaw1 = MK_STDID1(id); \
                                    (paraStruct)->idRaw2 = MK_STDID2(id); \
                                    (paraStruct)->idRaw3 = MK_STDID3(id); \
                                    (paraStruct)->idRaw4 = MK_STDID4(id)
-#  define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id); \
                                    (paraStruct)->idRaw1 = MK_EXTID1(id); \
                                    (paraStruct)->idRaw2 = MK_EXTID2(id); \
                                    (paraStruct)->idRaw3 = MK_EXTID3(id); \
                                    (paraStruct)->idRaw4 = MK_EXTID4(id)
 # elif( kCanNumberOfUsedCanRxIdTables > 3 )
-#  define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id); \
                                    (paraStruct)->idRaw1 = MK_STDID1(id); \
                                    (paraStruct)->idRaw2 = MK_STDID2(id); \
                                    (paraStruct)->idRaw3 = MK_STDID3(id)
-#  define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id); \
                                    (paraStruct)->idRaw1 = MK_EXTID1(id); \
                                    (paraStruct)->idRaw2 = MK_EXTID2(id); \
                                    (paraStruct)->idRaw3 = MK_EXTID3(id)
 # elif( kCanNumberOfUsedCanRxIdTables > 2 )
-#  define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id); \
                                    (paraStruct)->idRaw1 = MK_STDID1(id); \
                                    (paraStruct)->idRaw2 = MK_STDID2(id)
-#  define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id); \
                                    (paraStruct)->idRaw1 = MK_EXTID1(id); \
                                    (paraStruct)->idRaw2 = MK_EXTID2(id)
 # elif( kCanNumberOfUsedCanRxIdTables > 1 )
-#  define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id); \
                                    (paraStruct)->idRaw1 = MK_STDID1(id)
-#  define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id); \
                                    (paraStruct)->idRaw1 = MK_EXTID1(id)
-# else
-#  define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
+#else
+#define SET_PARASTRUCT_IDRAW_RX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id)
-#  define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_RX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id)
-# endif
+#endif
 #endif
 
 #if( kCanNumberOfUsedCanTxIdTables > 4 )
-# define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id); \
                                    (paraStruct)->idRaw1 = MK_STDID1(id); \
                                    (paraStruct)->idRaw2 = MK_STDID2(id); \
                                    (paraStruct)->idRaw3 = MK_STDID3(id); \
                                    (paraStruct)->idRaw4 = MK_STDID4(id)
-# define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id); \
                                    (paraStruct)->idRaw1 = MK_EXTID1(id); \
                                    (paraStruct)->idRaw2 = MK_EXTID2(id); \
                                    (paraStruct)->idRaw3 = MK_EXTID3(id); \
                                    (paraStruct)->idRaw4 = MK_EXTID4(id)
 #elif( kCanNumberOfUsedCanTxIdTables > 3 )
-# define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id); \
                                    (paraStruct)->idRaw1 = MK_STDID1(id); \
                                    (paraStruct)->idRaw2 = MK_STDID2(id); \
                                    (paraStruct)->idRaw3 = MK_STDID3(id)
-# define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id); \
                                    (paraStruct)->idRaw1 = MK_EXTID1(id); \
                                    (paraStruct)->idRaw2 = MK_EXTID2(id); \
                                    (paraStruct)->idRaw3 = MK_EXTID3(id)
 #elif( kCanNumberOfUsedCanTxIdTables > 2 )
-# define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id); \
                                    (paraStruct)->idRaw1 = MK_STDID1(id); \
                                    (paraStruct)->idRaw2 = MK_STDID2(id)
-# define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id); \
                                    (paraStruct)->idRaw1 = MK_EXTID1(id); \
                                    (paraStruct)->idRaw2 = MK_EXTID2(id)
 #elif( kCanNumberOfUsedCanTxIdTables > 1 )
-# define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id); \
                                    (paraStruct)->idRaw1 = MK_STDID1(id)
-# define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id); \
                                    (paraStruct)->idRaw1 = MK_EXTID1(id)
 #else
-# define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_STD(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_STDID0(id)
-# define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
+#define SET_PARASTRUCT_IDRAW_TX_EXT(paraStruct, id) \
                                    (paraStruct)->idRaw0 = MK_EXTID0(id)
 #endif
 
@@ -856,25 +856,25 @@ typedef struct sCanInitParastruct{
   CanObjectHandle   hwObjHandle;
 #if defined( C_ENABLE_RX_FULLCAN_OBJECTS )
   tCanRxId0                idRaw0;
-# if( kCanNumberOfUsedCanRxIdTables > 1 )
+#if( kCanNumberOfUsedCanRxIdTables > 1 )
   tCanRxId1                idRaw1;
-# endif
-# if( kCanNumberOfUsedCanRxIdTables > 2 )
+#endif
+#if( kCanNumberOfUsedCanRxIdTables > 2 )
   tCanRxId2                idRaw2;
-# endif
-# if( kCanNumberOfUsedCanRxIdTables > 3 )
+#endif
+#if( kCanNumberOfUsedCanRxIdTables > 3 )
   tCanRxId3                idRaw3;
-# endif
-# if( kCanNumberOfUsedCanRxIdTables > 4 )
+#endif
+#if( kCanNumberOfUsedCanRxIdTables > 4 )
   tCanRxId4                idRaw4;
-# endif
+#endif
   tCanIdType               idType;
 #endif
 #if defined(C_ENABLE_CAN_RAM_CHECK)
   uint8                    doRamCheck;
-# if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
+#if defined(C_ENABLE_CAN_RAM_CHECK_EXTENDED)
   uint8                    isChRamCheckFail;
-# endif
+#endif
 #endif
   uint8                    isInitOk;
 
@@ -953,9 +953,9 @@ typedef struct{
 #if defined(CAN_ENABLE_GENERIC_CONFIRMATION_API2)
   CanTxConfInfoStructPtr   txStructConf;
 #endif
-  #if defined( C_ENABLE_CANCEL_IN_HW )
+#if defined( C_ENABLE_CANCEL_IN_HW )
   vuint8                   txBufferStatus;
-  #endif
+#endif
 }tCanTxConfirmationParaStruct;
 V_DEF_P2VAR_TYPE(V_NONE, tCanTxConfirmationParaStruct, VAR_NOINIT) CanTxConfirmationParaStructPtr;
 
@@ -987,11 +987,11 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitBeginSetRegisters( C
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitMailboxTx( CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanInitParaStructPtr initPara );
 
-# if(defined( C_ENABLE_CAN_RAM_CHECK ))
+#if(defined( C_ENABLE_CAN_RAM_CHECK ))
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitMailboxTxDeactivate( CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanInitParaStructPtr initPara );
 
-# endif
+#endif
 
 #if defined( C_ENABLE_RX_FULLCAN_OBJECTS )
 
@@ -1015,11 +1015,11 @@ V_DEF_FUNC(CAN_STATIC, vuint8, STATIC_CODE) CanLL_InitIsMailboxCorrupt( CAN_CHAN
 
 #endif
 
-V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitPowerOn( void );
+V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitPowerOn(void);
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_InitPowerOnChannelSpecific( CAN_CHANNEL_CANTYPE_ONLY );
 
-V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitMemoryPowerOn( void );
+V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitMemoryPowerOn(void);
 
 #if defined( C_ENABLE_CANCEL_IN_HW )
 
@@ -1069,13 +1069,13 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_RxBasicReleaseObj(CAN_CHAN
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_RxBasicMsgReceivedEnd(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanRxBasicParaStructPtr rxBasicPara);
 
-# if defined( C_ENABLE_RX_BASICCAN_POLLING )
+#if defined( C_ENABLE_RX_BASICCAN_POLLING )
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_RxBasicIsGlobalIndPending(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_ONLY);
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_RxBasicProcessPendings(CAN_CHANNEL_AND_HW_CHANNEL_CANTYPE_FIRST CanTaskParaStructPtr taskPara);
 
-# endif
+#endif
 #endif
 
 #if defined( C_ENABLE_RX_FULLCAN_OBJECTS )
@@ -1153,21 +1153,21 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_ClearCanWakeupInterruptFla
 #endif
 
 #if !defined(C_ENABLE_INTC_ACCESS_BY_APPL)
-# if defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
-#  if defined(C_ENABLE_LL_CAN_INTCTRL)
+#if defined(C_ENABLE_USE_OS_INTERRUPT_CONTROL)
+#if defined(C_ENABLE_LL_CAN_INTCTRL)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, boolean, STATIC_CODE) CanLL_OsIsInterruptSourceEnabled(Can_ExternalISRType IsrId);
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_OsRestoreInterruptSource(Can_ExternalISRType IsrId, boolean OldFlag);
 
-#  endif
+#endif
 
-#  if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL) && defined(C_ENABLE_WAKEUP_POLLING)
+#if defined(C_ENABLE_LL_CAN_WAKEUP_INTCTRL) && defined(C_ENABLE_WAKEUP_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, boolean, STATIC_CODE) CanLL_OsIsInterruptPending(Can_ExternalISRType IsrId);
 
-#  endif
-# endif
+#endif
+#endif
 #endif
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanLL_InitPowerOnModeTransitions(void);
@@ -1218,10 +1218,10 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, vuint8, STATIC_CODE) CanLL_CheckGeneratedData(void)
 
 #endif
 
-# if(CAN_HW_LOOP_SUPPORT_API == STD_OFF)
+#if(CAN_HW_LOOP_SUPPORT_API == STD_OFF)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, Can_ReturnType, STATIC_CODE) ApplCanTimerLoop(CAN_CHANNEL_CANTYPE_FIRST uint8 source);
-# endif
+#endif
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_ModeTransition(CAN_CHANNEL_CANTYPE_FIRST uint8 transitionRequest, uint8 busOffRecovery, uint8 doRamCheck);
 
@@ -1282,17 +1282,17 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitRxBasicCAN(CAN_CHANNE
 V_DEF_FUNC(CAN_LOCAL_INLINE, uint8, STATIC_CODE) CanHL_InitEnd_InitMode(CAN_CHANNEL_CANTYPE_FIRST CanInitParaStructPtr initPara);
 
 #if defined(C_ENABLE_RX_BASICCAN_OBJECTS)
-# if defined(C_ENABLE_RX_BASICCAN_POLLING)
+#if defined(C_ENABLE_RX_BASICCAN_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxBasicCanPolling(CAN_HW_CHANNEL_CANTYPE_ONLY);
-# endif
+#endif
 #endif
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
-# if defined(C_ENABLE_RX_FULLCAN_POLLING)
+#if defined(C_ENABLE_RX_FULLCAN_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_RxFullCanPolling(CAN_HW_CHANNEL_CANTYPE_ONLY);
-# endif
+#endif
 #endif
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS) || defined(C_ENABLE_RX_BASICCAN_OBJECTS)
@@ -1313,16 +1313,16 @@ V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_TxConfirmationPolling(CAN_
 V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_TxConfirmation(CAN_HW_CHANNEL_CANTYPE_FIRST CanObjectHandle mailboxHandle, CanObjectHandle mailboxElement, CanObjectHandle hwObjHandle);
 
 #if defined(C_ENABLE_RX_BASICCAN_OBJECTS)
-# if defined(C_ENABLE_RX_BASICCAN_POLLING)
+#if defined(C_ENABLE_RX_BASICCAN_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_BasicCanMsgReceivedPolling(CAN_HW_CHANNEL_CANTYPE_FIRST CanObjectHandle rxMailboxHandle, CanObjectHandle hwObjHandle);
-# endif
+#endif
 
 V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_BasicCanMsgReceived(CAN_HW_CHANNEL_CANTYPE_FIRST CanObjectHandle rxMailboxHandle, CanObjectHandle hwObjHandle);
 #endif
 
 #if defined(C_ENABLE_RX_FULLCAN_OBJECTS)
-# if defined(C_ENABLE_RX_FULLCAN_POLLING)
+#if defined(C_ENABLE_RX_FULLCAN_POLLING)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_FullCanMsgReceivedPolling(CAN_HW_CHANNEL_CANTYPE_FIRST CanObjectHandle rxMailboxHandle, CanObjectHandle hwObjHandle);
 #endif
@@ -1332,10 +1332,10 @@ V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_FullCanMsgReceived(CAN_HW_CHANNE
 
 V_DEF_FUNC(CAN_STATIC, void, STATIC_CODE) CanHL_ErrorHandling(CAN_HW_CHANNEL_CANTYPE_ONLY);
 
-# if defined(C_ENABLE_SLEEP_WAKEUP)
+#if defined(C_ENABLE_SLEEP_WAKEUP)
 
 V_DEF_FUNC(CAN_LOCAL_INLINE, void, STATIC_CODE) CanHL_WakeUpHandling(CAN_CHANNEL_CANTYPE_ONLY);
-# endif
+#endif
 
 #if defined(C_ENABLE_CANCEL_TX_IN_HW)
 #endif
