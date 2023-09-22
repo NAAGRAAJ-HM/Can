@@ -59,7 +59,7 @@ void RS_CAN_SetCommunicationMode(void){
    RSCAN0GCTR  &= ~0x1;
 }
 
-Can_RtnType Can_ReadRxFiFo(Can_FrameType* pFrame){
+Can_RtnType Can_ReadRxFiFo(Type_McalCan_stFrame* pFrame){
   Can_RtnType tRetVal;
   if((RSCAN0RFSTS0 & 0x1) == 0){
       pFrame->IDE   = (RSCAN0RFID0  & 0x80000000) >> 31;
@@ -88,19 +88,19 @@ Can_RtnType Can_ReadRxFiFo(Can_FrameType* pFrame){
    return tRetVal;
 }
 
-Can_RtnType Can_SendTxBuffer(const Can_FrameType* pFrame){
+Can_RtnType Can_SendTxBuffer(const Type_McalCan_stFrame* pFrame){
    static uint8 ucTxBufIdx = 0;
    uint8 ucRetVal;
    VU8* pTBSR;
    VU8* pTBCR;
-   Can_FrameType* pTxBuffer;
+   Type_McalCan_stFrame* pTxBuffer;
    pTBSR = &(RSCAN0TMSTS0);
    pTBCR = &(RSCAN0TMC0);
    if((pTBSR[ucTxBufIdx] & (VU8)0x01u) == CAN_TBTST_TRANSMITTING){
       ucRetVal = CAN_RTN_ERR;
    }
    else{
-      pTxBuffer = (Can_FrameType*) &(RSCAN0TMID0);
+      pTxBuffer = (Type_McalCan_stFrame*) &(RSCAN0TMID0);
       pTxBuffer[ucTxBufIdx] = *pFrame;
       pTBCR[ucTxBufIdx] = CAN_TBCR_TRM;
       ucRetVal = CAN_RTN_OK;

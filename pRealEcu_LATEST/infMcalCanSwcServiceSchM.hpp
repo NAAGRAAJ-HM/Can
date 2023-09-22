@@ -26,6 +26,8 @@
 /******************************************************************************/
 #include "CompilerCfg_McalCan.hpp"
 
+#include "Types_McalCan.hpp"
+
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
@@ -54,6 +56,10 @@
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 extern FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceSchM_vMainFunctionBusOff(void);
+
+extern FUNC(void, MCALCAN_CODE) infMcalMcuSwcServiceSchM_vRunnableRx(
+   const Type_McalCan_stFrame* tCanFrame
+);
 
 /******************************************************************************/
 /* EOF                                                                        */
