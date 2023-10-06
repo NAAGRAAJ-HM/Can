@@ -54,13 +54,13 @@
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 extern Type_McalCan_eReturn infMcalCanEcuabCanIf_tSetModeController(
-      uint8                   ucController
-   ,  Type_McalCan_eStateTransition ucMode
+      uint8                         ucController
+   ,  Type_McalCan_eStatesTransition leStateTransition
 );
 
 extern Type_McalCan_eReturn infMcalCanEcuabCanIf_tWrite(
             Type_McalCan_tHandleHw ucHthRefId
-   ,  const Type_McalCan_stPdu*     PduInfo_Write
+   ,  const Type_McalCan_stPdu*    PduInfo_Write
 );
 
 /******************************************************************************/
