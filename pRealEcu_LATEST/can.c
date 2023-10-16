@@ -80,39 +80,70 @@
 /******************************************************************************/
 /* OBJECTS                                                                    */
 /******************************************************************************/
-Type_EcuabCanIf_eModesController eModeController = EcuabCanIf_eModeController_UNINIT;
+Type_EcuabCanIf_eModeController ucControllerMode = CANIF_CS_UNINIT;
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 void infMcalCanSwcApplEcuM_vInitFunction(void){
-   RS_CAN_Init();
-   eModeController = EcuabCanIf_eModeController_STARTED;
+  RS_CAN_Init();
+  ucControllerMode = CANIF_CS_STARTED;
 }
 
 void Can_SetBaudrate(void){
 }
 
 Type_McalCan_eReturn infMcalCanEcuabCanIf_tSetModeController(
-      uint8                         ucController
-   ,  Type_McalCan_eStatesTransition leStateTransition
+      uint8                   ucController
+   ,  Type_McalCan_eStateTransition ucMode
 ){
-   switch(eModeController){
-      case EcuabCanIf_eModeController_SLEEP:   if(McalCan_eStatesTransition_WAKEUP == leStateTransition){RS_CAN_SetResetMode(); Os_Disable_CAT2ISR_Can0Receive(); Os_Disable_CAT2ISR_Can0Transmit();                 eModeController = EcuabCanIf_eModeController_STOPPED;} break;
-      case EcuabCanIf_eModeController_STOPPED: if(McalCan_eStatesTransition_START  == leStateTransition){RS_CAN_Init();         Os_Enable_CAT2ISR_Can0Receive();  Os_Enable_CAT2ISR_Can0Transmit();  TRCV_Normal();  eModeController = EcuabCanIf_eModeController_STARTED;}
-                                          else if(McalCan_eStatesTransition_SLEEP  == leStateTransition){RS_CAN_SetSleepMode(); Os_Disable_CAT2ISR_Can0Receive(); Os_Disable_CAT2ISR_Can0Transmit(); TRCV_Standby(); eModeController = EcuabCanIf_eModeController_SLEEP;}   break;
-      case EcuabCanIf_eModeController_STARTED: if(McalCan_eStatesTransition_STOP   == leStateTransition){RS_CAN_SetResetMode(); Os_Disable_CAT2ISR_Can0Receive(); Os_Disable_CAT2ISR_Can0Transmit();                 eModeController = EcuabCanIf_eModeController_STOPPED;} break;
-      default:                                                                                                                                                                                                                                                              break;
-   }
-   CanIf_ControllerModeIndication(
-         ucController
-      ,  eModeController
-   );
-   return McalCan_eReturn_OK;
+  switch(ucControllerMode){
+   case CANIF_CS_SLEEP:
+      if(ucMode == CAN_T_WAKEUP){
+        RS_CAN_SetResetMode();
+        Os_Disable_CAT2ISR_Can0Receive();
+        Os_Disable_CAT2ISR_Can0Transmit();
+        ucControllerMode = CANIF_CS_STOPPED;
+      }
+   break;
+
+   case CANIF_CS_STOPPED:
+      if(ucMode == CAN_T_START){
+        RS_CAN_Init();
+        Os_Enable_CAT2ISR_Can0Receive();
+        Os_Enable_CAT2ISR_Can0Transmit();
+        TRCV_Normal();
+        ucControllerMode = CANIF_CS_STARTED;
+      }
+      else if(ucMode == CAN_T_SLEEP){
+        RS_CAN_SetSleepMode();
+        Os_Disable_CAT2ISR_Can0Receive();
+        Os_Disable_CAT2ISR_Can0Transmit();
+        TRCV_Standby();
+        ucControllerMode = CANIF_CS_SLEEP;
+      }
+   break;
+
+   case CANIF_CS_STARTED:
+      if(ucMode == CAN_T_STOP){
+        RS_CAN_SetResetMode();
+        Os_Disable_CAT2ISR_Can0Receive();
+        Os_Disable_CAT2ISR_Can0Transmit();
+        ucControllerMode = CANIF_CS_STOPPED;
+      }
+   break;
+
+    default:
+   break;
+  }
+
+  CanIf_ControllerModeIndication(ucController, ucControllerMode);
+  return CAN_OK;
 }
 
 void infMcalCanSwcServiceSchM_vMainFunctionBusOff(void){
   static uint8 ucBusoffTime = 0;
+
   if(RSCAN0C0STS & 0x10u){
    ucBusoffTime = cBUSOFFTIMEOUT;
   }
@@ -120,7 +151,7 @@ void infMcalCanSwcServiceSchM_vMainFunctionBusOff(void){
    CanIf_ControllerBusOff(0);
    if(--ucBusoffTime == 0){
       RSCAN0C0CTR |= 0x8;
-      if(CanIf_SetPduMode(0, EcuabCanIf_eModePdu_ONLINE) == E_NOT_OK){
+      if(CanIf_SetPduMode(0, CANIF_ONLINE) == E_NOT_OK){
         ApplMcu_vPerformReset();
       }
    }
@@ -132,7 +163,7 @@ FUNC(void, MCALCAN_CODE) infMcalMcuSwcServiceSchM_vRunnableRx(
 ){
    Can_HwType                   tCanMailbox;
    Type_SwcServiceCom_stInfoPdu tPduInfo;
-   Type_EcuabCanIf_eModesController tCanIfControllerMode;
+   Type_EcuabCanIf_eModeController tCanIfControllerMode;
 
    CanIf_GetControllerMode(
          0
@@ -140,30 +171,30 @@ FUNC(void, MCALCAN_CODE) infMcalMcuSwcServiceSchM_vRunnableRx(
    );
    if(
          tCanIfControllerMode
-      == EcuabCanIf_eModeController_STARTED
+      == CANIF_CS_STARTED
    ){
       tCanMailbox.CanId = tCanFrame->ID;
       switch(
          tCanMailbox.CanId
       ){
-         case CfgEcuabCanIf_dIdCanRx_ApplicationReq:           tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_1_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_BcmPeripheralMasterclock: tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_2_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_EspWheelSpeed_F:          tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_3_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_UdsReqPhy:                tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_4_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_UdsReqFunc:               tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_5_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_EspWheelSpeed_R:          tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_6_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_EspWheelPulsesStamped:    tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_7_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_TmmStatus:                tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_8_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_TmpsRdcData:              tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_9_Config;  break;
-         case CfgEcuabCanIf_dIdCanRx_VehStatus:                tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_10_Config; break;
-         case CfgEcuabCanIf_dIdCanRx_VmsStatusReq:             tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_11_Config; break;
-         default:                                                                                                                                      break;
+         case CfgEcuabCanIf_dIdCanRx_ApplicationReq:           tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_1_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_BcmPeripheralMasterclock: tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_2_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_EspWheelSpeed_F:          tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_3_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_UdsReqPhy:                tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_4_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_UdsReqFunc:               tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_5_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_EspWheelSpeed_R:          tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_6_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_EspWheelPulsesStamped:    tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_7_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_TmmStatus:                tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_8_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_TmpsRdcData:              tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_9_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_VehStatus:                tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_10_Config;      break;
+         case CfgEcuabCanIf_dIdCanRx_VmsStatusReq:             tCanMailbox.Hoh = CanIfConf_CanIfHrhCfg_Can_Network_CANNODE_0_Rx_Std_MailBox_11_Config;      break;
+         default:                                                                                            break;
       }
       tCanMailbox.ControllerId = 0;
       tPduInfo.SduLength       = tCanFrame->DLC;
       tPduInfo.SduDataPtr      = (uint8*)tCanFrame->DB;
 
-      infEcuabCanIfMcalCan_vIndicationRx(
+      CanIf_RxIndication_Internal(
             &tCanMailbox
          ,  &tPduInfo
       );
@@ -172,7 +203,7 @@ FUNC(void, MCALCAN_CODE) infMcalMcuSwcServiceSchM_vRunnableRx(
 
 Type_McalCan_eReturn infMcalCanEcuabCanIf_tWrite(
             Type_McalCan_tHandleHw ucHthRefId
-   ,  const Type_McalCan_stPdu*    PduInfo_Write
+   ,  const Type_McalCan_stPdu*     PduInfo_Write
 ){
    Type_McalCan_stFrame tTxCanFrame;
    uint8         i;
@@ -194,7 +225,7 @@ Type_McalCan_eReturn infMcalCanEcuabCanIf_tWrite(
    CanIf_TxConfirmation(
       PduInfo_Write->swPduHandle
    );
-   return McalCan_eReturn_OK;
+   return CAN_OK;
 }
 
 /******************************************************************************/

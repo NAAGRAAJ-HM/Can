@@ -38,18 +38,18 @@
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
 typedef enum{
-      McalCan_eReturn_OK
-   ,  McalCan_eReturn_NOK
-   ,  McalCan_eReturn_BUSY
+      CAN_OK
+   ,  CAN_NOT_OK
+   ,  CAN_BUSY
 }Type_McalCan_eReturn;
 
 typedef enum{
-      McalCan_eStatesTransition_START
-   ,  McalCan_eStatesTransition_STOP
-   ,  McalCan_eStatesTransition_SLEEP
-   ,  McalCan_eStatesTransition_WAKEUP
-   ,  McalCan_eStatesTransition_MAX
-}Type_McalCan_eStatesTransition;
+      CAN_T_START
+   ,  CAN_T_STOP
+   ,  CAN_T_SLEEP
+   ,  CAN_T_WAKEUP
+   ,  CAN_T_MAXTRANSITION
+}Type_McalCan_eStateTransition;
 
 typedef uint16 Type_McalCan_tHandleHw;
 typedef uint32 Type_McalCan_tId;
