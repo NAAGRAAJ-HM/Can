@@ -54,7 +54,7 @@
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
 extern Type_McalCan_eReturn infMcalCanEcuabCanIf_tSetModeController(
-      uint8                         ucController
+      uint8                          ucController
    ,  Type_McalCan_eStatesTransition leStateTransition
 );
 
