@@ -157,7 +157,7 @@ void infMcalCanSwcServiceSchM_vMainFunctionBusOff(void){
   }
 }
 
-FUNC(void, MCALCAN_CODE) infMcalMcuSwcServiceSchM_vRunnableRx(
+FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceSchM_vRunnableRx(
    const Type_McalCan_stFrame* tCanFrame
 ){
    Can_HwType                   tCanMailbox;

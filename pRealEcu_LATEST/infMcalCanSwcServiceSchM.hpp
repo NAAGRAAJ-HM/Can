@@ -57,7 +57,7 @@
 /******************************************************************************/
 extern FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceSchM_vMainFunctionBusOff(void);
 
-extern FUNC(void, MCALCAN_CODE) infMcalMcuSwcServiceSchM_vRunnableRx(
+extern FUNC(void, MCALCAN_CODE) infMcalCanSwcServiceSchM_vRunnableRx(
    const Type_McalCan_stFrame* tCanFrame
 );
 
