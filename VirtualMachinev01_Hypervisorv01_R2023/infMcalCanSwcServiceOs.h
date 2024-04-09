@@ -1,6 +1,7 @@
-#pragma once
+#ifndef _INFMCALCANSWCSERVICEOS_H
+#define _INFMCALCANSWCSERVICEOS_H
 /******************************************************************************/
-/* File   : McalCan.hpp                                                       */
+/* File   : infMcalCanSwcServiceOs.h                                          */
 /*                                                                            */
 /* Author : Nagaraja HULIYAPURADA MATA                                        */
 /*                                                                            */
@@ -24,10 +25,16 @@
 /******************************************************************************/
 /* #INCLUDES                                                                  */
 /******************************************************************************/
+#include "CompilerCfg_McalCan.h"
 
 /******************************************************************************/
 /* #DEFINES                                                                   */
 /******************************************************************************/
+//TBD: make it enaum, modular and well architectured
+#define CAN_RTN_OK                          0U
+#define CAN_RTN_FIFO_FULL                   1U
+#define CAN_RTN_BUFFER_EMPTY                2U
+#define CAN_RTN_ERR                         255U
 
 /******************************************************************************/
 /* MACROS                                                                     */
@@ -36,14 +43,28 @@
 /******************************************************************************/
 /* TYPEDEFS                                                                   */
 /******************************************************************************/
+typedef struct {
+   uint32 ID    : 29;
+   uint32 THLEN :  1;
+   uint32 RTR   :  1;
+   uint32 IDE   :  1;
+   uint32 TS    : 16;
+   uint32 LBL   : 12;
+   uint32 DLC   :  4;
+   uint8  DB[8];
+}McalCan_FrameType;
 
-/******************************************************************************/
-/* OBJECTS                                                                    */
-/******************************************************************************/
+typedef uint8 McalCan_RtnType;
 
 /******************************************************************************/
 /* FUNCTIONS                                                                  */
 /******************************************************************************/
+extern FUNC(void, MCALCAN_CODE) McalCan_ClearRxFiFoInterruptFlag   (void);
+extern FUNC(void, MCALCAN_CODE) McalCan_ClearTxBufferInterruptFlag (void);
+extern FUNC(void, MCALCAN_CODE) McalCan_MainFunction_BusOff        (void);
+
+extern FUNC(McalCan_RtnType, MCALCAN_CODE) McalCan_ReadRxFiFo            (      McalCan_FrameType* pFrame);
+extern FUNC(void,            MCALCAN_CODE) McalCan_ForwardMessageToCanIf (const McalCan_FrameType* tCanFrame);
 
 /******************************************************************************/
 /* CONSTS                                                                     */
@@ -60,4 +81,5 @@
 /******************************************************************************/
 /* EOF                                                                        */
 /******************************************************************************/
+#endif
 
